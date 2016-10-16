@@ -30,7 +30,7 @@ and exp =
   | Comment of string
   (* TODO *)
   (*| Sra of 
-  | Srl of *)
+    | Srl of *)
   (* virtual instructions *)
   | IfEq of Id.t * id_or_imm * t * t
   | IfLE of Id.t * id_or_imm * t * t
@@ -42,7 +42,7 @@ and exp =
   | CallDir of Id.l * Id.t list * Id.t list
   | Save of Id.t * Id.t 
   | Restore of Id.t 
-  
+
 type fundef =
   { name : Id.l; args : Id.t list; fargs : Id.t list; body : t; ret : Type.t }
 
@@ -55,10 +55,9 @@ let fletd (x, e1, e2) = Let ((x, Type.Float), e1, e2)
 (* seq : exp * t -> t *)
 let seq (e1, e2) = Let ((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = [| "%r0"; "%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"; "%r10"; 
+let regs = [| "%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"; "%r10"; 
               "%r11"; "%r12"; "%r13"; "%r14"; "%r15"; "%r16"; "%r17"; "%r18"; 
-              "%r19"; "%r20"; "%r21"; "%r22"; "%r23"; "%r24"; "%r25"; "%r26"; 
-              "%r27"|]
+              "%r19"; "%r20"; "%r21"; "%r22"; "%r23"; "%r24"; "%r25"; "%r26"|]
 (* let regs = Array.init 27 (fun i -> Printf.sprintf "_R_%d" i) *)
 let fregs = Array.init 32 (fun i -> Printf.sprintf "%%f%d" i)
 let allregs = Array.to_list regs
@@ -70,6 +69,10 @@ let reg_hp = "%r28"
 let reg_sp = "r30"
 let reg_tmp = "r29"
 (* r31 is the link register *)
+let reg_link = "r31"
+(* r27 is for a comdition register *)
+let reg_cmp = "r27"
+let reg_zero = "r0"
 
 (* is_reg : Id.t -> bool *)
 let is_reg x = x.[0] = '%'

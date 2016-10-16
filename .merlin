@@ -1,6 +1,6 @@
 PKG ppx_deriving.std
 S aplpha
-S asm_
+S asm
 S assoc
 S beta
 S closure

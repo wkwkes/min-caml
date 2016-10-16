@@ -50,6 +50,9 @@ val reg_fsw : string
 val reg_hp : string
 val reg_sp : string
 val reg_tmp : string
+val reg_link : string
+val reg_cmp : string
+val reg_zero : string
 val is_reg : string -> bool
 
 val fv : t -> S.elt list
