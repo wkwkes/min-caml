@@ -63,7 +63,7 @@ and g' oc = function
     (* TODO SUBをLIに変えたい *)
     let r = reg x in
     Printf.fprintf oc "\tSUB\t%s, %s, %s\n" r r r;
-    Printf.fprintf oc "\tADDI\t%s,%s, %d\n" r r i
+    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" r r i
   | (NonTail(x), FLi(Id.L(l))) ->
     let s = load_label reg_tmp l in
     Printf.fprintf oc "%s\tlfd\t%s, 0(%%%s)\n" s (reg x) reg_tmp
@@ -158,21 +158,21 @@ and g' oc = function
     Printf.fprintf oc "\tlfd\t%s, %d(%%%s)\n" (reg x) (offset y) reg_sp
   | (Tail, (Nop | Sw _ | Stfd _ | Comment _ | Save _ as exp)) ->
     g' oc (NonTail(Id.gentmp Type.Unit), exp);
-    Printf.fprintf oc "\tJR\t%%r32\n";
+    Printf.fprintf oc "\tJR\t%%r31\n";
   | (Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ |  (*TOOD  Mul _ | Div _ |*) Sll _ |
             Lw _ as exp)) -> 
     g' oc (NonTail(regs.(0)), exp);
-    Printf.fprintf oc "\tJR\t%%r32\n";
+    Printf.fprintf oc "\tJR\t%%r31\n";
   | (Tail, (FLi _ | FMr _ | FNeg _ | FAdd _ | FSub _ | FMul _ | FDiv _ |
             Lfd _ as exp)) ->
     g' oc (NonTail(fregs.(0)), exp);
-    Printf.fprintf oc "\tJR\t%%r32\n";
+    Printf.fprintf oc "\tJR\t%%r31\n";
   | (Tail, (Restore(x) as exp)) ->
     (match locate x with
      | [i] -> g' oc (NonTail(regs.(0)), exp)
      | [i; j] when (i + 1 = j) -> g' oc (NonTail(fregs.(0)), exp)
      | _ -> assert false);
-    Printf.fprintf oc "\tJR\t%%r32\n";
+    Printf.fprintf oc "\tJR\t%%r31\n";
     (********************************)
   | (Tail, IfEq(x, V(y), e1, e2)) ->
     (*Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);*)
@@ -186,14 +186,15 @@ and g' oc = function
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfLE(x, C(y), e1, e2)) ->
     Printf.fprintf oc "\tADDI\t%%%s, %%%s, %d\n" reg_cmp reg_zero y;
-    Printf.fprintf oc "\tSLT\t%%%s, %s, %%%s\n" reg_cmp (reg x) reg_cmp;
+    Printf.fprintf oc "\tSLT\t%%%s, %%%s, %s\n" reg_cmp reg_cmp (reg x);
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+    (* TODO : LEとGEの向きの確認 *)
   | (Tail, IfGE(x, V(y), e1, e2)) ->
-    Printf.fprintf oc "\tSLT\t%%%s, %s, %s\n" reg_cmp (reg y) (reg x);
+    Printf.fprintf oc "\tSLT\t%%%s, %s, %%%s\n" reg_cmp (reg y) (reg x);
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfGE(x, C(y), e1, e2)) ->
     Printf.fprintf oc "\tADDI\t%%%s, %%%s, %d\n" reg_cmp reg_zero y;
-    Printf.fprintf oc "\tSLT\t%%%s, %%%s, %s\n" reg_cmp reg_cmp (reg x);
+    Printf.fprintf oc "\tSLT\t%%%s, %s, %%%s\n" reg_cmp (reg x) reg_cmp;
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (* TODO *)
   (* 今は適当に型を合わせている *)
@@ -214,14 +215,14 @@ and g' oc = function
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (NonTail(z), IfLE(x, C(y), e1, e2)) ->
     Printf.fprintf oc "\tADDI\t%%%s, %%%s, %d\n" reg_cmp reg_zero y;
-    Printf.fprintf oc "\tSLT\t%%%s, %s, %s\n" reg_cmp (reg x) reg_cmp;
+    Printf.fprintf oc "\tSLT\t%%%s, %%%s, %s\n" reg_cmp reg_cmp (reg x);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (NonTail(z), IfGE(x, V(y), e1, e2)) ->
     Printf.fprintf oc "\tSLT\t%%%s, %s, %s\n" reg_cmp (reg y) (reg x);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (NonTail(z), IfGE(x, C(y), e1, e2)) ->
     Printf.fprintf oc "\tADDI\t%%%s, %%%s, %d\n" reg_cmp reg_zero y;
-    Printf.fprintf oc "\tSLT\t%%%s, %%%s, %s\n" reg_cmp reg_cmp (reg x);
+    Printf.fprintf oc "\tSLT\t%%%s, %s, %%%s\n" reg_cmp (reg x) reg_cmp;
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (* TODO *)
   (* 型だけ適当に合わせている *)
@@ -281,6 +282,8 @@ and g' oc = function
    bnでcr7を見ながらe2に飛ぶ
    飛ばない場合はe1を続ける. 
    今は rxとryを比べてbnでb_elseにジャンプする.
+
+   bとbnを入れ替えた
 *)
 and g'_tail_if oc e1 e2 b bn rx ry = 
   let b_else = Id.genid (b ^ "_else") in
