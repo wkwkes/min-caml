@@ -1,1 +1,1 @@
-Minips/globals.s
+x86/globals.s

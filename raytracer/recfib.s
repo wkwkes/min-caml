@@ -1,7 +1,7 @@
 main: # main entry point
 	SUB	%r0, %r0, %r0   # main program start
 	SUB	%r1, %r1, %r1
-	ADDI	%r1, %r1, 10
+	ADDI	%r1, %r1, 45
 	ADDI	%r29, %r31, 0
 	SW	%r29, 4(%r30)
 	ADDI	%r30, %r30, 8
