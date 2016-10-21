@@ -31,5 +31,7 @@ type fundef = { name : Id.l * Type.t;
 		body : t }
 type prog = Prog of fundef list * t
 
+val show_prog : prog -> string
+val show : t -> string
 val fv : t -> S.t
 val f : KNormal.t -> prog
