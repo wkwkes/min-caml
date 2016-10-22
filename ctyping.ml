@@ -22,7 +22,7 @@ let isExt s =
 let rec tyeq t1 t2 =
   match (t1, t2) with
   | (Var _, _) | (_, Var _) -> true
-  | (Int, Int) | (Bool, Bool) | (Float, Float) | (Unit, Unit) -> true
+  | (Int, Int) | (Bool, Bool) | (Float, Float) | (Unit, Unit) | (Int, Bool) | (Bool, Int) -> true
   | (Fun (xs, xret), Fun (ys, yret)) -> tyeql xs ys && tyeq xret yret 
   | (Tuple xs, Tuple ys) -> tyeql xs ys
   | (Array x, Array y) -> tyeq x y
@@ -51,10 +51,9 @@ let rec g venv cenv = function
   | Closure.FAdd (x, y) | Closure.FSub (x, y) | Closure.FMul (x, y) | Closure.FDiv (x, y)
     -> if tyeq (findv venv x) Float && tyeq (findv venv y)Float then Float else raise (ClsTypeError "err fadd")
   | Closure.IfEq (x1, x2, e1, e2) | Closure.IfLE (x1, x2, e1, e2) ->
-    let tb = findv venv x1 in
     let tc = g venv cenv e1 in
-    if tyeq tb (findv venv x2) && tyeq tc (g venv cenv e2) then tc
-    else raise (ClsTypeError "err if")
+    if tyeq (findv venv x1) (findv venv x2) && tyeq tc (g venv cenv e2) then tc
+    else raise (ClsTypeError "err if") 
   | Closure.Let ((x1, ty), e1, e2) ->
     let t1 = g venv cenv e1 in
     if tyeq ty t1 then (Hashtbl.add venv x1 ty; g venv cenv e2) else 
@@ -115,16 +114,3 @@ let f (Closure.Prog (fs, e)) =
   let cenv = Hashtbl.create 1000 in
   let _ = g_fundef venv cenv fs in
   let _ =  g venv cenv e in ()
-
-(*
-TODO:
-Closure.Let (("Ti4.14", Type.Int), (Closure.Int 0),
-           Closure.IfLE ("x.10", "Ti4.14", (Closure.Var "acc.9"),
-             Closure.Let (("Ti5.15", Type.Int),
-               Closure.Add ("acc.9", "x.10"),
-               Closure.Let (("Ti7.16", Type.Int),
-                 Closure.Let (("Ti6.17", Type.Int), (Closure.Int 1),
-                   Closure.Sub ("x.10", "Ti6.17")),
-                 Closure.AppDir ((Id.L "sum.8"), ["Ti5.15"; "Ti7.16"])))))
-                 を直接 g に入れてみる.
-*)
