@@ -29,11 +29,13 @@ type t = (* �����������Ѵ����μ� (caml2html: clo
   | Put of Id.t * Id.t * Id.t (* Put (array, index, val) *)
   | ExtArray of Id.l
 [@@deriving show]
+
 type fundef = { name : Id.l * Type.t;
                 args : (Id.t * Type.t) list;
                 formal_fv : (Id.t * Type.t) list;
                 body : t }
 [@@deriving show]
+
 type prog = Prog of fundef list * t
 [@@deriving show]
 

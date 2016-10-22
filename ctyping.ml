@@ -4,38 +4,61 @@ exception ClsTypeError of string
 
 let findv env x =
   try Hashtbl.find env x with
-  | Not_found -> Int
-  (*| Not_found -> raise (ClsTypeError ("variable"^(Id.show x)^"not found"))*)
+  (*| Not_found -> Int*)
+| Not_found -> raise (ClsTypeError ("variable"^(Id.show x)^"not found"))
+
+let rec print_types = function
+  | [] -> "]"
+  | x::xs -> ";" ^ (Type.show x) ^ (print_types xs)
+
+let cenv_printer cenv =
+  let aux a (ty1, args, fvs) = 
+    let (_, args) = List.split args in
+    let (_, fvs) = List.split fvs in
+    print_endline
+      ("(" ^ (Id.show a) ^ ", (" ^ (Type.show ty1) ^ ", ([" ^ (print_types args) ^ ", [" ^ (print_types fvs) ^ "]))")
+  in Hashtbl.iter aux cenv
+
+let venv_printer venv =
+  print_endline "venv : ";
+  Hashtbl.iter (fun a b -> print_endline ("("^a^", "^(Type.show b) ^ ")")) venv
 
 let findc env x =
+  print_endline "called this\n";
+  cenv_printer env;
   try Hashtbl.find env x with
   | Not_found -> raise (ClsTypeError ("variable"^(Id.show x)^"not found"))
 
 let rec findv_list env = function
-  | [] -> []
+  | [] -> print_endline "oracle"; []
   | x::xs -> (findv env x)::(findv_list env xs)
 
 let isExt s =
-  String.sub s 0 9 = "min_caml_"
+  if String.length s < 9 then false
+  else String.sub s 0 9 = "min_caml_"
 
-let tyeq t1 t2 =
+let rec tyeq t1 t2 =
   match (t1, t2) with
   | (Var _, _) | (_, Var _) -> true
-  | (t1, t2) -> t1 = t2
-
-let rec tyeql ts1 ts2 =
+  | (Int, Int) | (Bool, Bool) | (Float, Float) | (Unit, Unit) -> true
+  | (Fun (xs, xret), Fun (ys, yret)) -> tyeql xs ys && tyeq xret yret 
+  | (Tuple xs, Tuple ys) -> tyeql xs ys
+  | (Array x, Array y) -> tyeq x y
+  | _ -> false
+and tyeql ts1 ts2 =
   match (ts1, ts2) with
   | ([], []) -> true
-  | (t1::t1s, t2::t2s) when tyeq t1 t2 -> tyeql ts1 ts2
+  | (t1::t1s, t2::t2s) when tyeq t1 t2 -> tyeql t1s t2s
   | _ -> raise (ClsTypeError "err tyeql")
 
 let rec g_cls venv cenv = function
     { Closure.entry = (Id.L f); Closure.actual_fv = fvs } ->
     let (tfun, _, tcfvs) = findc cenv f in
+    let (_, tcfvs) = List.split tcfvs in
     let tfvs = findv_list venv fvs in
-    if tcfvs = tfvs then tfun else raise (ClsTypeError "err g_cls")
+    if tyeql tcfvs tfvs then tfun else raise (ClsTypeError "err g_cls")
 
-let rec g venv cenv = function (* g var_env closure_env exp : t *)
+let rec g venv cenv exp = print_endline (Closure.show exp ^ "\n"); match exp with (* g var_env closure_env exp : t *)
   | Closure.Unit -> Unit
   | Closure.Int _ -> Int
   | Closure.Float _ -> Float
@@ -48,7 +71,7 @@ let rec g venv cenv = function (* g var_env closure_env exp : t *)
   | Closure.IfEq (x1, x2, e1, e2) | Closure.IfLE (x1, x2, e1, e2) ->
     let tb = findv venv x1 in
     let tc = g venv cenv e1 in
-    if tyeq tb Bool && tyeq tb (findv venv x2) && tyeq tc (g venv cenv e2) then tc
+    if tyeq tb (findv venv x2) && tyeq tc (g venv cenv e2) then tc
     else raise (ClsTypeError "err if")
   | Closure.Let ((x1, ty), e1, e2) ->
     let t1 = g venv cenv e1 in
@@ -59,16 +82,21 @@ let rec g venv cenv = function (* g var_env closure_env exp : t *)
     let tcls = g_cls venv cenv cls in
     if tyeq tcls ty then (Hashtbl.add venv x ty; g venv cenv e) else raise (ClsTypeError "err makecls")
   | Closure.AppCls (x, args) -> 
-    (match findv venv x with
-     | Fun (targs, tret) when targs = findv_list venv args ->
+    let ttt = findv venv x in
+    let _ = print_endline (Type.show ttt) in
+    let _ = cenv_printer cenv in
+    (match ttt with
+     | Fun (targs, tret) when (print_endline (print_types targs); tyeql targs (findv_list venv args)) ->
        tret
-     | _ -> raise (ClsTypeError "err Appcls")
+     | _ -> (print_endline "jajajava" ;raise (ClsTypeError "err Appcls"))
     )
   | Closure.AppDir (Id.L x, args) when isExt x -> Var (ref None)
   | Closure.AppDir (Id.L x, args) ->
+    print_endline "called here\n";
     (match findc cenv x with
-     | (Fun (targs, tret), _, _) when tyeql targs (findv_list venv args) ->
-       tret
+     | (Fun (targs, tret), _, _) -> if (print_endline "yoyo"; tyeql targs (venv_printer venv; findv_list venv args)) then
+       (print_endline "hoge"; tret)
+       else raise (ClsTypeError "err Appdir1")
      | _ -> raise (ClsTypeError "err Appdir")
     )
   | Closure.Tuple xs -> Tuple (findv_list venv xs)
@@ -88,20 +116,41 @@ let rec g venv cenv = function (* g var_env closure_env exp : t *)
     if tyeq (findv venv idx) Int && tyeq (findv venv elm) ty then Unit else raise (ClsTypeError "err get")
   | Closure.ExtArray (Id.L arr) -> (Array Int) 
 
-let rec g_fundef venv cenv = function
-| [] -> ()
-| { Closure.name=(Id.L lf, Fun (tfunargs, tfret)); Closure.args=args; Closure.formal_fv=fvs; Closure.body=e }::xs ->
-    let (_,targs) = List.split args in
-    let (_,tfvs) = List.split fvs in
-    let _ = Hashtbl.add cenv lf (Fun(tfunargs, tfret), targs, tfvs) in
+let rec to_strings = function
+  | [] -> ""
+  | x::xs -> (Closure.show_fundef x) ^ (to_strings xs)
+
+let rec g_fundef venv cenv x =
+  (print_endline ("g_fundef "^(to_strings x)^"\n"));
+  match x with 
+  | [] -> print_endline "\n ----- g_fundef ends\n";()
+  | { Closure.name=(Id.L lf, Fun (tfunargs, tfret)); Closure.args=args; Closure.formal_fv=fvs; Closure.body=e }::xs ->
+    (*let (_,targs) = List.split args in
+    let (_,tfvs) = List.split fvs in*)
+    let _ = Hashtbl.add cenv lf (Fun(tfunargs, tfret), args, fvs) in 
+    let _ = Hashtbl.add venv lf (Fun (tfunargs, tfret)) in
+    let _ = List.iter (fun (x, t) -> Hashtbl.add venv x t) args in
+    let _ = List.iter (fun (x, t) -> Hashtbl.add venv x t) fvs in 
     if tyeq (g venv cenv e) tfret then g_fundef venv cenv xs else raise (ClsTypeError "err g_fundef")
-| _ -> raise (ClsTypeError "err g_fundef")
+  | _ -> raise (ClsTypeError "err g_fundef")
+
 
 let f (Closure.Prog (fs, e)) =
-    let venv = Hashtbl.create 100 in
-    let cenv = Hashtbl.create 100 in
-    let _ = g_fundef venv cenv fs; g venv cenv e in
-    (Closure.Prog (fs, e))
+  let venv = Hashtbl.create 1000 in
+  let cenv = Hashtbl.create 1000 in
+  let _ = print_endline "\nctyping start:\n" in
+  let _ = g_fundef venv cenv fs in
+  let _ =  g venv cenv e in ()
 
-    
-
+(*
+TODO:
+Closure.Let (("Ti4.14", Type.Int), (Closure.Int 0),
+           Closure.IfLE ("x.10", "Ti4.14", (Closure.Var "acc.9"),
+             Closure.Let (("Ti5.15", Type.Int),
+               Closure.Add ("acc.9", "x.10"),
+               Closure.Let (("Ti7.16", Type.Int),
+                 Closure.Let (("Ti6.17", Type.Int), (Closure.Int 1),
+                   Closure.Sub ("x.10", "Ti6.17")),
+                 Closure.AppDir ((Id.L "sum.8"), ["Ti5.15"; "Ti7.16"])))))
+                 を直接 g に入れてみる.
+*)

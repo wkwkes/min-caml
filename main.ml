@@ -20,7 +20,6 @@ let lexbuf outchan l =
     (RegAlloc.f
        (Simm.f
           (Virtual.f
-             (Ctyping.f 
                 (let ast = Closure.f
                      (*(iter !limit *)
                      (*(let ast = Cse.f *)
@@ -32,8 +31,9 @@ let lexbuf outchan l =
                            in if !knormal_option then print_endline ("knormal : \n" ^ (KNormal.show ast)) else () ; ast)
                       in if !alpha_option then print_endline ("alpha : \n" ^ (KNormal.show ast)) else (); ast)
                      (*in if !cse_option then print_endline ("cse : \n" ^ (KNormal.show ast)) else (); ast)*)
-                 in if !closure_option then print_endline ("closure : \n" ^ (Closure.show_prog ast)) else (); ast)
-             ))))
+                 in if !closure_option then print_endline ("closure : \n" ^ (Closure.show_prog ast)) else ();
+                 Ctyping.f ast; ast)
+             )))
 
 let string s = lexbuf stdout (Lexing.from_string s)
 
