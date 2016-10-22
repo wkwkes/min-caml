@@ -22,9 +22,11 @@ type t = (* �����������Ѵ����μ� (caml2html: clo
   | AppCls of Id.t * Id.t list
   | AppDir of Id.l * Id.t list
   | Tuple of Id.t list
-  | LetTuple of (Id.t * Type.t) list * Id.t * t
-  | Get of Id.t * Id.t
-  | Put of Id.t * Id.t * Id.t
+  | LetTuple of (Id.t * Type.t) list * Id.t * t 
+  (* let (x,y) = (1, 2) in () ->
+     let x = (1, 2) in LetTuple ([(x, int), (y, int)], x, ()) *)
+  | Get of Id.t * Id.t (* Get (array, index) *)
+  | Put of Id.t * Id.t * Id.t (* Put (array, index, val) *)
   | ExtArray of Id.l
 [@@deriving show]
 type fundef = { name : Id.l * Type.t;
