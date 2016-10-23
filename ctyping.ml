@@ -4,7 +4,6 @@ exception ClsTypeError of string
 
 let findv env x =
   try Hashtbl.find env x with
-  (*| Not_found -> Int*)
   | Not_found -> raise (ClsTypeError ("variable"^(Id.show x)^"not found"))
 
 let findc env x =
