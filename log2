@@ -1,0 +1,9 @@
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "g.3"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.4", Type.Int)]; formal_fv = [];
+     body = Closure.Let (("Ti2.7", Type.Int), (Closure.Int 2),
+              Closure.Sub ("x.4", "Ti2.7")) }],
+  Closure.Let (("w.5", Type.Int),
+    Closure.Let (("Ti1.6", Type.Int), (Closure.Int 6),
+      Closure.AppDir ((Id.L "g.3"), ["Ti1.6"])), Closure.Unit))

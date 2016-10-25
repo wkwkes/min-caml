@@ -1,0 +1,29 @@
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "f.3"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.4", Type.Int)]; formal_fv = [("z.2", Type.Int)];
+     body = Closure.Sub ("x.4", "z.2") }],
+
+  Closure.Let (("z.2", Type.Int),
+               (Closure.Int 4),
+                Closure.MakeCls (("f.3", Type.Fun ([Type.Int], Type.Int)),
+                                { Closure.entry = (Id.L "f.3"); actual_fv = ["z.2"] },
+                                Closure.Let (("w.5", Type.Int),
+                                              Closure.Let (("Ti1.6", Type.Int), 
+                                                            (Closure.Int 8),
+                                                            Closure.AppCls ("f.3", ["Ti1.6"])),
+                                              Closure.Unit))))
+-------
+
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "f.3"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.4", Type.Int)]; formal_fv = [("z.2", Type.Int)];
+     body = Closure.Sub ("x.4", "z.2") }],
+
+  Let ("z.2" = 4 in
+       MakeCls (("f.3, Type.Fun ([Type.Int], Type.Int)),
+                 { Closure.entry = (Id.L "f.3"); actual_fv = ["z.2"] },
+                 Let (("Ti1.6", Type.Int), 
+                      (Closure.Int 8),
+                       Closure.AppCls ("f.3", ["Ti1.6"]))

@@ -1,0 +1,19 @@
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "f.8"), Type.Fun ([Type.Int], Type.Int));
+     args = [("y.9", Type.Int)]; formal_fv = [("x.7", Type.Int)];
+     body = Closure.Let (("Ti3.12", Type.Int), (Closure.Int 0),
+              Closure.IfEq ("y.9", "Ti3.12", (Closure.Int 0),
+                Closure.Let (("Ti6.13", Type.Int),
+                  Closure.Let (("Ti5.14", Type.Int),
+                    Closure.Let (("Ti4.15", Type.Int), (Closure.Int 1),
+                      Closure.Sub ("y.9", "Ti4.15")),
+                    Closure.AppCls ("f.8", ["Ti5.14"])),
+                  Closure.Add ("x.7", "Ti6.13")))) }],
+  Closure.Let (("x.7", Type.Int), (Closure.Int 10),
+    Closure.MakeCls (("f.8", Type.Fun ([Type.Int], Type.Int)),
+      { Closure.entry = (Id.L "f.8"); actual_fv = ["x.7"] },
+      Closure.Let (("Ti2.10", Type.Int),
+        Closure.Let (("Ti1.11", Type.Int), (Closure.Int 123),
+          Closure.AppCls ("f.8", ["Ti1.11"])),
+        Closure.AppDir ((Id.L "min_caml_print_int"), ["Ti2.10"])))))

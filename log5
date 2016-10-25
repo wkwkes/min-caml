@@ -1,0 +1,26 @@
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "i.7"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.8", Type.Int)]; formal_fv = []; body = (Closure.Var "x.8") };
+   { Closure.name = ((Id.L "f.10"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.11", Type.Int)]; formal_fv = [("z.9", Type.Int)];
+     body = Closure.Let (("Ti6.17", Type.Int),
+              Closure.Let (("Ti5.18", Type.Int), (Closure.Int 5),
+                Closure.Sub ("z.9", "Ti5.18")),
+              Closure.AppDir ((Id.L "i.7"), ["Ti6.17"])) }],
+              
+  Closure.MakeCls (("i.7", Type.Fun ([Type.Int], Type.Int)),
+    { Closure.entry = (Id.L "i.7"); actual_fv = [] },
+    Closure.Let (("z.9", Type.Int), (Closure.Int 4),
+      Closure.MakeCls (("f.10", Type.Fun ([Type.Int], Type.Int)),
+        { Closure.entry = (Id.L "f.10"); actual_fv = ["z.9"] },
+        Closure.Let (
+          ("w.12", (Type.Tuple [Type.Fun ([Type.Int], Type.Int); Type.Int])),
+          Closure.Let (("Ti1.13", Type.Int), (Closure.Int 6),
+            Closure.IfLE ("Ti1.13", "z.9",
+              Closure.Let (("Ti2.16", Type.Int), (Closure.Int 8),
+                (Closure.Tuple ["f.10"; "Ti2.16"])),
+              Closure.Let (("Ti4.14", Type.Int),
+                Closure.Let (("Ti3.15", Type.Int), (Closure.Int 7),
+                  Closure.AppCls ("f.10", ["Ti3.15"])),
+                (Closure.Tuple ["i.7"; "Ti4.14"])))), Closure.Unit)))))

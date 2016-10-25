@@ -3,8 +3,11 @@ let limit = ref 1000
 let syntax_option = ref false
 let knormal_option = ref false
 let alpha_option = ref false
+<<<<<<< HEAD
 let cse_option = ref false
 let closure_option = ref false
+=======
+>>>>>>> fib
 
 let rec iter n e = 
   Format.eprintf "iteration %d@." n;
@@ -19,6 +22,7 @@ let lexbuf outchan l =
   Emit.f outchan
     (RegAlloc.f
        (Simm.f
+<<<<<<< HEAD
           (Virtual.f  
              (let ast = Closure.f
                   (*(iter !limit *)
@@ -34,6 +38,19 @@ let lexbuf outchan l =
               in if !closure_option then print_endline ("closure : \n" ^ (Closure.show_prog ast)) else ();
               Ctyping.f ast; ast)
           )))
+=======
+          (Virtual.f
+             (Closure.f
+                (*(iter !limit*)
+                   (let ast = Alpha.f
+                        (let ast =  KNormal.f
+                             (Typing.f
+                                (let ast = Parser.exp Lexer.token l in
+                                 if !syntax_option then print_endline (Syntax.show ast) else () ; ast))
+                         in if !knormal_option then print_endline (KNormal.show ast) else () ; ast)
+                    in if !alpha_option then print_endline  (KNormal.show ast) else (); ast) 
+                ))))
+>>>>>>> fib
 
 let string s = lexbuf stdout (Lexing.from_string s)
 
@@ -53,9 +70,13 @@ let () =
      ("-iter", Arg.Int(fun i -> limit := i), "maximum number of optimizations iterated");
      ("-syntax", Arg.Unit(fun () -> syntax_option := true), "dump ast of syntax");
      ("-knormal", Arg.Unit(fun () -> knormal_option := true), "dump ast of knormal");
+<<<<<<< HEAD
      ("-alpha", Arg.Unit(fun () -> alpha_option := true), "dump ast of alpha");
      ("-cse", Arg.Unit(fun () -> cse_option := true), "dump ast of cse");
      ("-closure", Arg.Unit(fun () -> closure_option := true), "dump ast of closure")]
+=======
+     ("-alpha", Arg.Unit(fun () -> alpha_option := true), "dump ast of alpha")]
+>>>>>>> fib
     (fun s -> files := !files @ [s])
     ("Mitou Min-Caml Compiler (C) Eijiro Sumii\n" ^
      Printf.sprintf "usage: %s [-inline m] [-iter n] ...filenames without \".ml\"..." Sys.argv.(0));

@@ -38,19 +38,18 @@ let rec shuffle sw xys =
   | (x, y) :: xys, [] -> (* no acyclic moves; resolve a cyclic move *)
     (y, sw) :: (x, y) :: shuffle sw (List.map
                                        (function
-                                         | (y', z) when y = y' -> (sw, z)
+                                         | (y', z) when y = y' -> (sw, z) 
                                          | yz -> yz)
                                        xys)
   | xys, acyc -> acyc @ shuffle sw xys
 
-type dest = Tail | NonTail of Id.t (* �������ɤ�����ɽ���ǡ����� (caml2html: emit_dest) *)
-let rec g oc = function (* ̿�����Υ������֥����� (caml2html: emit_g) *)
+type dest = Tail | NonTail of Id.t
+let rec g oc = function 
   | dest, Ans(exp) -> g' oc (dest, exp)
   | dest, Let((x, t), exp, e) ->
     g' oc (NonTail(x), exp);
     g oc (dest, e)
-and g' oc = function (* ��̿���Υ������֥����� (caml2html: emit_gprime) *)
-  (* �����Ǥʤ��ä����׻����̤�dest�˥��å� (caml2html: emit_nontail) *)
+and g' oc = function
   | NonTail(_), Nop -> ()
   | NonTail(x), Set(i) -> Printf.fprintf oc "\tmovl\t$%d, %s\n" i x
   | NonTail(x), SetL(Id.L(y)) -> Printf.fprintf oc "\tmovl\t$%s, %s\n" y x
