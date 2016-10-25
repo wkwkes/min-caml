@@ -1,0 +1,10 @@
+closure : 
+Closure.Prog ([],
+  Closure.Let (("Tt4.5", (Type.Tuple [Type.Int; Type.Int; Type.Int])),
+    Closure.Let (("Ti1.9", Type.Int), (Closure.Int 1),
+      Closure.Let (("Ti2.10", Type.Int), (Closure.Int 2),
+        Closure.Let (("Ti3.11", Type.Int), (Closure.Int 3),
+          (Closure.Tuple ["Ti1.9"; "Ti2.10"; "Ti3.11"])))),
+    Closure.LetTuple (
+      [("x.6", Type.Int); ("y.7", Type.Int); ("z.8", Type.Int)], "Tt4.5",
+      Closure.Unit)))

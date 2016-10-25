@@ -1,0 +1,23 @@
+closure : 
+Closure.Prog (
+  [{ Closure.name = ((Id.L "i.4"), Type.Fun ([Type.Int], Type.Int));
+     args = [("x.5", Type.Int)];
+     formal_fv = [("h.2", Type.Fun ([Type.Int], Type.Int))];
+     body = Closure.AppCls ("h.2", ["x.5"]) };
+   { Closure.name = ((Id.L "g.1"),
+                     Type.Fun ([Type.Fun ([Type.Int], Type.Int)],
+                       Type.Fun ([Type.Int], Type.Int)));
+     args = [("h.2", Type.Fun ([Type.Int], Type.Int))]; formal_fv = [
+     ];
+     body = Closure.MakeCls (("i.4", Type.Fun ([Type.Int], Type.Int)),
+              { Closure.entry = (Id.L "i.4"); actual_fv = ["h.2"] },
+              (Closure.Var "i.4")) }],
+  Closure.MakeCls (
+    ("g.1",
+     Type.Fun ([Type.Fun ([Type.Int], Type.Int)],
+       Type.Fun ([Type.Int], Type.Int))),
+    { Closure.entry = (Id.L "g.1"); actual_fv = [] },
+    Closure.Let (
+      ("w.3",
+       Type.Fun ([Type.Fun ([Type.Int], Type.Int)],
+         Type.Fun ([Type.Int], Type.Int))), (Closure.Var "g.1"), Closure.Unit)))

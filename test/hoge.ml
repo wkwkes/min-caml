@@ -1,2 +1,1 @@
-let f _ = () in
-(Array.create 1 f).(0) <- f
+let rec f x = x + 1 in f 5
