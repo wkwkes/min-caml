@@ -27,7 +27,7 @@ let lexbuf outchan l =
                                  if !syntax_option then print_endline (Syntax.show ast) else () ; ast))
                          in if !knormal_option then print_endline (KNormal.show ast) else () ; ast)
                     in if !alpha_option then print_endline  (KNormal.show ast) else (); ast) 
-                ))))
+    ))))
 
 let string s = lexbuf stdout (Lexing.from_string s)
 

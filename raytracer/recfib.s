@@ -1,17 +1,5 @@
-main: # main entry point
-	SUB	%r0, %r0, %r0   # main program start
-	SUB	%r1, %r1, %r1
-	ADDI	%r1, %r1, 45
-	ADDI	%r29, %r31, 0
-	SW	%r29, 4(%r30)
-	ADDI	%r30, %r30, 8
-	JAL	fib.9
-	ADDI	%r29, %r0, 8
-	SUB	%r30, %r30, %r29
-	LW	%r29, 4(%r30)
-	ADDI	%r31, %r29, 0
-	J 	return
-   # main program end
+	.text
+	.globl  _min_caml_start
 fib.9:
 	ADDI	%r27, %r0, 2
 	SLT	%r27, %r1, %r27
@@ -43,9 +31,18 @@ fib.9:
 	ADD	%r1, %r2, %r1
 	JR	%r31
 BEQ_else.23:
-	SUB	%r1, %r1, %r1
-	ADDI	%r1, %r1, 1
+	ADDI	%r1, %r0, 1
 	JR	%r31
-return:
-
-  
+_min_caml_start: # main entry point
+	SUB	%r0, %r0, %r0
+   # main program start
+	ADDI	%r1, %r0, 10
+	ADDI	%r29, %r31, 0
+	SW	%r29, 4(%r30)
+	ADDI	%r30, %r30, 8
+	JAL	fib.9
+	ADDI	%r29, %r0, 8
+	SUB	%r30, %r30, %r29
+	LW	%r29, 4(%r30)
+	ADDI	%r31, %r29, 0
+   # main program end

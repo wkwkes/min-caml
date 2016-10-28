@@ -59,7 +59,7 @@ let regs = [| "%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"; "%r
               "%r11"; "%r12"; "%r13"; "%r14"; "%r15"; "%r16"; "%r17"; "%r18"; 
               "%r19"; "%r20"; "%r21"; "%r22"; "%r23"; "%r24"; "%r25"; "%r26"|]
 (* let regs = Array.init 27 (fun i -> Printf.sprintf "_R_%d" i) *)
-let fregs = Array.init 32 (fun i -> Printf.sprintf "%%f%d" i)
+let fregs = Array.init 31 (fun i -> Printf.sprintf "%%f%d" (i + 1))
 let allregs = Array.to_list regs
 let allfregs = Array.to_list fregs
 let reg_cl = regs.(Array.length regs - 1) (* closure address *)
@@ -73,6 +73,7 @@ let reg_link = "r31"
 (* r27 is for a comdition register *)
 let reg_cmp = "r27"
 let reg_zero = "r0"
+let reg_fzero = "f0"
 
 (* is_reg : Id.t -> bool *)
 let is_reg x = x.[0] = '%'

@@ -53,6 +53,7 @@ val reg_tmp : string
 val reg_link : string
 val reg_cmp : string
 val reg_zero : string
+val reg_fzero : string
 val is_reg : string -> bool
 
 val fv : t -> S.elt list
