@@ -223,11 +223,12 @@ and g' oc = function
   (* 今は適当に型を合わせている float用のcompの仕様が決まるまで待つ *)
   | (Tail, IfFEq(x, y, e1, e2)) ->
     (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
-    g'_tail_if oc e1 e2 "BEQ" "BNE" (reg x ) (reg y)
+    Printf.fprintf oc "\tC.eq.s\t%%%s, %s, %s\n" reg_cmp (reg x) (reg y);
+    g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfFLE(x, y, e1, e2)) ->
     (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
-    Printf.fprintf oc "\tFSLT\t%%%s, %s, %s\n" reg_cmp (reg x) (reg y);
-    g'_tail_if oc e1 e2 "BEQ" "BNW" (add_per reg_cmp) (add_per reg_zero)
+    Printf.fprintf oc "\tC.lt.s\t%%%s, %s, %s\n" reg_cmp (reg y) (reg x);
+    g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (*********)
   | (NonTail(z), IfEq(x, V(y), e1, e2)) ->
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)
@@ -252,9 +253,11 @@ and g' oc = function
   (* 型だけ適当に合わせている *)
   | (NonTail(z), IfFEq(x, y, e1, e2)) ->
     (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
-    g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)
+    Printf.fprintf oc "\tC.eq.s\t%%%s, %s, %s\n" reg_cmp (reg x) (reg y);
+    g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+    (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)*)
   | (NonTail(z), IfFLE(x, y, e1, e2)) ->
-    Printf.fprintf oc "\tSLT\t%%%s, %s, %s\n" reg_cmp (reg x) (reg y);
+    Printf.fprintf oc "\tC.lt.s\t%%%s, %s, %s\n" reg_cmp (reg y) (reg x);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (*****************************************************)
   | (Tail, CallCls(x, ys, zs)) ->
