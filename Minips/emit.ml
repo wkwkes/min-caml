@@ -41,6 +41,7 @@ let load_label r label =
   let r = reg r in
   let r = if r = "r29" then "%r29" else r in
   "\tLA\t" ^ r ^ ", " ^ label ^ "\n"
+  
 (******)
 
 let rec shuffle sw xys = 
@@ -58,7 +59,8 @@ let rec shuffle sw xys =
 
 type dest = Tail | NonTail of Id.t
 
-let add_per s = "%" ^ s
+(*let add_per s = "%" ^ s*)
+let add_per x = x
 
 let rec g oc = function 
   | (dest, Ans (exp)) -> g' oc (dest, exp)
@@ -277,7 +279,7 @@ and g' oc = function
     Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
     Printf.fprintf oc "\tLW\t%s, 0(%s)\n" reg_tmp (reg reg_cl);
     (*おそらくjamp and linkでいいと思うけどbctrlが何かいまいちわからない*)
-    Printf.fprintf oc "\tJAL\t%s\n" reg_tmp;
+    Printf.fprintf oc "\tJALR\t%s\n" reg_tmp;
     (*
     subiがないのでreg_tmpにimmを一時的に入れてSUBを使う.
     大丈夫なはず.
