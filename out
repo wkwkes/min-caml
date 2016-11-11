@@ -1,0 +1,47 @@
+45,47c45,46
+<   (* TODO *)
+<   | Closure.Mul (x, y) -> Ans (Add (x, V (y)))
+<   | Closure.Div (x, y) -> Ans (Sub (x, V (y)))
+---
+>   | Closure.Mul (x, y) -> Ans (Mul (x, V (y)))
+>   | Closure.Div (x, y) -> Ans (Div (x, V (y)))
+80c79
+<         (fun y _ offset store_fv -> seq (Sw (y, x, C (offset)), store_fv)) in
+---
+>         (fun y _ offset store_fv -> seq (Stw (y, x, C (offset)), store_fv)) in
+85c84
+<                    seq (Sw (z, x, C (0)), store_fv))))
+---
+>                    seq (Stw (z, x, C (0)), store_fv))))
+99c98
+<         (fun x _ offset store -> seq (Sw (x, y, C (offset)), store))  in
+---
+>         (fun x _ offset store -> seq (Stw (x, y, C (offset)), store))  in
+113c112
+<            else Let ((x, t), Lw (y, C (offset)), load)) in
+---
+>            else Let ((x, t), Lwz (y, C (offset)), load)) in
+120c119
+<        Let ((offset, Type.Int), Sll (y, C (3)), 
+---
+>        Let ((offset, Type.Int), Slw (y, C (3)), 
+123,124c122,123
+<        Let ((offset, Type.Int), Sll (y, C (2)),
+<             Ans (Lw (x, V (offset))))
+---
+>        Let ((offset, Type.Int), Slw (y, C (2)),
+>             Ans (Lwz (x, V (offset))))
+131c130
+<        Let ((offset, Type.Int), Sll (y, C (3)),
+---
+>        Let ((offset, Type.Int), Slw (y, C (3)),
+134,135c133,134
+<        Let ((offset, Type.Int), Sll (y, C (2)), 
+<             Ans (Sw (z, x, V (offset)))) 
+---
+>        Let ((offset, Type.Int), Slw (y, C (2)), 
+>             Ans (Stw (z, x, V (offset)))) 
+148c147
+<       (fun z t offset load -> Let ((z, t), Lw (x, C (offset)), load)) in
+---
+>       (fun z t offset load -> Let ((z, t), Lwz (x, C (offset)), load)) in

@@ -1,6 +1,7 @@
 (* 2���ڥ����ɤǤϤʤ�3���ڥ����ɤ�x86�������֥����ɤ� *)
 
 type id_or_imm = V of Id.t | C of int
+[@@deriving show]
 type t = 
   | Ans of exp
   | Let of (Id.t * Type.t) * exp * t
@@ -36,6 +37,8 @@ and exp =
   | CallDir of Id.l * Id.t list * Id.t list
   | Save of Id.t * Id.t
   | Restore of Id.t
+[@@deriving show]
+
 type fundef = { name : Id.l; args : Id.t list; fargs : Id.t list; body : t; ret : Type.t }
 
 type prog = Prog of (Id.l * float) list * fundef list * t

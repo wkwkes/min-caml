@@ -211,6 +211,7 @@ and g' oc = function (* ��̿���Υ������֥����� *
     g'_args oc [] ys zs;
     Printf.fprintf oc "\tb\t%s\n" x
   | (NonTail(a), CallCls(x, ys, zs)) ->
+    Printf.fprintf oc "here\n";
     Printf.fprintf oc "\tmflr\t%s\n" reg_tmp;
     g'_args oc [(x, reg_cl)] ys zs;
     let ss = stacksize () in
@@ -225,7 +226,8 @@ and g' oc = function (* ��̿���Υ������֥����� *
        Printf.fprintf oc "\tmr\t%s, %s\n" (reg a) (reg regs.(0)) 
      else if List.mem a allfregs && a <> fregs.(0) then 
        Printf.fprintf oc "\tfmr\t%s, %s\n" (reg a) (reg fregs.(0)));
-    Printf.fprintf oc "\tmtlr\t%s\n" reg_tmp
+    Printf.fprintf oc "\tmtlr\t%s\n" reg_tmp;
+    Printf.fprintf oc "end\n"
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) -> 
     Printf.fprintf oc "\tmflr\t%s\n" reg_tmp;
     g'_args oc [] ys zs;

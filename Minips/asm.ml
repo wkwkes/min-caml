@@ -1,6 +1,7 @@
 (* Minips assembly with a few virtual instructions *)
 
 type id_or_imm = V of Id.t | C of int
+[@@deriving show]
 type t = 
   | Ans of exp
   | Let of (Id.t * Type.t) * exp * t
@@ -42,6 +43,7 @@ and exp =
   | CallDir of Id.l * Id.t list * Id.t list
   | Save of Id.t * Id.t 
   | Restore of Id.t 
+[@@deriving show]
 
 type fundef =
   { name : Id.l; args : Id.t list; fargs : Id.t list; body : t; ret : Type.t }
@@ -55,7 +57,7 @@ let fletd (x, e1, e2) = Let ((x, Type.Float), e1, e2)
 (* seq : exp * t -> t *)
 let seq (e1, e2) = Let ((Id.gentmp Type.Unit, Type.Unit), e1, e2)
 
-let regs = [| "%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"; "%r10"; 
+let regs = [|"%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"; "%r10"; 
               "%r11"; "%r12"; "%r13"; "%r14"; "%r15"; "%r16"; "%r17"; "%r18"; 
               "%r19"; "%r20"; "%r21"; "%r22"; "%r23"; "%r24"; "%r25"; "%r26"|]
 (* let regs = Array.init 27 (fun i -> Printf.sprintf "_R_%d" i) *)
@@ -71,7 +73,8 @@ let reg_tmp = "%r29"
 (* r31 is the link register *)
 let reg_link = "%r31"
 (* r27 is for a comdition register *)
-let reg_cmp = "%r0"
+let reg_cmp = "%r27"
+let reg_zero = "%r0"
 let reg_fzero = "%f0"
 
 (* is_reg : Id.t -> bool *)

@@ -1,3 +1,4 @@
+
 let limit = ref 1000
 
 let syntax_option = ref false
@@ -15,7 +16,7 @@ let lexbuf outchan l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Emit.f outchan
-    (RegAlloc.f
+    (let Asm.Prog(a, b, c) = RegAlloc.f
        (Simm.f
           (Virtual.f
              (Closure.f
@@ -27,7 +28,7 @@ let lexbuf outchan l =
                                  if !syntax_option then print_endline (Syntax.show ast) else () ; ast))
                          in if !knormal_option then print_endline (KNormal.show ast) else () ; ast)
                     in if !alpha_option then print_endline  (KNormal.show ast) else (); ast) 
-    ))))
+    ))) in print_endline (Asm.show c); Asm.Prog(a, b, c))
 
 let string s = lexbuf stdout (Lexing.from_string s)
 

@@ -26,6 +26,7 @@ let locate x =
 let offset x = 4 * List.hd (locate x)
 let stacksize () = align ((List.length !stackmap + 1) * 4)
 
+(* これいらないのでは *)
 let reg r = 
   if is_reg r 
   (*then String.sub r 1 (String.length r - 1)*)
@@ -41,7 +42,7 @@ let load_label r label =
   let r = reg r in
   let r = if r = "r29" then "%r29" else r in
   "\tLA\t" ^ r ^ ", " ^ label ^ "\n"
-  
+
 (******)
 
 let rec shuffle sw xys = 
@@ -259,7 +260,7 @@ and g' oc = function
     (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
     Printf.fprintf oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
-    (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)*)
+  (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)*)
   | (NonTail(z), IfFLE(x, y, e1, e2)) ->
     Printf.fprintf oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
@@ -271,10 +272,11 @@ and g' oc = function
   | (Tail, CallDir(Id.L(x), ys, zs)) ->
     g'_args oc [] ys zs;
     Printf.fprintf oc "\tJ\t%s\n" x
-  | (NonTail(a), CallCls(x, ys, zs)) ->
+  | (NonTail(a), CallCls(x, ys, zs)) -> (* TODO いろいろ書き直し sparcを参考に *)
+    (*Printf.fprintf oc "here\n";*)
     Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
     g'_args oc [(x, reg_cl)] ys zs;
-    let ss = stacksize () in
+    let ss = stacksize () in 
     Printf.fprintf oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
     Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
     Printf.fprintf oc "\tLW\t%s, 0(%s)\n" reg_tmp (reg reg_cl);
@@ -284,18 +286,20 @@ and g' oc = function
     subiがないのでreg_tmpにimmを一時的に入れてSUBを使う.
     大丈夫なはず.
     *)
-    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
-    Printf.fprintf oc "\tSUB\t%s, %s,%s\n" reg_sp reg_sp reg_tmp;
+    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero ss;
+    Printf.fprintf oc "\tSUB\t%s, %s, %s\n" reg_sp reg_sp reg_cmp;
     Printf.fprintf oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
+    
     (if List.mem a allregs && a <> regs.(0) then 
        Printf.fprintf oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0 
      else if List.mem a allfregs && a <> fregs.(0) then
        (* TODO *) 
        (*Printf.fprintf oc "\tFMR\t%s, %s\n" (reg a) (reg fregs.(0)));*)
        Printf.fprintf oc "\tADD.s\t%s, %s, %s\n" (reg x) (reg fregs.(0)) reg_fzero);
-    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
+    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0;
+    (*Printf.fprintf oc "end\n"*)
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) -> 
-    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
+    (*Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;*)
     g'_args oc [] ys zs;
     let ss = stacksize () in
     Printf.fprintf oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
@@ -310,10 +314,9 @@ and g' oc = function
        (* TODO *)
        (*Printf.fprintf oc "\tFMR\t%s, %s\n" (reg a) (reg fregs.(0)));*)
        Printf.fprintf oc "\tADD.s\t%s, %s, %s\n" (reg a) (reg fregs.(0)) reg_fzero);
-    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
+    Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0
 (* g'_tail_if oc e1 e2 b bn は元々は
-   bnでcr7を見ながらe2に飛ぶ
-   飛ばない場合はe1を続ける. 
+   bnでcr7を見ながらe2に飛ぶ   飛ばない場合はe1を続ける. 
    今は rxとryを比べてbnでb_elseにジャンプする.
 
    bとbnを入れ替えた
@@ -386,19 +389,21 @@ let f oc (Prog(data, fundefs, e)) =
   (*Printf.fprintf oc "\tmflr\tr0\n";*)
   Printf.fprintf oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
   (* TODO どうしよう *)
-  (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
-    Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
-    Printf.fprintf oc "\tstwu\tr1, -96(r1)\n";*)
+  (*Printf.fprintf oc "\tSW\t%%r30, -8(%%r1)\n";
+  Printf.fprintf oc "\tSW\t%%r0, 8(%%r1)\n";
+  Printf.fprintf oc "\tSW\t%%r1, -96(%%r1)\n";*)
+  
   Printf.fprintf oc "   # main program start\n";
   stackset := S.empty;
   stackmap := [];
   g oc (NonTail("_R_0"), e);
   Printf.fprintf oc "   # main program end\n";
   (* TODO どうしよう *)
-  (*Printf.fprintf oc "\tmr\tr3, %s\n" regs.(0);
-    Printf.fprintf oc "\tlwz\tr1, 0(r1)\n";
-    Printf.fprintf oc "\tlwz\tr0, 8(r1)\n";
-    Printf.fprintf oc "\tmtlr\tr0\n";
-    Printf.fprintf oc "\tlmw\tr30, -8(r1)\n";
-    Printf.fprintf oc "\tblr\n"*)
+  (*Printf.fprintf oc "\tADDI\t%%r3, %s, 0\n" regs.(0);
+  Printf.fprintf oc "\tLW\t%%r1, 0(%%r1)\n";
+  Printf.fprintf oc "\tLW\t%%r0, 8(%%r1)\n";*)
+  (*リンクレジスタに0を入れる*)
+  (*Printf.fprintf oc "\tmtlr\t%%r0\n";*)
+  (*Printf.fprintf oc "\tLW\t%%r30, -8(%%r1)\n";*)
+  (*Printf.fprintf oc "\tblr\n"*)
 

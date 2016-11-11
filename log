@@ -1,10 +1,8 @@
-closure : 
-Closure.Prog ([],
-  Closure.Let (("Tt4.5", (Type.Tuple [Type.Int; Type.Int; Type.Int])),
-    Closure.Let (("Ti1.9", Type.Int), (Closure.Int 1),
-      Closure.Let (("Ti2.10", Type.Int), (Closure.Int 2),
-        Closure.Let (("Ti3.11", Type.Int), (Closure.Int 3),
-          (Closure.Tuple ["Ti1.9"; "Ti2.10"; "Ti3.11"])))),
-    Closure.LetTuple (
-      [("x.6", Type.Int); ("y.7", Type.Int); ("z.8", Type.Int)], "Tt4.5",
-      Closure.Unit)))
+Asm.Let (("%r1", Type.Int), (Asm.Li 100),
+  Asm.Let (("%r26", Type.Fun ([Type.Int], Type.Int)), (Asm.Mr "%r28"),
+    Asm.Let (("%r28", Type.Int), Asm.Add ("%r28", (Asm.C 8)),
+      Asm.Let (("%r2", Type.Int), (Asm.SetL (Id.L "g.3")),
+        Asm.Let (("%r0", Type.Unit), Asm.Sw ("%r2", "%r26", (Asm.C 0)),
+          Asm.Let (("%r0", Type.Unit), Asm.Sw ("%r1", "%r26", (Asm.C 4)),
+            Asm.Let (("%r1", Type.Int), (Asm.Li 100),
+              (Asm.Ans Asm.CallCls ("%r26", ["%r1"], [])))))))))

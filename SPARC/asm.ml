@@ -1,10 +1,12 @@
 (* SPARC assembly with a few virtual instructions *)
 
 type id_or_imm = V of Id.t | C of int
-type t = (* Ì¿Îá¤ÎÎó (caml2html: sparcasm_t) *)
+[@@deriving show]
+
+type t = (* Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (caml2html: sparcasm_t) *)
   | Ans of exp
   | Let of (Id.t * Type.t) * exp * t
-and exp = (* °ì¤Ä°ì¤Ä¤ÎÌ¿Îá¤ËÂÐ±þ¤¹¤ë¼° (caml2html: sparcasm_exp) *)
+and exp = (* ï¿½ï¿½ï¿½Ä°ï¿½ï¿½Ä¤ï¿½Ì¿ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½ï¿½ë¼° (caml2html: sparcasm_exp) *)
   | Nop
   | Set of int
   | SetL of Id.l
@@ -27,16 +29,18 @@ and exp = (* °ì¤Ä°ì¤Ä¤ÎÌ¿Îá¤ËÂÐ±þ¤¹¤ë¼° (caml2html: sparcasm_exp) *)
   (* virtual instructions *)
   | IfEq of Id.t * id_or_imm * t * t
   | IfLE of Id.t * id_or_imm * t * t
-  | IfGE of Id.t * id_or_imm * t * t (* º¸±¦ÂÐ¾Î¤Ç¤Ï¤Ê¤¤¤Î¤ÇÉ¬Í× *)
+  | IfGE of Id.t * id_or_imm * t * t (* ï¿½ï¿½ï¿½ï¿½ï¿½Ð¾Î¤Ç¤Ï¤Ê¤ï¿½ï¿½Î¤ï¿½É¬ï¿½ï¿½ *)
   | IfFEq of Id.t * Id.t * t * t
   | IfFLE of Id.t * Id.t * t * t
   (* closure address, integer arguments, and float arguments *)
   | CallCls of Id.t * Id.t list * Id.t list
   | CallDir of Id.l * Id.t list * Id.t list
-  | Save of Id.t * Id.t (* ¥ì¥¸¥¹¥¿ÊÑ¿ô¤ÎÃÍ¤ò¥¹¥¿¥Ã¥¯ÊÑ¿ô¤ØÊÝÂ¸ (caml2html: sparcasm_save) *)
-  | Restore of Id.t (* ¥¹¥¿¥Ã¥¯ÊÑ¿ô¤«¤éÃÍ¤òÉü¸µ (caml2html: sparcasm_restore) *)
+  | Save of Id.t * Id.t (* ï¿½ì¥¸ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½Í¤ò¥¹¥ï¿½ï¿½Ã¥ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ (caml2html: sparcasm_save) *)
+  | Restore of Id.t (* ï¿½ï¿½ï¿½ï¿½ï¿½Ã¥ï¿½ï¿½Ñ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¤ï¿½ï¿½ï¿½ï¿½ï¿½ (caml2html: sparcasm_restore) *)
+[@@deriving show]
+
 type fundef = { name : Id.l; args : Id.t list; fargs : Id.t list; body : t; ret : Type.t }
-(* ¥×¥í¥°¥é¥àÁ´ÂÎ = ÉâÆ°¾®¿ôÅÀ¿ô¥Æ¡¼¥Ö¥ë + ¥È¥Ã¥×¥ì¥Ù¥ë´Ø¿ô + ¥á¥¤¥ó¤Î¼° (caml2html: sparcasm_prog) *)
+(* ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¡ï¿½ï¿½Ö¥ï¿½ + ï¿½È¥Ã¥×¥ï¿½ï¿½Ù¥ï¿½ï¿½Ø¿ï¿½ + ï¿½á¥¤ï¿½ï¿½ï¿½Î¼ï¿½ (caml2html: sparcasm_prog) *)
 type prog = Prog of (Id.l * float) list * fundef list * t
 
 let fletd(x, e1, e2) = Let((x, Type.Float), e1, e2)
@@ -88,7 +92,7 @@ let rec fv_exp = function
 and fv = function
   | Ans(exp) -> fv_exp exp
   | Let((x, t), exp, e) ->
-      fv_exp exp @ remove_and_uniq (S.singleton x) (fv e)
+    fv_exp exp @ remove_and_uniq (S.singleton x) (fv e)
 let fv e = remove_and_uniq S.empty (fv e)
 
 let rec concat e1 xt e2 =
