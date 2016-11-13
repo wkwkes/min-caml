@@ -385,7 +385,7 @@ let f oc (Prog(data, fundefs, e)) =
   (*Printf.fprintf oc "main: # main entry point\n";*)
   (*Printf.fprintf oc "\tmflr\tr0\n";*)
   Printf.fprintf oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
-  Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero 65535;
+  Printf.fprintf oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 1000;
   (* TODO どうしよう *)
   (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
     Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
