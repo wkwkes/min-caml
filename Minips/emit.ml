@@ -32,6 +32,8 @@ let reg r =
   then String.sub r 0 (String.length r)
   else r
 
+let dump = Printf.fprintf
+
 (*TODO*)
 (*let load_label r label =
   "\tlis\t" ^ (reg r) ^ ", ha16(" ^ label ^ ")\n" ^
