@@ -71,7 +71,8 @@ let reg_tmp = "%r29"
 (* r31 is the link register *)
 let reg_link = "%r31"
 (* r27 is for a comdition register *)
-let reg_cmp = "%r0"
+let reg_cmp = "%r27"
+let reg_zero = "%r0"
 let reg_fzero = "%f0"
 
 (* is_reg : Id.t -> bool *)
