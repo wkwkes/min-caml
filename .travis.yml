@@ -6,3 +6,6 @@ sudo: required
 script: ./to_x86 && make min-caml && make do_test
 env:
   - OCAML_VERSION=4.03
+branches:
+  only: 
+    - trunk
