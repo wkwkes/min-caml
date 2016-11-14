@@ -1,45 +1,50 @@
-	.text
-	.globl  _min_caml_start
+.data
+.balign	8
+.text
 fib.9:
-	ADDI	%r27, %r0, 2
-	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.23
-	ADDI	%r2, %r1, -1
-	SW	%r1, 0(%r30)
-	ADDI	%r1, %r2, 0
-	SW	%r29, 4(%r30)
-	ADDI	%r30, %r30, 8
-	JAL	fib.9
-	ADDI	%r29, %r0, 8
-	SUB	%r30, %r30, %r29
-	LW	%r29, 4(%r30)
-	ADDI	%r29, %r31, 0
-	LW	%r2, 0(%r30)
-	ADDI	%r2, %r2, -2
-	SW	%r1, 4(%r30)
-	ADDI	%r1, %r2, 0
-	SW	%r29, 12(%r30)
-	ADDI	%r30, %r30, 16
-	JAL	fib.9
-	ADDI	%r29, %r0, 16
-	SUB	%r30, %r30, %r29
-	LW	%r29, 12(%r30)
-	ADDI	%r29, %r31, 0
-	LW	%r2, 4(%r30)
-	ADD	%r1, %r2, %r1
-	JR	%r31
-BEQ_else.23:
-	ADDI	%r1, %r0, 1
-	JR	%r31
-_min_caml_start: # main entry point
-	SUB	%r0, %r0, %r0
-   # main program start
-	ADDI	%r1, %r0, 30
-	SW	%r29, 4(%r30)
-	ADDI	%r30, %r30, 8
-	JAL	fib.9
-	ADDI	%r29, %r0, 8
-	SUB	%r30, %r30, %r29
-	LW	%r29, 4(%r30)
-	ADDI	%r29, %r31, 0
-   # main program end
+	cmpl	$2, %eax
+	jl	jge_else.23
+	movl	%eax, %ebx
+	subl	$1, %ebx
+	movl	%eax, 0(%ebp)
+	movl	%ebx, %eax
+	addl	$8, %ebp
+	call	fib.9
+	subl	$8, %ebp
+	movl	0(%ebp), %ebx
+	subl	$2, %ebx
+	movl	%eax, 4(%ebp)
+	movl	%ebx, %eax
+	addl	$8, %ebp
+	call	fib.9
+	subl	$8, %ebp
+	movl	4(%ebp), %ebx
+	addl	%ebx, %eax
+	ret
+jge_else.23:
+	movl	$1, %eax
+	ret
+.globl	min_caml_start
+min_caml_start:
+.globl	_min_caml_start
+_min_caml_start: # for cygwin
+	pushl	%eax
+	pushl	%ebx
+	pushl	%ecx
+	pushl	%edx
+	pushl	%esi
+	pushl	%edi
+	pushl	%ebp
+	movl	32(%esp),%ebp
+	movl	36(%esp),%eax
+	movl	%eax,min_caml_hp
+	movl	$30, %eax
+	call	fib.9
+	popl	%ebp
+	popl	%edi
+	popl	%esi
+	popl	%edx
+	popl	%ecx
+	popl	%ebx
+	popl	%eax
+	ret

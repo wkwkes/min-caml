@@ -10,11 +10,9 @@ f.3:
 	ADD.s	%f1, %f1, %f2
 	JR	%r31
 _min_caml_start: # main entry point
-	!
 	SUB	%r0, %r0, %r0
 	ADDI	%r28, %r0, 1000
    # main program start
-   !
 	LA	%r29, l.7
 	LWC1	%f1, 0(%r29)
 	ADDI	%r26, %r28, 0
