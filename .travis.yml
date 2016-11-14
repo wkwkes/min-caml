@@ -1,9 +1,17 @@
-language: python
-python:
-  - '2.7'
-install: bash -ex .travis-ocaml.sh && opam install ocamlfind && opam install ppx_deriving 
+install: 
+  - bash -ex .travis-ocaml.sh
+  - opam install install conf-m4 
+  - opam install ocamlfind
+  - opam install base-bytes
+  - opam install ocamlbuild
+  - opam install ppx_tools
+  - opam install result
+  - opam install ppx_deriving 
 sudo: required
-script: ./to_x86 && make min-caml && make do_test
+script: 
+  - ./to_x86
+  - make min-caml
+  - make do_test
 env:
   - OCAML_VERSION=4.03
 branches:
