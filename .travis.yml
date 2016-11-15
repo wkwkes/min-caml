@@ -1,6 +1,6 @@
 install: 
   - bash -ex .travis-ocaml.sh
-  - opam install install conf-m4 
+  - opam install conf-m4 
   - opam install ocamlfind
   - opam install base-bytes
   - opam install ocamlbuild
