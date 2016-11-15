@@ -152,7 +152,7 @@ and g' oc = function
     let ry = reg y in
     let rz = reg z in
     dump oc "\tADD.s\t%s, %s, %s\n" ry ry rz;
-    dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) 0 (reg z)
+    dump oc "\tLWC1\t%s, %d(%s)\n" rx 0 (reg z)
   | (NonTail(x), Lfd(y, C(z))) -> 
     dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) z (reg y)
   | (NonTail(_), Stfd(x, y, V(z))) ->
@@ -160,7 +160,7 @@ and g' oc = function
     let ry = reg y in
     let rz = reg z in
     dump oc "\tADD.s\t%s, %s, %s\n" ry ry rz;
-    dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) 0 (reg z)
+    dump oc "\tSWC1\t%s, %d(%s)\n" rx 0 (reg z)
   | (NonTail(_), Stfd(x, y, C(z))) ->
     dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) z (reg y)
   (********************)
@@ -384,7 +384,7 @@ let f oc (Prog(data, fundefs, e)) =
   (*Printf.fprintf oc "main: # main entry point\n";*)
   (*Printf.fprintf oc "\tmflr\tr0\n";*)
   dump oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
-  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 32768;
+  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 32668;
   (* TODO どうしよう *) 
   (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
     Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
