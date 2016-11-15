@@ -79,8 +79,7 @@ and g' oc = function
     let m = i lxor (n lsl 16) in
     let r = reg x in
     dump oc "\tADDI\t%s, %s, %d\n" r reg_zero n;
-    dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero 16;
-    dump oc "\tSLL\t%s, %s, %s\n" r r reg_tmp;
+    dump oc "\tSLL\t%s, %s, %d\n" r r 16;
     dump oc "\tORI\t%s, %s, %d\n" r r m
   | (NonTail(x), FLi(Id.L(l))) ->
     let s = load_label reg_tmp l in
@@ -113,10 +112,9 @@ and g' oc = function
     | (NonTail(x), Div(y, C(z))) -> 
     Printf.fprintf oc "\tDIVI\t%s, %s, %d\n" (reg x) (reg y) z*)
   | (NonTail(x), Sll(y, V(z))) -> 
-    dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+    dump oc "\tjavaSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sll(y, C(z))) ->
-    dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z;
-    dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) reg_tmp
+    dump oc "\tSLL\t%s, %s, %d\n" (reg x) (reg y) z
   | (NonTail(x), Lw(y, V(z))) ->
     let rx = reg x in
     let ry = reg y in
@@ -386,7 +384,7 @@ let f oc (Prog(data, fundefs, e)) =
   (*Printf.fprintf oc "main: # main entry point\n";*)
   (*Printf.fprintf oc "\tmflr\tr0\n";*)
   dump oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
-  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 1000;
+  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 32768;
   (* TODO どうしよう *) 
   (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
     Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
