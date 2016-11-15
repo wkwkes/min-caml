@@ -1,3 +1,5 @@
+language: c 
+compiler: gcc
 install: 
   - bash -ex .travis-ocaml.sh
   - opam install conf-m4 
