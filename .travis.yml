@@ -9,7 +9,8 @@ install:
   - opam install cppo
   - opam install ppx_deriving 
 sudo: required
-script: 
+script:
+  - eval `opam config env`
   - ./to_x86
   - make min-caml
   - make do_test
