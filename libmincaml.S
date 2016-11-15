@@ -1,1 +1,1 @@
-x86/libmincaml.S
+Minips/libmincaml.S

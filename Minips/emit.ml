@@ -289,7 +289,7 @@ and g' oc = function
     (if List.mem a allregs && a <> regs.(0) then 
        dump oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0 
      else if List.mem a allfregs && a <> fregs.(0) then
-       (* TODO *) 
+       (* TODO *)
        (*Printf.fprintf oc "\tFMR\t%s, %s\n" (reg a) (reg fregs.(0)));*)
        dump oc "\tADD.s\t%s, %s, %s\n" (reg x) (reg fregs.(0)) reg_fzero);
     dump oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
