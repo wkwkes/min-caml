@@ -6,6 +6,7 @@ install:
   - opam install ocamlbuild
   - opam install ppx_tools
   - opam install result
+  - opam install cppo
   - opam install ppx_deriving 
 sudo: required
 script: 
