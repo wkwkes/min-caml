@@ -38,7 +38,7 @@ join-reg join-reg2 non-tail-if non-tail-if2 \
 inprod inprod-rec inprod-loop matmul matmul-flat
 
 do_test: $(TESTS:%=test/%.cmp)
-	if [ ! -s ./*.ml ]; then echo "Test Passed"; else echo "Test Failed"; exit 1; fi
+	if [ ! -s ./*.cmp ]; then echo "Test Passed"; else echo "Test Failed"; exit 1; fi
 
 
 .PRECIOUS: test/%.s test/% test/%.res test/%.ans test/%.cmp
