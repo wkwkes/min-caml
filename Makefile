@@ -38,7 +38,9 @@ join-reg join-reg2 non-tail-if non-tail-if2 \
 inprod inprod-rec inprod-loop matmul matmul-flat
 
 do_test: $(TESTS:%=test/%.cmp)
-	cat test/*.cmp
+	cat main.ml
+	# cat test/*.cmp
+
 
 .PRECIOUS: test/%.s test/% test/%.res test/%.ans test/%.cmp
 TRASH = $(TESTS:%=test/%.s) $(TESTS:%=test/%) $(TESTS:%=test/%.res) $(TESTS:%=test/%.ans) $(TESTS:%=test/%.cmp)
