@@ -1,5 +1,6 @@
 language: c 
 compiler: gcc
+sudo: required
 install: 
   - bash -ex .travis-ocaml.sh
   - opam install conf-m4 
@@ -10,8 +11,7 @@ install:
   - opam install result
   - opam install cppo
   - opam install ppx_deriving 
-  - apt-get install gcc-multilib
-sudo: required
+  - sudo apt-get install gcc-multilib
 script:
   - eval `opam config env`
   - ./to_x86
