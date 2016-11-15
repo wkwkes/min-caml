@@ -10,6 +10,7 @@ install:
   - opam install result
   - opam install cppo
   - opam install ppx_deriving 
+  - apt-get install gcc-multilib
 sudo: required
 script:
   - eval `opam config env`
