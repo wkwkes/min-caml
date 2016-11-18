@@ -15,7 +15,7 @@ let lexbuf outchan l =
   Id.counter := 0;
   Typing.extenv := M.empty;
   Emit.f outchan
-    (RegAlloc.f
+    (let ast = RegAlloc.f
        (Simm.f
           (Virtual.f
              (Closure.f
@@ -27,7 +27,7 @@ let lexbuf outchan l =
                                  if !syntax_option then print_endline (Syntax.show ast) else () ; ast))
                          in if !knormal_option then print_endline (KNormal.show ast) else () ; ast)
                     in if !alpha_option then print_endline  (KNormal.show ast) else (); ast) 
-    ))))
+    ))) in ast (* print_endline (Asm.show_prog ast); ast*))
 
 let string s = lexbuf stdout (Lexing.from_string s)
 

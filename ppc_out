@@ -5,266 +5,266 @@ Asm.Prog (
    ((Id.L "l.337"), 3.); ((Id.L "l.334"), 2.); ((Id.L "l.331"), 1.);
    ((Id.L "l.328"), 0.)],
   [{ Asm.name = (Id.L "loop3.140");
-     args = ["%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"]; fargs = [];
+     args = ["%r2"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"]; fargs = [];
      body = (Asm.Ans
-               Asm.IfGE ("%r2", (Asm.C 0),
-                 Asm.Let (("%r7", Type.Int), Asm.Sll ("%r1", (Asm.C 2)),
-                   Asm.Let (("%r7", (Type.Array Type.Float)),
-                     Asm.Lw ("%r6", (Asm.V "%r7")),
-                     Asm.Let (("%r8", Type.Int), Asm.Sll ("%r1", (Asm.C 2)),
-                       Asm.Let (("%r8", (Type.Array Type.Float)),
-                         Asm.Lw ("%r6", (Asm.V "%r8")),
-                         Asm.Let (("%r9", Type.Int),
-                           Asm.Sll ("%r3", (Asm.C 2)),
-                           Asm.Let (("%f1", Type.Float),
-                             Asm.Lfd ("%r8", (Asm.V "%r9")),
-                             Asm.Let (("%r8", Type.Int),
-                               Asm.Sll ("%r1", (Asm.C 2)),
-                               Asm.Let (("%r8", (Type.Array Type.Float)),
-                                 Asm.Lw ("%r4", (Asm.V "%r8")),
-                                 Asm.Let (("%r9", Type.Int),
-                                   Asm.Sll ("%r2", (Asm.C 2)),
-                                   Asm.Let (("%f2", Type.Float),
-                                     Asm.Lfd ("%r8", (Asm.V "%r9")),
-                                     Asm.Let (("%r8", Type.Int),
-                                       Asm.Sll ("%r2", (Asm.C 2)),
+               Asm.IfGE ("%r5", (Asm.C 0),
+                 Asm.Let (("%r10", Type.Int), Asm.Slw ("%r2", (Asm.C 2)),
+                   Asm.Let (("%r10", (Type.Array Type.Float)),
+                     Asm.Lwz ("%r9", (Asm.V "%r10")),
+                     Asm.Let (("%r11", Type.Int), Asm.Slw ("%r2", (Asm.C 2)),
+                       Asm.Let (("%r11", (Type.Array Type.Float)),
+                         Asm.Lwz ("%r9", (Asm.V "%r11")),
+                         Asm.Let (("%r12", Type.Int),
+                           Asm.Slw ("%r6", (Asm.C 3)),
+                           Asm.Let (("%f0", Type.Float),
+                             Asm.Lfd ("%r11", (Asm.V "%r12")),
+                             Asm.Let (("%r11", Type.Int),
+                               Asm.Slw ("%r2", (Asm.C 2)),
+                               Asm.Let (("%r11", (Type.Array Type.Float)),
+                                 Asm.Lwz ("%r7", (Asm.V "%r11")),
+                                 Asm.Let (("%r12", Type.Int),
+                                   Asm.Slw ("%r5", (Asm.C 3)),
+                                   Asm.Let (("%f1", Type.Float),
+                                     Asm.Lfd ("%r11", (Asm.V "%r12")),
+                                     Asm.Let (("%r11", Type.Int),
+                                       Asm.Slw ("%r5", (Asm.C 2)),
                                        Asm.Let (
-                                         ("%r8", (Type.Array Type.Float)),
-                                         Asm.Lw ("%r5", (Asm.V "%r8")),
-                                         Asm.Let (("%r9", Type.Int),
-                                           Asm.Sll ("%r3", (Asm.C 2)),
-                                           Asm.Let (("%f3", Type.Float),
-                                             Asm.Lfd ("%r8", (Asm.V "%r9")),
-                                             Asm.Let (("%f2", Type.Float),
-                                               Asm.FMul ("%f2", "%f3"),
-                                               Asm.Let (("%f1", Type.Float),
-                                                 Asm.FAdd ("%f1", "%f2"),
-                                                 Asm.Let (("%r8", Type.Int),
-                                                   Asm.Sll ("%r3", (Asm.C 2)),
+                                         ("%r11", (Type.Array Type.Float)),
+                                         Asm.Lwz ("%r8", (Asm.V "%r11")),
+                                         Asm.Let (("%r12", Type.Int),
+                                           Asm.Slw ("%r6", (Asm.C 3)),
+                                           Asm.Let (("%f2", Type.Float),
+                                             Asm.Lfd ("%r11", (Asm.V "%r12")),
+                                             Asm.Let (("%f1", Type.Float),
+                                               Asm.FMul ("%f1", "%f2"),
+                                               Asm.Let (("%f0", Type.Float),
+                                                 Asm.FAdd ("%f0", "%f1"),
+                                                 Asm.Let (("%r11", Type.Int),
+                                                   Asm.Slw ("%r6", (Asm.C 3)),
                                                    Asm.Let (
                                                      ("%r0", Type.Unit),
-                                                     Asm.Stfd ("%f1", "%r7",
-                                                       (Asm.V "%r8")),
+                                                     Asm.Stfd ("%f0", "%r10",
+                                                       (Asm.V "%r11")),
                                                      Asm.Let (
-                                                       ("%r2", Type.Int),
-                                                       Asm.Sub ("%r2",
+                                                       ("%r5", Type.Int),
+                                                       Asm.Sub ("%r5",
                                                          (Asm.C 1)),
                                                        (Asm.Ans
                                                           Asm.CallDir (
                                                             (Id.L "loop3.140"),
-                                                            ["%r1"; "%r2";
-                                                             "%r3"; "%r4";
-                                                             "%r5"; "%r6"],
+                                                            ["%r2"; "%r5";
+                                                             "%r6"; "%r7";
+                                                             "%r8"; "%r9"],
                                                             []))))))))))))))))))))),
                  (Asm.Ans Asm.Nop))); ret = Type.Unit };
    { Asm.name = (Id.L "loop2.147");
-     args = ["%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"]; fargs = [];
+     args = ["%r2"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"]; fargs = [];
      body = (Asm.Ans
-               Asm.IfGE ("%r3", (Asm.C 0),
-                 Asm.Let (("%r7", Type.Int), Asm.Sub ("%r2", (Asm.C 1)),
-                   Asm.Let (("Tu381", Type.Unit), Asm.Save ("%r6", "c.153"),
+               Asm.IfGE ("%r6", (Asm.C 0),
+                 Asm.Let (("%r10", Type.Int), Asm.Sub ("%r5", (Asm.C 1)),
+                   Asm.Let (("Tu381", Type.Unit), Asm.Save ("%r9", "c.153"),
                      Asm.Let (("Tu380", Type.Unit),
-                       Asm.Save ("%r5", "b.152"),
+                       Asm.Save ("%r8", "b.152"),
                        Asm.Let (("Tu379", Type.Unit),
-                         Asm.Save ("%r4", "a.151"),
+                         Asm.Save ("%r7", "a.151"),
                          Asm.Let (("Tu378", Type.Unit),
-                           Asm.Save ("%r2", "m.149"),
+                           Asm.Save ("%r5", "m.149"),
                            Asm.Let (("Tu377", Type.Unit),
-                             Asm.Save ("%r1", "i.148"),
+                             Asm.Save ("%r2", "i.148"),
                              Asm.Let (("Tu376", Type.Unit),
-                               Asm.Save ("%r3", "j.150"),
+                               Asm.Save ("%r6", "j.150"),
                                Asm.Let (("%r0", Type.Unit),
                                  Asm.CallDir ((Id.L "loop3.140"),
-                                   ["%r1"; "%r7"; "%r3"; "%r4"; "%r5"; "%r6"],
+                                   ["%r2"; "%r10"; "%r6"; "%r7"; "%r8"; "%r9"],
                                    []),
-                                 Asm.Let (("%r1", Type.Int),
+                                 Asm.Let (("%r2", Type.Int),
                                    (Asm.Restore "j.150"),
-                                   Asm.Let (("%r3", Type.Int),
-                                     Asm.Sub ("%r1", (Asm.C 1)),
-                                     Asm.Let (("%r1", Type.Int),
+                                   Asm.Let (("%r6", Type.Int),
+                                     Asm.Sub ("%r2", (Asm.C 1)),
+                                     Asm.Let (("%r2", Type.Int),
                                        (Asm.Restore "i.148"),
-                                       Asm.Let (("%r2", Type.Int),
+                                       Asm.Let (("%r5", Type.Int),
                                          (Asm.Restore "m.149"),
-                                         Asm.Let (("%r4", Type.Int),
+                                         Asm.Let (("%r7", Type.Int),
                                            (Asm.Restore "a.151"),
-                                           Asm.Let (("%r5", Type.Int),
+                                           Asm.Let (("%r8", Type.Int),
                                              (Asm.Restore "b.152"),
-                                             Asm.Let (("%r6", Type.Int),
+                                             Asm.Let (("%r9", Type.Int),
                                                (Asm.Restore "c.153"),
                                                (Asm.Ans
                                                   Asm.CallDir (
                                                     (Id.L "loop2.147"),
-                                                    ["%r1"; "%r2"; "%r3";
-                                                     "%r4"; "%r5"; "%r6"], [
+                                                    ["%r2"; "%r5"; "%r6";
+                                                     "%r7"; "%r8"; "%r9"], [
                                                     ]))))))))))))))))),
                  (Asm.Ans Asm.Nop))); ret = Type.Unit };
    { Asm.name = (Id.L "loop1.154");
-     args = ["%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"]; fargs = [];
+     args = ["%r2"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"]; fargs = [];
      body = (Asm.Ans
-               Asm.IfGE ("%r1", (Asm.C 0),
-                 Asm.Let (("%r7", Type.Int), Asm.Sub ("%r3", (Asm.C 1)),
-                   Asm.Let (("Tu388", Type.Unit), Asm.Save ("%r6", "c.160"),
+               Asm.IfGE ("%r2", (Asm.C 0),
+                 Asm.Let (("%r10", Type.Int), Asm.Sub ("%r6", (Asm.C 1)),
+                   Asm.Let (("Tu388", Type.Unit), Asm.Save ("%r9", "c.160"),
                      Asm.Let (("Tu387", Type.Unit),
-                       Asm.Save ("%r5", "b.159"),
+                       Asm.Save ("%r8", "b.159"),
                        Asm.Let (("Tu386", Type.Unit),
-                         Asm.Save ("%r4", "a.158"),
+                         Asm.Save ("%r7", "a.158"),
                          Asm.Let (("Tu385", Type.Unit),
-                           Asm.Save ("%r3", "n.157"),
+                           Asm.Save ("%r6", "n.157"),
                            Asm.Let (("Tu384", Type.Unit),
-                             Asm.Save ("%r2", "m.156"),
+                             Asm.Save ("%r5", "m.156"),
                              Asm.Let (("Tu383", Type.Unit),
-                               Asm.Save ("%r1", "i.155"),
+                               Asm.Save ("%r2", "i.155"),
                                Asm.Let (("%r0", Type.Unit),
                                  Asm.CallDir ((Id.L "loop2.147"),
-                                   ["%r1"; "%r2"; "%r7"; "%r4"; "%r5"; "%r6"],
+                                   ["%r2"; "%r5"; "%r10"; "%r7"; "%r8"; "%r9"],
                                    []),
-                                 Asm.Let (("%r1", Type.Int),
+                                 Asm.Let (("%r2", Type.Int),
                                    (Asm.Restore "i.155"),
-                                   Asm.Let (("%r1", Type.Int),
-                                     Asm.Sub ("%r1", (Asm.C 1)),
-                                     Asm.Let (("%r2", Type.Int),
+                                   Asm.Let (("%r2", Type.Int),
+                                     Asm.Sub ("%r2", (Asm.C 1)),
+                                     Asm.Let (("%r5", Type.Int),
                                        (Asm.Restore "m.156"),
-                                       Asm.Let (("%r3", Type.Int),
+                                       Asm.Let (("%r6", Type.Int),
                                          (Asm.Restore "n.157"),
-                                         Asm.Let (("%r4", Type.Int),
+                                         Asm.Let (("%r7", Type.Int),
                                            (Asm.Restore "a.158"),
-                                           Asm.Let (("%r5", Type.Int),
+                                           Asm.Let (("%r8", Type.Int),
                                              (Asm.Restore "b.159"),
-                                             Asm.Let (("%r6", Type.Int),
+                                             Asm.Let (("%r9", Type.Int),
                                                (Asm.Restore "c.160"),
                                                (Asm.Ans
                                                   Asm.CallDir (
                                                     (Id.L "loop1.154"),
-                                                    ["%r1"; "%r2"; "%r3";
-                                                     "%r4"; "%r5"; "%r6"], [
+                                                    ["%r2"; "%r5"; "%r6";
+                                                     "%r7"; "%r8"; "%r9"], [
                                                     ]))))))))))))))))),
                  (Asm.Ans Asm.Nop))); ret = Type.Unit };
    { Asm.name = (Id.L "mul.161");
-     args = ["%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"]; fargs = [];
-     body = Asm.Let (("%r1", Type.Int), Asm.Sub ("%r1", (Asm.C 1)),
+     args = ["%r2"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"]; fargs = [];
+     body = Asm.Let (("%r2", Type.Int), Asm.Sub ("%r2", (Asm.C 1)),
               (Asm.Ans
                  Asm.CallDir ((Id.L "loop1.154"),
-                   ["%r1"; "%r2"; "%r3"; "%r4"; "%r5"; "%r6"], [])));
+                   ["%r2"; "%r5"; "%r6"; "%r7"; "%r8"; "%r9"], [])));
      ret = Type.Unit };
-   { Asm.name = (Id.L "init.169"); args = ["%r1"; "%r2"; "%r3"]; fargs = [
+   { Asm.name = (Id.L "init.169"); args = ["%r2"; "%r5"; "%r6"]; fargs = [
      ];
      body = (Asm.Ans
-               Asm.IfGE ("%r1", (Asm.C 0),
-                 Asm.Let (("%f1", Type.Float), (Asm.FLi (Id.L "l.328")),
-                   Asm.Let (("Tu393", Type.Unit), Asm.Save ("%r2", "n.171"),
+               Asm.IfGE ("%r2", (Asm.C 0),
+                 Asm.Let (("%f0", Type.Float), (Asm.FLi (Id.L "l.328")),
+                   Asm.Let (("Tu393", Type.Unit), Asm.Save ("%r5", "n.171"),
                      Asm.Let (("Tu392", Type.Unit),
-                       Asm.Save ("%r3", "mat.172"),
+                       Asm.Save ("%r6", "mat.172"),
                        Asm.Let (("Tu391", Type.Unit),
-                         Asm.Save ("%r1", "i.170"),
-                         Asm.Let (("%r1", (Type.Array Type.Float)),
+                         Asm.Save ("%r2", "i.170"),
+                         Asm.Let (("%r2", (Type.Array Type.Float)),
                            Asm.CallDir ((Id.L "min_caml_create_float_array"),
-                             ["%r2"], ["%f1"]),
-                           Asm.Let (("%r2", Type.Int), (Asm.Restore "i.170"),
-                             Asm.Let (("%r3", Type.Int),
-                               Asm.Sll ("%r2", (Asm.C 2)),
-                               Asm.Let (("%r4", Type.Int),
+                             ["%r5"], ["%f0"]),
+                           Asm.Let (("%r5", Type.Int), (Asm.Restore "i.170"),
+                             Asm.Let (("%r6", Type.Int),
+                               Asm.Slw ("%r5", (Asm.C 2)),
+                               Asm.Let (("%r7", Type.Int),
                                  (Asm.Restore "mat.172"),
                                  Asm.Let (("%r0", Type.Unit),
-                                   Asm.Sw ("%r1", "%r4", (Asm.V "%r3")),
-                                   Asm.Let (("%r1", Type.Int),
-                                     Asm.Sub ("%r2", (Asm.C 1)),
-                                     Asm.Let (("%r2", Type.Int),
+                                   Asm.Stw ("%r2", "%r7", (Asm.V "%r6")),
+                                   Asm.Let (("%r2", Type.Int),
+                                     Asm.Sub ("%r5", (Asm.C 1)),
+                                     Asm.Let (("%r5", Type.Int),
                                        (Asm.Restore "n.171"),
                                        (Asm.Ans
                                           Asm.CallDir ((Id.L "init.169"),
-                                            ["%r1"; "%r2"; "%r4"], []))))))))))))),
+                                            ["%r2"; "%r5"; "%r7"], []))))))))))))),
                  (Asm.Ans Asm.Nop))); ret = Type.Unit };
-   { Asm.name = (Id.L "make.173"); args = ["%r1"; "%r2"; "%r3"]; fargs = [
+   { Asm.name = (Id.L "make.173"); args = ["%r2"; "%r5"; "%r6"]; fargs = [
      ];
-     body = Asm.Let (("Tu395", Type.Unit), Asm.Save ("%r2", "n.175"),
-              Asm.Let (("Tu394", Type.Unit), Asm.Save ("%r1", "m.174"),
-                Asm.Let (("%r3", (Type.Array (Type.Array Type.Float))),
+     body = Asm.Let (("Tu395", Type.Unit), Asm.Save ("%r5", "n.175"),
+              Asm.Let (("Tu394", Type.Unit), Asm.Save ("%r2", "m.174"),
+                Asm.Let (("%r6", (Type.Array (Type.Array Type.Float))),
                   Asm.CallDir ((Id.L "min_caml_create_array"),
-                    ["%r1"; "%r3"], []),
-                  Asm.Let (("%r1", Type.Int), (Asm.Restore "m.174"),
-                    Asm.Let (("%r1", Type.Int), Asm.Sub ("%r1", (Asm.C 1)),
-                      Asm.Let (("%r2", Type.Int), (Asm.Restore "n.175"),
+                    ["%r2"; "%r6"], []),
+                  Asm.Let (("%r2", Type.Int), (Asm.Restore "m.174"),
+                    Asm.Let (("%r2", Type.Int), Asm.Sub ("%r2", (Asm.C 1)),
+                      Asm.Let (("%r5", Type.Int), (Asm.Restore "n.175"),
                         Asm.Let (("Tu396", Type.Unit),
-                          Asm.Save ("%r3", "mat.281"),
+                          Asm.Save ("%r6", "mat.281"),
                           Asm.Let (("%r0", Type.Unit),
                             Asm.CallDir ((Id.L "init.169"),
-                              ["%r1"; "%r2"; "%r3"], []),
-                            Asm.Let (("%r1", Type.Int),
+                              ["%r2"; "%r5"; "%r6"], []),
+                            Asm.Let (("%r2", Type.Int),
                               (Asm.Restore "mat.281"),
-                              (Asm.Ans (Asm.Mr "%r1")))))))))));
+                              (Asm.Ans (Asm.Mr "%r2")))))))))));
      ret = (Type.Array (Type.Array Type.Float)) }],
-  Asm.Let (("%r1", Type.Int), (Asm.Li 0),
-    Asm.Let (("%f1", Type.Float), (Asm.FLi (Id.L "l.328")),
-      Asm.Let (("%r3", (Type.Array Type.Float)),
-        Asm.CallDir ((Id.L "min_caml_create_float_array"), ["%r1"], ["%f1"]),
-        Asm.Let (("%r1", Type.Int), (Asm.Li 2),
-          Asm.Let (("%r2", Type.Int), (Asm.Li 3),
-            Asm.Let (("Tu398", Type.Unit), Asm.Save ("%r3", "dummy.168"),
-              Asm.Let (("%r1", (Type.Array (Type.Array Type.Float))),
-                Asm.CallDir ((Id.L "make.173"), ["%r1"; "%r2"; "%r3"], []),
-                Asm.Let (("%r2", Type.Int), (Asm.Li 3),
-                  Asm.Let (("%r3", Type.Int), (Asm.Li 2),
-                    Asm.Let (("%r4", Type.Int), (Asm.Restore "dummy.168"),
+  Asm.Let (("%r2", Type.Int), (Asm.Li 0),
+    Asm.Let (("%f0", Type.Float), (Asm.FLi (Id.L "l.328")),
+      Asm.Let (("%r6", (Type.Array Type.Float)),
+        Asm.CallDir ((Id.L "min_caml_create_float_array"), ["%r2"], ["%f0"]),
+        Asm.Let (("%r2", Type.Int), (Asm.Li 2),
+          Asm.Let (("%r5", Type.Int), (Asm.Li 3),
+            Asm.Let (("Tu398", Type.Unit), Asm.Save ("%r6", "dummy.168"),
+              Asm.Let (("%r2", (Type.Array (Type.Array Type.Float))),
+                Asm.CallDir ((Id.L "make.173"), ["%r2"; "%r5"; "%r6"], []),
+                Asm.Let (("%r5", Type.Int), (Asm.Li 3),
+                  Asm.Let (("%r6", Type.Int), (Asm.Li 2),
+                    Asm.Let (("%r7", Type.Int), (Asm.Restore "dummy.168"),
                       Asm.Let (("Tu400", Type.Unit),
-                        Asm.Save ("%r1", "a.177"),
+                        Asm.Save ("%r2", "a.177"),
                         Asm.Let (("Tu399", Type.Unit),
-                          Asm.Save ("%r4", "dummy.168"),
+                          Asm.Save ("%r7", "dummy.168"),
                           Asm.Let (
-                            ("%r1", (Type.Array (Type.Array Type.Float))),
+                            ("%r2", (Type.Array (Type.Array Type.Float))),
                             Asm.CallDir ((Id.L "make.173"),
-                              ["%r2"; "%r3"; "%r4"], []),
-                            Asm.Let (("%r2", Type.Int), (Asm.Li 2),
-                              Asm.Let (("%r3", Type.Int), (Asm.Li 2),
-                                Asm.Let (("%r4", Type.Int),
+                              ["%r5"; "%r6"; "%r7"], []),
+                            Asm.Let (("%r5", Type.Int), (Asm.Li 2),
+                              Asm.Let (("%r6", Type.Int), (Asm.Li 2),
+                                Asm.Let (("%r7", Type.Int),
                                   (Asm.Restore "dummy.168"),
                                   Asm.Let (("Tu401", Type.Unit),
-                                    Asm.Save ("%r1", "b.178"),
+                                    Asm.Save ("%r2", "b.178"),
                                     Asm.Let (
-                                      ("%r6",
+                                      ("%r9",
                                        (Type.Array (Type.Array Type.Float))),
                                       Asm.CallDir ((Id.L "make.173"),
-                                        ["%r2"; "%r3"; "%r4"], []),
-                                      Asm.Let (("%r4", Type.Int),
+                                        ["%r5"; "%r6"; "%r7"], []),
+                                      Asm.Let (("%r7", Type.Int),
                                         (Asm.Restore "a.177"),
                                         Asm.Let (
-                                          ("%r1", (Type.Array Type.Float)),
-                                          Asm.Lw ("%r4", (Asm.C 0)),
-                                          Asm.Let (("%f1", Type.Float),
+                                          ("%r2", (Type.Array Type.Float)),
+                                          Asm.Lwz ("%r7", (Asm.C 0)),
+                                          Asm.Let (("%f0", Type.Float),
                                             (Asm.FLi (Id.L "l.331")),
                                             Asm.Let (("%r0", Type.Unit),
-                                              Asm.Stfd ("%f1", "%r1",
+                                              Asm.Stfd ("%f0", "%r2",
                                                 (Asm.C 0)),
                                               Asm.Let (
-                                                ("%r1",
+                                                ("%r2",
                                                  (Type.Array Type.Float)),
-                                                Asm.Lw ("%r4", (Asm.C 0)),
-                                                Asm.Let (("%f1", Type.Float),
+                                                Asm.Lwz ("%r7", (Asm.C 0)),
+                                                Asm.Let (("%f0", Type.Float),
                                                   (Asm.FLi (Id.L "l.334")),
                                                   Asm.Let (
                                                     ("%r0", Type.Unit),
-                                                    Asm.Stfd ("%f1", "%r1",
-                                                      (Asm.C 4)),
+                                                    Asm.Stfd ("%f0", "%r2",
+                                                      (Asm.C 8)),
                                                     Asm.Let (
-                                                      ("%r1",
+                                                      ("%r2",
                                                        (Type.Array Type.Float)),
-                                                      Asm.Lw ("%r4",
+                                                      Asm.Lwz ("%r7",
                                                         (Asm.C 0)),
                                                       Asm.Let (
-                                                        ("%f1", Type.Float),
+                                                        ("%f0", Type.Float),
                                                         (Asm.FLi
                                                            (Id.L "l.337")),
                                                         Asm.Let (
                                                           ("%r0", Type.Unit),
-                                                          Asm.Stfd ("%f1",
-                                                            "%r1", (Asm.C 8)),
+                                                          Asm.Stfd ("%f0",
+                                                            "%r2", (Asm.C 16)),
                                                           Asm.Let (
-                                                            ("%r1",
+                                                            ("%r2",
                                                              (Type.Array
                                                                 Type.Float)),
-                                                            Asm.Lw ("%r4",
+                                                            Asm.Lwz ("%r7",
                                                               (Asm.C 4)),
                                                             Asm.Let (
-                                                              ("%f1",
+                                                              ("%f0",
                                                                Type.Float),
                                                               (Asm.FLi
                                                                  (Id.L
@@ -273,20 +273,20 @@ Asm.Prog (
                                                                 ("%r0",
                                                                  Type.Unit),
                                                                 Asm.Stfd (
-                                                                  "%f1",
-                                                                  "%r1",
+                                                                  "%f0",
+                                                                  "%r2",
                                                                   (Asm.C 0)),
                                                                 Asm.Let (
-                                                                  ("%r1",
+                                                                  ("%r2",
                                                                    (Type.Array
                                                                     Type.Float)),
-                                                                  Asm.Lw (
-                                                                    "%r4",
+                                                                  Asm.Lwz (
+                                                                    "%r7",
                                                                     (
                                                                     Asm.C 4)),
                                                                   Asm.Let (
                                                                     (
-                                                                    "%f1",
+                                                                    "%f0",
                                                                     Type.Float),
                                                                     (
                                                                     Asm.FLi
@@ -296,18 +296,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
-                                                                    (Asm.C 4)),
+                                                                    "%f0",
+                                                                    "%r2",
+                                                                    (Asm.C 8)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r4",
+                                                                    Asm.Lwz (
+                                                                    "%r7",
                                                                     (Asm.C 4)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -316,23 +316,23 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
-                                                                    (Asm.C 8)),
+                                                                    "%f0",
+                                                                    "%r2",
+                                                                    (Asm.C 16)),
                                                                     Asm.Let (
-                                                                    ("%r5",
+                                                                    ("%r8",
                                                                     Type.Int),
                                                                     (Asm.Restore
                                                                     "b.178"),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    Asm.Lwz (
+                                                                    "%r8",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -341,18 +341,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
+                                                                    "%f0",
+                                                                    "%r2",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    Asm.Lwz (
+                                                                    "%r8",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -361,18 +361,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
-                                                                    (Asm.C 4)),
+                                                                    "%f0",
+                                                                    "%r2",
+                                                                    (Asm.C 8)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    Asm.Lwz (
+                                                                    "%r8",
                                                                     (Asm.C 4)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -381,18 +381,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
+                                                                    "%f0",
+                                                                    "%r2",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    Asm.Lwz (
+                                                                    "%r8",
                                                                     (Asm.C 4)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -401,18 +401,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
-                                                                    (Asm.C 4)),
-                                                                    Asm.Let (
-                                                                    ("%r1",
-                                                                    (Type.Array
-                                                                    Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    "%f0",
+                                                                    "%r2",
                                                                     (Asm.C 8)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%r2",
+                                                                    (Type.Array
+                                                                    Type.Float)),
+                                                                    Asm.Lwz (
+                                                                    "%r8",
+                                                                    (Asm.C 8)),
+                                                                    Asm.Let (
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -421,18 +421,18 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
+                                                                    "%f0",
+                                                                    "%r2",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r5",
+                                                                    Asm.Lwz (
+                                                                    "%r8",
                                                                     (Asm.C 8)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     (Asm.FLi
                                                                     (Id.L
@@ -441,26 +441,26 @@ Asm.Prog (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.Stfd (
-                                                                    "%f1",
-                                                                    "%r1",
-                                                                    (Asm.C 4)),
-                                                                    Asm.Let (
-                                                                    ("%r1",
-                                                                    Type.Int),
-                                                                    (Asm.Li 2),
+                                                                    "%f0",
+                                                                    "%r2",
+                                                                    (Asm.C 8)),
                                                                     Asm.Let (
                                                                     ("%r2",
                                                                     Type.Int),
+                                                                    (Asm.Li 2),
+                                                                    Asm.Let (
+                                                                    ("%r5",
+                                                                    Type.Int),
                                                                     (Asm.Li 3),
                                                                     Asm.Let (
-                                                                    ("%r3",
+                                                                    ("%r6",
                                                                     Type.Int),
                                                                     (Asm.Li 2),
                                                                     Asm.Let (
                                                                     ("Tu402",
                                                                     Type.Unit),
                                                                     Asm.Save (
-                                                                    "%r6",
+                                                                    "%r9",
                                                                     "c.179"),
                                                                     Asm.Let (
                                                                     ("%r0",
@@ -468,52 +468,52 @@ Asm.Prog (
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "mul.161"),
-                                                                    ["%r1";
-                                                                    "%r2";
-                                                                    "%r3";
-                                                                    "%r4";
+                                                                    ["%r2";
                                                                     "%r5";
-                                                                    "%r6"],
+                                                                    "%r6";
+                                                                    "%r7";
+                                                                    "%r8";
+                                                                    "%r9"],
                                                                     []),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     (Asm.Restore
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r2",
+                                                                    ("%r5",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r1",
+                                                                    Asm.Lwz (
+                                                                    "%r2",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     Asm.Lfd (
-                                                                    "%r2",
+                                                                    "%r5",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
                                                                     ("Tu403",
                                                                     Type.Unit),
                                                                     Asm.Save (
-                                                                    "%r1",
+                                                                    "%r2",
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_truncate"),
                                                                     [],
-                                                                    ["%f1"]),
+                                                                    ["%f0"]),
                                                                     Asm.Let (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_print_int"),
-                                                                    ["%r1"],
+                                                                    ["%r2"],
                                                                     []),
                                                                     Asm.Let (
                                                                     ("%r0",
@@ -528,44 +528,44 @@ Asm.Prog (
                                                                     [], [
                                                                     ]),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     (Asm.Restore
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r2",
+                                                                    ("%r5",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r1",
+                                                                    Asm.Lwz (
+                                                                    "%r2",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     Asm.Lfd (
-                                                                    "%r2",
-                                                                    (Asm.C 4)),
+                                                                    "%r5",
+                                                                    (Asm.C 8)),
                                                                     Asm.Let (
                                                                     ("Tu404",
                                                                     Type.Unit),
                                                                     Asm.Save (
-                                                                    "%r1",
+                                                                    "%r2",
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_truncate"),
                                                                     [],
-                                                                    ["%f1"]),
+                                                                    ["%f0"]),
                                                                     Asm.Let (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_print_int"),
-                                                                    ["%r1"],
+                                                                    ["%r2"],
                                                                     []),
                                                                     Asm.Let (
                                                                     ("%r0",
@@ -580,44 +580,44 @@ Asm.Prog (
                                                                     [], [
                                                                     ]),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     (Asm.Restore
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r2",
+                                                                    ("%r5",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r1",
+                                                                    Asm.Lwz (
+                                                                    "%r2",
                                                                     (Asm.C 4)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     Asm.Lfd (
-                                                                    "%r2",
+                                                                    "%r5",
                                                                     (Asm.C 0)),
                                                                     Asm.Let (
                                                                     ("Tu405",
                                                                     Type.Unit),
                                                                     Asm.Save (
-                                                                    "%r1",
+                                                                    "%r2",
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_truncate"),
                                                                     [],
-                                                                    ["%f1"]),
+                                                                    ["%f0"]),
                                                                     Asm.Let (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_print_int"),
-                                                                    ["%r1"],
+                                                                    ["%r2"],
                                                                     []),
                                                                     Asm.Let (
                                                                     ("%r0",
@@ -632,38 +632,38 @@ Asm.Prog (
                                                                     [], [
                                                                     ]),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     (Asm.Restore
                                                                     "c.179"),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     (Type.Array
                                                                     Type.Float)),
-                                                                    Asm.Lw (
-                                                                    "%r1",
+                                                                    Asm.Lwz (
+                                                                    "%r2",
                                                                     (Asm.C 4)),
                                                                     Asm.Let (
-                                                                    ("%f1",
+                                                                    ("%f0",
                                                                     Type.Float),
                                                                     Asm.Lfd (
-                                                                    "%r1",
-                                                                    (Asm.C 4)),
+                                                                    "%r2",
+                                                                    (Asm.C 8)),
                                                                     Asm.Let (
-                                                                    ("%r1",
+                                                                    ("%r2",
                                                                     Type.Int),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_truncate"),
                                                                     [],
-                                                                    ["%f1"]),
+                                                                    ["%f0"]),
                                                                     Asm.Let (
                                                                     ("%r0",
                                                                     Type.Unit),
                                                                     Asm.CallDir (
                                                                     (Id.L
                                                                     "min_caml_print_int"),
-                                                                    ["%r1"],
+                                                                    ["%r2"],
                                                                     []),
                                                                     Asm.Let (
                                                                     ("%r0",

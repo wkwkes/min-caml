@@ -59,3 +59,5 @@ val is_reg : string -> bool
 val fv : t -> S.elt list
 val concat : t -> Id.t * Type.t -> t -> t
 val align : int -> int
+
+val show_prog : prog -> string
