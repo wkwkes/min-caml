@@ -117,7 +117,7 @@ let rec g env = function
     (match M.find x env with
      | Type.Array (Type.Unit) -> Ans (Nop)
      | Type.Array (Type.Float) ->
-       Let ((offset, Type.Int), Sll (y, C (3)), 
+       Let ((offset, Type.Int), Sll (y, C (2)), 
             Ans (Lfd (x, V (offset))))
      | Type.Array (_) ->
        Let ((offset, Type.Int), Sll (y, C (2)),
@@ -128,7 +128,7 @@ let rec g env = function
     (match M.find x env with
      | Type.Array (Type.Unit) -> Ans (Nop)
      | Type.Array (Type.Float) -> 
-       Let ((offset, Type.Int), Sll (y, C (3)),
+       Let ((offset, Type.Int), Sll (y, C (2)),
             Ans (Stfd (z, x, V (offset)))) 
      | Type.Array (_) ->
        Let ((offset, Type.Int), Sll (y, C (2)), 

@@ -1,0 +1,147 @@
+make[1]: `min-caml' is up to date.
+./min-caml test/print
+gcc -g -O2 -Wall -m32 test/print.s libmincaml.S stub.c -lm -o test/print
+test/print > test/print.res
+ocaml test/print.ml > test/print.ans
+diff test/print.res test/print.ans > test/print.cmp
+./min-caml test/sum-tail
+gcc -g -O2 -Wall -m32 test/sum-tail.s libmincaml.S stub.c -lm -o test/sum-tail
+test/sum-tail > test/sum-tail.res
+ocaml test/sum-tail.ml > test/sum-tail.ans
+diff test/sum-tail.res test/sum-tail.ans > test/sum-tail.cmp
+./min-caml test/gcd
+gcc -g -O2 -Wall -m32 test/gcd.s libmincaml.S stub.c -lm -o test/gcd
+test/gcd > test/gcd.res
+ocaml test/gcd.ml > test/gcd.ans
+diff test/gcd.res test/gcd.ans > test/gcd.cmp
+./min-caml test/sum
+gcc -g -O2 -Wall -m32 test/sum.s libmincaml.S stub.c -lm -o test/sum
+test/sum > test/sum.res
+ocaml test/sum.ml > test/sum.ans
+diff test/sum.res test/sum.ans > test/sum.cmp
+./min-caml test/fib
+gcc -g -O2 -Wall -m32 test/fib.s libmincaml.S stub.c -lm -o test/fib
+test/fib > test/fib.res
+ocaml test/fib.ml > test/fib.ans
+diff test/fib.res test/fib.ans > test/fib.cmp
+./min-caml test/ack
+gcc -g -O2 -Wall -m32 test/ack.s libmincaml.S stub.c -lm -o test/ack
+test/ack > test/ack.res
+ocaml test/ack.ml > test/ack.ans
+diff test/ack.res test/ack.ans > test/ack.cmp
+./min-caml test/even-odd
+gcc -g -O2 -Wall -m32 test/even-odd.s libmincaml.S stub.c -lm -o test/even-odd
+test/even-odd > test/even-odd.res
+ocaml test/even-odd.ml > test/even-odd.ans
+diff test/even-odd.res test/even-odd.ans > test/even-odd.cmp
+./min-caml test/adder
+gcc -g -O2 -Wall -m32 test/adder.s libmincaml.S stub.c -lm -o test/adder
+test/adder > test/adder.res
+ocaml test/adder.ml > test/adder.ans
+diff test/adder.res test/adder.ans > test/adder.cmp
+./min-caml test/funcomp
+gcc -g -O2 -Wall -m32 test/funcomp.s libmincaml.S stub.c -lm -o test/funcomp
+test/funcomp > test/funcomp.res
+ocaml test/funcomp.ml > test/funcomp.ans
+diff test/funcomp.res test/funcomp.ans > test/funcomp.cmp
+./min-caml test/cls-rec
+gcc -g -O2 -Wall -m32 test/cls-rec.s libmincaml.S stub.c -lm -o test/cls-rec
+test/cls-rec > test/cls-rec.res
+ocaml test/cls-rec.ml > test/cls-rec.ans
+diff test/cls-rec.res test/cls-rec.ans > test/cls-rec.cmp
+./min-caml test/cls-bug
+gcc -g -O2 -Wall -m32 test/cls-bug.s libmincaml.S stub.c -lm -o test/cls-bug
+test/cls-bug > test/cls-bug.res
+ocaml test/cls-bug.ml > test/cls-bug.ans
+diff test/cls-bug.res test/cls-bug.ans > test/cls-bug.cmp
+gcc -g -O2 -Wall -m32 test/cls-bug2.s libmincaml.S stub.c -lm -o test/cls-bug2
+test/cls-bug2 > test/cls-bug2.res
+ocaml test/cls-bug2.ml > test/cls-bug2.ans
+diff test/cls-bug2.res test/cls-bug2.ans > test/cls-bug2.cmp
+./min-caml test/cls-reg-bug
+gcc -g -O2 -Wall -m32 test/cls-reg-bug.s libmincaml.S stub.c -lm -o test/cls-reg-bug
+test/cls-reg-bug > test/cls-reg-bug.res
+ocaml test/cls-reg-bug.ml > test/cls-reg-bug.ans
+diff test/cls-reg-bug.res test/cls-reg-bug.ans > test/cls-reg-bug.cmp
+./min-caml test/shuffle
+gcc -g -O2 -Wall -m32 test/shuffle.s libmincaml.S stub.c -lm -o test/shuffle
+test/shuffle > test/shuffle.res
+ocaml test/shuffle.ml > test/shuffle.ans
+diff test/shuffle.res test/shuffle.ans > test/shuffle.cmp
+./min-caml test/spill
+gcc -g -O2 -Wall -m32 test/spill.s libmincaml.S stub.c -lm -o test/spill
+test/spill > test/spill.res
+ocaml test/spill.ml > test/spill.ans
+diff test/spill.res test/spill.ans > test/spill.cmp
+./min-caml test/spill2
+gcc -g -O2 -Wall -m32 test/spill2.s libmincaml.S stub.c -lm -o test/spill2
+test/spill2 > test/spill2.res
+ocaml test/spill2.ml > test/spill2.ans
+diff test/spill2.res test/spill2.ans > test/spill2.cmp
+./min-caml test/spill3
+gcc -g -O2 -Wall -m32 test/spill3.s libmincaml.S stub.c -lm -o test/spill3
+test/spill3 > test/spill3.res
+ocaml test/spill3.ml > test/spill3.ans
+diff test/spill3.res test/spill3.ans > test/spill3.cmp
+./min-caml test/join-stack
+gcc -g -O2 -Wall -m32 test/join-stack.s libmincaml.S stub.c -lm -o test/join-stack
+test/join-stack > test/join-stack.res
+ocaml test/join-stack.ml > test/join-stack.ans
+diff test/join-stack.res test/join-stack.ans > test/join-stack.cmp
+./min-caml test/join-stack2
+gcc -g -O2 -Wall -m32 test/join-stack2.s libmincaml.S stub.c -lm -o test/join-stack2
+test/join-stack2 > test/join-stack2.res
+ocaml test/join-stack2.ml > test/join-stack2.ans
+diff test/join-stack2.res test/join-stack2.ans > test/join-stack2.cmp
+./min-caml test/join-stack3
+gcc -g -O2 -Wall -m32 test/join-stack3.s libmincaml.S stub.c -lm -o test/join-stack3
+test/join-stack3 > test/join-stack3.res
+ocaml test/join-stack3.ml > test/join-stack3.ans
+diff test/join-stack3.res test/join-stack3.ans > test/join-stack3.cmp
+./min-caml test/join-reg
+gcc -g -O2 -Wall -m32 test/join-reg.s libmincaml.S stub.c -lm -o test/join-reg
+test/join-reg > test/join-reg.res
+ocaml test/join-reg.ml > test/join-reg.ans
+diff test/join-reg.res test/join-reg.ans > test/join-reg.cmp
+./min-caml test/join-reg2
+gcc -g -O2 -Wall -m32 test/join-reg2.s libmincaml.S stub.c -lm -o test/join-reg2
+test/join-reg2 > test/join-reg2.res
+ocaml test/join-reg2.ml > test/join-reg2.ans
+diff test/join-reg2.res test/join-reg2.ans > test/join-reg2.cmp
+./min-caml test/non-tail-if
+gcc -g -O2 -Wall -m32 test/non-tail-if.s libmincaml.S stub.c -lm -o test/non-tail-if
+test/non-tail-if > test/non-tail-if.res
+ocaml test/non-tail-if.ml > test/non-tail-if.ans
+diff test/non-tail-if.res test/non-tail-if.ans > test/non-tail-if.cmp
+./min-caml test/non-tail-if2
+gcc -g -O2 -Wall -m32 test/non-tail-if2.s libmincaml.S stub.c -lm -o test/non-tail-if2
+test/non-tail-if2 > test/non-tail-if2.res
+ocaml test/non-tail-if2.ml > test/non-tail-if2.ans
+diff test/non-tail-if2.res test/non-tail-if2.ans > test/non-tail-if2.cmp
+./min-caml test/inprod
+gcc -g -O2 -Wall -m32 test/inprod.s libmincaml.S stub.c -lm -o test/inprod
+test/inprod > test/inprod.res
+ocaml test/inprod.ml > test/inprod.ans
+diff test/inprod.res test/inprod.ans > test/inprod.cmp
+./min-caml test/inprod-rec
+gcc -g -O2 -Wall -m32 test/inprod-rec.s libmincaml.S stub.c -lm -o test/inprod-rec
+test/inprod-rec > test/inprod-rec.res
+ocaml test/inprod-rec.ml > test/inprod-rec.ans
+diff test/inprod-rec.res test/inprod-rec.ans > test/inprod-rec.cmp
+./min-caml test/inprod-loop
+gcc -g -O2 -Wall -m32 test/inprod-loop.s libmincaml.S stub.c -lm -o test/inprod-loop
+test/inprod-loop > test/inprod-loop.res
+ocaml test/inprod-loop.ml > test/inprod-loop.ans
+diff test/inprod-loop.res test/inprod-loop.ans > test/inprod-loop.cmp
+./min-caml test/matmul
+gcc -g -O2 -Wall -m32 test/matmul.s libmincaml.S stub.c -lm -o test/matmul
+test/matmul > test/matmul.res
+ocaml test/matmul.ml > test/matmul.ans
+diff test/matmul.res test/matmul.ans > test/matmul.cmp
+./min-caml test/matmul-flat
+gcc -g -O2 -Wall -m32 test/matmul-flat.s libmincaml.S stub.c -lm -o test/matmul-flat
+test/matmul-flat > test/matmul-flat.res
+ocaml test/matmul-flat.ml > test/matmul-flat.ans
+diff test/matmul-flat.res test/matmul-flat.ans > test/matmul-flat.cmp
+if [ ! -s ./*.cmp ]; then echo "Test Passed"; else echo "Test Failed"; exit 1; fi
+Test Passed

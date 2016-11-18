@@ -112,7 +112,7 @@ and g' oc = function
     | (NonTail(x), Div(y, C(z))) -> 
     Printf.fprintf oc "\tDIVI\t%s, %s, %d\n" (reg x) (reg y) z*)
   | (NonTail(x), Sll(y, V(z))) -> 
-    dump oc "\tjavaSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+    dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sll(y, C(z))) ->
     dump oc "\tSLL\t%s, %s, %d\n" (reg x) (reg y) z
   | (NonTail(x), Lw(y, V(z))) ->
@@ -151,8 +151,8 @@ and g' oc = function
     let rx = reg x in
     let ry = reg y in
     let rz = reg z in
-    dump oc "\tADD.s\t%s, %s, %s\n" ry ry rz;
-    dump oc "\tLWC1\t%s, %d(%s)\n" rx 0 (reg z)
+    dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
+    dump oc "\tLWC1\t%s, %d(%s)\n" rx 0 reg_tmp
   | (NonTail(x), Lfd(y, C(z))) -> 
     dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) z (reg y)
   | (NonTail(_), Stfd(x, y, V(z))) ->
@@ -208,13 +208,13 @@ and g' oc = function
     dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
     g'_tail_if oc e1 e2 "BEQ" "BNE" (reg x) (add_per reg_cmp)
   | (Tail, IfLE(x, V(y), e1, e2)) ->
-    dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
+    dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfLE(x, C(y), e1, e2)) ->
     dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
     dump oc "\tSLT\t%s, %s, %s\n" reg_cmp reg_cmp (reg x);
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
-  (* TODO : LEとGEの向きの確認 => 解決*)
+  (* TODO : LEとGEの向きの確認 => 解決 => してない*)
   | (Tail, IfGE(x, V(y), e1, e2)) ->
     dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
     g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
@@ -237,7 +237,7 @@ and g' oc = function
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)
   | (NonTail(z), IfEq(x, C(y), e1, e2)) ->
     dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
-    (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (add_per reg_cmp)*)
+    g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (add_per reg_cmp)
   | (NonTail(z), IfLE(x, V(y), e1, e2)) ->
     dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
     g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
