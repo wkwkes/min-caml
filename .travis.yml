@@ -14,9 +14,10 @@ install:
   - sudo apt-get install gcc-multilib
 script:
   - eval `opam config env`
-  - ./to_x86
-  - make min-caml
-  - make do_test
+  - test/test.sh
+  # - ./to_x86
+  # - make min-caml
+  # - make do_test
 env:
   - OCAML_VERSION=4.03
 branches:
