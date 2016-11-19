@@ -74,7 +74,10 @@ release: min-caml.html
 	rm -fr tmp ; mkdir tmp ; cd tmp ; cvs -d:ext:sumii@min-caml.cvs.sf.net://cvsroot/min-caml export -Dtomorrow min-caml ; tar cvzf ../min-caml.tar.gz min-caml ; cd .. ; rm -fr tmp
 	cp Makefile stub.c SPARC/libmincaml.S min-caml.html min-caml.tar.gz ../htdocs/
 
-cleand:
+clean_test:
+	test/remove.sh
+
+cleand: clean_test 
 	rm -rf *.dSYM test/*.dSYM
 
 include OCamlMakefile
