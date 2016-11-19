@@ -1,0 +1,26 @@
+CC=gcc
+CFLAGS=-Wall -g
+LMFLAG=-lm
+
+SRC= main.c list.c simulator.c sim_binary.c fetch.c readline.c assemble.c instructs.c
+OBJ=$(SRC:%.c=%.o)
+LIBS= simulator.h instructs.h
+LIBLIST= list.h
+
+simulator: $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $(OBJ) $(LMFLAG)
+
+instructs.o: instructs.c $(LIBS)
+	$(CC) $(CFLAGS) -c $< $(LMFLAG)
+.c.o:
+	$(CC) $(CFLAGS) -c $<
+main.o: $(LIBS)
+simulator.o: $(LIBS)
+sim_binary.o: $(LIBS)
+assemble.o: $(LIBS)
+fetch.o: $(LIBS)
+readline.o: $(LIBS) $(LIBLIST)
+list.o: $(LIBLIST)
+
+clean:
+	rm -rf *.o *~ simulator simulator.dSYM

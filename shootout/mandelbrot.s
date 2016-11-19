@@ -28,18 +28,18 @@ BEQ_else.117:
 	SWC1	%f6, 24(%r30)
 	SWC1	%f2, 32(%r30)
 	ADDI	%r29, %r31, 0
-	SW	%r29, 44(%r30)
-	ADDI	%r30, %r30, 48
+	SW	%r29, 40(%r30)
+	ADDI	%r30, %r30, 44
 	JAL	dbl.38
-	ADDI	%r29, %r0, 48
+	ADDI	%r29, %r0, 44
 	SUB	%r30, %r30, %r29
-	LW	%r29, 44(%r30)
+	LW	%r29, 40(%r30)
 	ADDI	%r31, %r29, 0
-	LWC1	%f2, 32(%r30)
+	LWC1	%f2, 32(%r30) # restore2
 	MUL.s	%f1, %f1, %f2
-	LWC1	%f6, 24(%r30)
+	LWC1	%f6, 24(%r30) # restore2
 	ADD.s	%f1, %f1, %f6
-	LWC1	%f2, 16(%r30)
+	LWC1	%f2, 16(%r30) # restore2
 	MUL.s	%f3, %f2, %f2
 	MUL.s	%f4, %f1, %f1
 	ADD.s	%f5, %f3, %f4
@@ -50,9 +50,9 @@ BEQ_else.117:
 	MUL.s	%f7, %f7, %f8
 	C.lt.s	%r27, %f7, %f5
 	BNE	%r27, %r0, BEQ_else.119
-	LW	%r1, 8(%r30)
+	LW	%r1, 8(%r30) # restore1
 	ADDI	%r1, %r1, -1
-	LWC1	%f5, 0(%r30)
+	LWC1	%f5, 0(%r30) # restore2
 	ADD.s	%f31, %f2, %f0 # args
 	ADD.s	%f2, %f1, %f0 # args
 	ADD.s	%f1, %f31, %f0 # args
@@ -69,20 +69,20 @@ BEQ_else.120:
 	SW	%r1, 0(%r30)
 	SW	%r2, 4(%r30)
 	ADDI	%r29, %r31, 0
-	SW	%r29, 12(%r30)
-	ADDI	%r30, %r30, 16
+	SW	%r29, 8(%r30)
+	ADDI	%r30, %r30, 12
 	JAL	min_caml_float_of_int
-	ADDI	%r29, %r0, 16
+	ADDI	%r29, %r0, 12
 	SUB	%r30, %r30, %r29
-	LW	%r29, 12(%r30)
+	LW	%r29, 8(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r29, %r31, 0
-	SW	%r29, 12(%r30)
-	ADDI	%r30, %r30, 16
+	SW	%r29, 8(%r30)
+	ADDI	%r30, %r30, 12
 	JAL	dbl.38
-	ADDI	%r29, %r0, 16
+	ADDI	%r29, %r0, 12
 	SUB	%r30, %r30, %r29
-	LW	%r29, 12(%r30)
+	LW	%r29, 8(%r30)
 	ADDI	%r31, %r29, 0
 	LA	%r29, l.99
 	LWC1	%f2, 0(%r29)
@@ -90,23 +90,23 @@ BEQ_else.120:
 	LA	%r29, l.100
 	LWC1	%f2, 0(%r29)
 	SUB.s	%f1, %f1, %f2
-	LW	%r1, 4(%r30)
+	LW	%r1, 4(%r30) # restore1
 	SWC1	%f1, 8(%r30)
 	ADDI	%r29, %r31, 0
-	SW	%r29, 20(%r30)
-	ADDI	%r30, %r30, 24
+	SW	%r29, 16(%r30)
+	ADDI	%r30, %r30, 20
 	JAL	min_caml_float_of_int
-	ADDI	%r29, %r0, 24
+	ADDI	%r29, %r0, 20
 	SUB	%r30, %r30, %r29
-	LW	%r29, 20(%r30)
+	LW	%r29, 16(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r29, %r31, 0
-	SW	%r29, 20(%r30)
-	ADDI	%r30, %r30, 24
+	SW	%r29, 16(%r30)
+	ADDI	%r30, %r30, 20
 	JAL	dbl.38
-	ADDI	%r29, %r0, 24
+	ADDI	%r29, %r0, 20
 	SUB	%r30, %r30, %r29
-	LW	%r29, 20(%r30)
+	LW	%r29, 16(%r30)
 	ADDI	%r31, %r29, 0
 	LA	%r29, l.99
 	LWC1	%f2, 0(%r29)
@@ -123,18 +123,18 @@ BEQ_else.120:
 	LWC1	%f3, 0(%r29)
 	LA	%r29, l.102
 	LWC1	%f4, 0(%r29)
-	LWC1	%f5, 8(%r30)
+	LWC1	%f5, 8(%r30) # restore2
 	ADDI	%r29, %r31, 0
-	SW	%r29, 20(%r30)
-	ADDI	%r30, %r30, 24
+	SW	%r29, 16(%r30)
+	ADDI	%r30, %r30, 20
 	JAL	iloop.54
-	ADDI	%r29, %r0, 24
+	ADDI	%r29, %r0, 20
 	SUB	%r30, %r30, %r29
-	LW	%r29, 20(%r30)
+	LW	%r29, 16(%r30)
 	ADDI	%r31, %r29, 0
-	LW	%r1, 0(%r30)
+	LW	%r1, 0(%r30) # restore1
 	ADDI	%r1, %r1, 1
-	LW	%r2, 4(%r30)
+	LW	%r2, 4(%r30) # restore1
 	J	xloop.44
 yloop.40:
 	ADDI	%r27, %r0, 400
@@ -155,7 +155,7 @@ BEQ_else.122:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 4(%r30)
 	ADDI	%r31, %r29, 0
-	LW	%r1, 0(%r30)
+	LW	%r1, 0(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	J	yloop.40
 _min_caml_start: # main entry point
@@ -164,11 +164,11 @@ _min_caml_start: # main entry point
    # main program start
 	ADDI	%r1, %r0, 0
 	ADDI	%r29, %r31, 0
-	SW	%r29, 4(%r30)
-	ADDI	%r30, %r30, 8
+	SW	%r29, 0(%r30)
+	ADDI	%r30, %r30, 4
 	JAL	yloop.40
-	ADDI	%r29, %r0, 8
+	ADDI	%r29, %r0, 4
 	SUB	%r30, %r30, %r29
-	LW	%r29, 4(%r30)
+	LW	%r29, 0(%r30)
 	ADDI	%r31, %r29, 0
    # main program end
