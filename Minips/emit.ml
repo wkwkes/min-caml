@@ -24,7 +24,9 @@ let locate x =
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
 let offset x = 4 * List.hd (locate x)
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+(*let stacksize () = align ((List.length !stackmap + 1) * 4)*)
+(* have to investigate in detail *)
+let stacksize () = (List.length !stackmap + 1) * 4
 
 let reg r = 
   if is_reg r 
@@ -158,7 +160,7 @@ and g' oc = function
       let rx = reg x in
       let ry = reg y in
       let rz = reg z in
-      dump oc "\tADD.s\t%s, %s, %s\n" reg_tmp ry rz;
+      dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
       dump oc "\tSWC1\t%s, %d(%s)\n" rx 0 reg_tmp
   | (NonTail(_), Stfd(x, y, C(z))) ->
       dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) z (reg y)
@@ -218,14 +220,14 @@ and g' oc = function
       g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfGE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
-      dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp;
+      dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp; 
       g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (* TODO *)
   (* 今は適当に型を合わせている float用のcompの仕様が決まるまで待つ *)
   | (Tail, IfFEq(x, y, e1, e2)) ->
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e2 e1 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   | (Tail, IfFLE(x, y, e1, e2)) ->
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
@@ -256,7 +258,7 @@ and g' oc = function
       (*  *)
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_non_tail_if oc (NonTail(z)) e2 e1 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
   (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)*)
   | (NonTail(z), IfFLE(x, y, e1, e2)) ->
       dump oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
@@ -296,7 +298,7 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
       g'_args oc [] ys zs;
       let ss = stacksize () in
-      dump oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
+      dump oc "\tSW\t%s, %d(%s) # save link register\n" reg_tmp (ss - 4) reg_sp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
       dump oc "\tJAL\t%s\n" x;
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
