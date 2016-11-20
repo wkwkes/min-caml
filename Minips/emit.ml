@@ -98,15 +98,19 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" (reg x) (reg y) (-1 * z)
   (* TODO *)
   | (NonTail(x), Mul(y, V(z))) -> 
-      Printf.fprintf oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+      (*Printf.fprintf oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
+      dump oc "\tSLL\t%s, %s, 2" (reg x) (reg y)
   | (NonTail(x), Mul(y, C(z))) ->
-      dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z; 
-      dump oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) reg_tmp
+      (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z; *)
+      (*dump oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
+      dump oc "\tSLL\t%s, %s, 2" (reg x) (reg y)
   | (NonTail(x), Div(y, V(z))) -> 
-      Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) (reg z)
+      (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
+      dump oc "\tSRL\t%s, %s, 1" (reg x) (reg y)
   | (NonTail(x), Div(y, C(z))) -> 
-      dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z;
-      Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) reg_tmp
+      (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z;*)
+      (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
+      dump oc "\tSRL\t%s, %s, 1" (reg x) (reg y)
   | (NonTail(x), Sll(y, V(z))) -> 
       dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sll(y, C(z))) ->
