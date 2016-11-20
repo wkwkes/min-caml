@@ -51,7 +51,7 @@ let rec shuffle sw xys =
   match List.partition (fun (_, y) -> List.mem_assoc y xys) xys with
   | ([], []) -> []
   | ((x, y) :: xys, []) -> (* no acyclic moves; resolve a cyclic move *)
-      (y, sw) :: (x, y) :: 
+      (y, sw) :: (x, y) ::
       shuffle sw (List.map (function 
           | (y', z) when y = y' -> (sw, z)
           | yz -> yz) xys)
@@ -59,10 +59,10 @@ let rec shuffle sw xys =
 
 type dest = Tail | NonTail of Id.t
 
-let rec g oc = function 
+let rec g oc = function
   | (dest, Ans (exp)) -> g' oc (dest, exp)
   | (dest, Let((x, t), exp, e)) -> g' oc (NonTail (x), exp); g oc (dest, e)
-and g' oc = function 
+and g' oc = function
   | (NonTail(_), Nop) -> ()
   | (NonTail(x), Li(i)) when i >= -32768 && i < 32768 ->
       let r = reg x in
@@ -97,14 +97,14 @@ and g' oc = function
   | (NonTail(x), Sub(y, C(z))) -> 
       dump oc "\tADDI\t%s, %s, %d\n" (reg x) (reg y) (-1 * z)
   (* TODO *)
-  (*| (NonTail(x), Mul(y, V(z))) -> 
+  | (NonTail(x), Mul(y, V(z))) -> 
     Printf.fprintf oc "\tMUL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
     | (NonTail(x), Mul(y, C(z))) -> 
-    Printf.fprintf oc "\tMULLI\t%s, %s, %d\n" (reg x) (reg y) z
+    Printf.fprintf oc "\tMULI\t%s, %s, %d\n" (reg x) (reg y) z
     | (NonTail(x), Div(y, V(z))) -> 
     Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) (reg z)
     | (NonTail(x), Div(y, C(z))) -> 
-    Printf.fprintf oc "\tDIVI\t%s, %s, %d\n" (reg x) (reg y) z*)
+    Printf.fprintf oc "\tDIVI\t%s, %s, %d\n" (reg x) (reg y) z
   | (NonTail(x), Sll(y, V(z))) -> 
       dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sll(y, C(z))) ->
@@ -165,7 +165,7 @@ and g' oc = function
   | (Tail, (Nop | Sw _ | Stfd _ | Comment _ | Save _ as exp)) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
       dump oc "\tJR\t%%r31\n"
-  | (Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ |  (*TOOD  Mul _ | Div _ |*) Sll _ |
+  | (Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ | Mul _ | Div _ | Sll _ |
             Lw _ as exp)) -> 
       g' oc (NonTail(regs.(0)), exp);
       dump oc "\tJR\t%%r31\n"
