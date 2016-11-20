@@ -142,22 +142,17 @@ exp: /* (* ���̤μ� (caml2html: parser_exp) *) */
 | LET LPAREN pat RPAREN EQUAL exp IN exp
     { LetTuple($1, $3, $6, $8) }
 | simple_exp DOT LPAREN exp RPAREN LESS_MINUS exp
-    { Put($2, $1, $4, $7) }
-/* 
+    { Put($2, $1, $4, $7) } 
 | exp SEMICOLON exp
     { Let($2, ((Id.gentmp Type.Unit), Type.Unit), $1, $3) }
-*/
-| semis
+| exp SEMICOLON
     { $1 }
-
 | ARRAY_CREATE simple_exp simple_exp
     %prec prec_app
     { Array($1, $2, $3) }
 | error
     { perr_handling (Parsing.symbol_start_pos ()); failwith "parse error" }
     
-
-
 fundef:
 | IDENT formal_args EQUAL exp
     { { name = addtyp (snd $1); args = $2; body = $4 } }
@@ -188,6 +183,7 @@ pat:
 | IDENT COMMA IDENT
     { [addtyp (snd $1); addtyp (snd $3)] }
 
+/*
 semis:
 | exp SEMICOLON semis
     { Let($2, ((Id.gentmp Type.Unit), Type.Unit), $1, $3) }
@@ -199,7 +195,7 @@ semitail:
     { Let($2, ((Id.gentmp Type.Unit), Type.Unit), $1, $3) }
 | exp SEMICOLON
     { Let($2, ((Id.gentmp Type.Unit), Type.Unit), $1, Unit)}
-
+*/
 %%
 
 let exp (lexfun : Lexing.lexbuf -> token) (lexbuf : Lexing.lexbuf) =
