@@ -1,8 +1,6 @@
 (*minips*)
 open Asm
 
-(*external gethi : float -> int32 = "gethi"*)
-(*external getlo : float -> int32 = "getlo"*)
 external get32 : float -> int32 = "get32"
 
 let stackset = ref S.empty
@@ -24,9 +22,9 @@ let locate x =
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
 let offset x = 4 * List.hd (locate x)
-(*let stacksize () = align ((List.length !stackmap + 1) * 4)*)
+let stacksize () = align ((List.length !stackmap + 1) * 4)
 (* have to investigate in detail *)
-let stacksize () = (List.length !stackmap + 1) * 4
+(*let stacksize () = (List.length !stackmap + 1) * 4*)
 
 let reg r = 
   if is_reg r 
@@ -46,8 +44,6 @@ let load_label r label =
   let r = if r = "r29" then "%r29" else r in
   "\tLA\t" ^ r ^ ", " ^ label ^ "\n"
 
-(******)
-
 let rec shuffle sw xys = 
   (* remove identical moves *)
   let (_, xys) = List.partition (fun (x, y) -> x = y) xys in
@@ -63,18 +59,13 @@ let rec shuffle sw xys =
 
 type dest = Tail | NonTail of Id.t
 
-(*let add_per s = "%" ^ s*)
-let add_per x = x
-
 let rec g oc = function 
   | (dest, Ans (exp)) -> g' oc (dest, exp)
   | (dest, Let((x, t), exp, e)) -> g' oc (NonTail (x), exp); g oc (dest, e)
 and g' oc = function 
   | (NonTail(_), Nop) -> ()
   | (NonTail(x), Li(i)) when i >= -32768 && i < 32768 ->
-      (* TODO SUBをLIに変えたい *)
       let r = reg x in
-      (*Printf.fprintf oc "\tSUB\t%s, %s, %s\n" r r r;*)
       dump oc "\tADDI\t%s, %s, %d\n" r reg_zero i
   | (NonTail(x), Li(i)) ->
       let n = i lsr 16 in
@@ -125,16 +116,12 @@ and g' oc = function
       dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
       dump oc "\tLW\t%s, %d(%s)\n" rx 0 reg_tmp
   | (NonTail(x), Lw(y, C(z))) ->
-      dump oc "\tLW\t%s, %d(%s)\n" (reg x) z (reg y) (* 怪しい *)
+      dump oc "\tLW\t%s, %d(%s)\n" (reg x) z (reg y)
   | (NonTail(_), Sw(x, y, V(z))) ->
-      let rx = reg x in
-      let ry = reg y in
-      let rz = reg z in
-      dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
-      dump oc "\tSW\t%s, %d(%s)\n" rx 0 reg_tmp
+      dump oc "\tADD\t%s, %s, %s\n" reg_tmp (reg y) (reg z);
+      dump oc "\tSW\t%s, %d(%s)\n" (reg x) 0 reg_tmp
   | (NonTail(_), Sw(x, y, C(z))) -> 
       dump oc "\tSW\t%s, %d(%s)\n" (reg x) z (reg y)
-  (* TODO floating-point instructions *)
   | (NonTail(x), FMr(y)) when x = y -> ()
   | (NonTail(x), FMr(y)) -> 
       dump oc "\tADD.s\t%s, %s, %s\n" (reg x) (reg y) reg_fzero
@@ -149,22 +136,15 @@ and g' oc = function
   | (NonTail(x), FDiv(y, z)) -> 
       dump oc "\tDIV.s\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Lfd(y, V(z))) ->
-      let rx = reg x in
-      let ry = reg y in
-      let rz = reg z in
-      dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
-      dump oc "\tLWC1\t%s, %d(%s)\n" rx 0 reg_tmp
+      dump oc "\tADD\t%s, %s, %s\n" reg_tmp (reg y) (reg z);
+      dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) 0 reg_tmp
   | (NonTail(x), Lfd(y, C(z))) -> 
       dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) z (reg y)
   | (NonTail(_), Stfd(x, y, V(z))) ->
-      let rx = reg x in
-      let ry = reg y in
-      let rz = reg z in
-      dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
-      dump oc "\tSWC1\t%s, %d(%s)\n" rx 0 reg_tmp
+      dump oc "\tADD\t%s, %s, %s\n" reg_tmp (reg y) (reg z);
+      dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) 0 reg_tmp
   | (NonTail(_), Stfd(x, y, C(z))) ->
       dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) z (reg y)
-  (********************)
   | (NonTail(_), Comment(s)) -> dump oc "#\t%s\n" s
   | (NonTail(_), Save(x, y))
     when List.mem x allregs && not (S.mem y !stackset) ->
@@ -184,86 +164,81 @@ and g' oc = function
       dump oc "\tLWC1\t%s, %d(%s) # restore2\n" (reg x) (offset y) reg_sp
   | (Tail, (Nop | Sw _ | Stfd _ | Comment _ | Save _ as exp)) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
-      dump oc "\tJR\t%%r31\n";
+      dump oc "\tJR\t%%r31\n"
   | (Tail, (Li _ | SetL _ | Mr _ | Neg _ | Add _ | Sub _ |  (*TOOD  Mul _ | Div _ |*) Sll _ |
             Lw _ as exp)) -> 
       g' oc (NonTail(regs.(0)), exp);
-      dump oc "\tJR\t%%r31\n";
+      dump oc "\tJR\t%%r31\n"
   | (Tail, (FLi _ | FMr _ | FNeg _ | FAdd _ | FSub _ | FMul _ | FDiv _ |
             Lfd _ as exp)) ->
       g' oc (NonTail(fregs.(0)), exp);
-      dump oc "\tJR\t%%r31\n";
+      dump oc "\tJR\t%%r31\n"
   | (Tail, (Restore(x) as exp)) ->
       (match locate x with
        | [i] -> g' oc (NonTail(regs.(0)), exp)
        | [i; j] when (i + 1 = j) -> g' oc (NonTail(fregs.(0)), exp)
        | _ -> assert false);
-      dump oc "\tJR\t%%r31\n";
-      (********************************)
+      dump oc "\tJR\t%%r31\n"
   | (Tail, IfEq(x, V(y), e1, e2)) ->
-      (*Printf.fprintf oc "\tcmpw\tcr7, %s, %s\n" (reg x) (reg y);*)
       g'_tail_if oc e1 e2 "BEQ" "BNE" (reg x) (reg y)
   | (Tail, IfEq(x, C(y), e1, e2)) ->
-      (*Printf.fprintf oc "\tcmpwi\tcr7, %s, %d\n" (reg x) y;*)
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (reg x) (add_per reg_cmp)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" (reg x) reg_cmp
   | (Tail, IfLE(x, V(y), e1, e2)) ->
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (Tail, IfLE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp reg_cmp (reg x);
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   (* TODO : LEとGEの向きの確認 => 解決 => してない*)
   | (Tail, IfGE(x, V(y), e1, e2)) ->
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (Tail, IfGE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp; 
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   (* TODO *)
   (* 今は適当に型を合わせている float用のcompの仕様が決まるまで待つ *)
   | (Tail, IfFEq(x, y, e1, e2)) ->
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
-      g'_tail_if oc e2 e1 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e2 e1 "BEQ" "BNE" reg_cmp reg_zero
   | (Tail, IfFLE(x, y, e1, e2)) ->
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
-      g'_tail_if oc e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   (*********)
   | (NonTail(z), IfEq(x, V(y), e1, e2)) ->
       g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)
   | (NonTail(z), IfEq(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (add_per reg_cmp)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) reg_cmp
   | (NonTail(z), IfLE(x, V(y), e1, e2)) ->
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfLE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp reg_cmp (reg x);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfGE(x, V(y), e1, e2)) ->
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfGE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp;
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   (* TODO *)
   (* 型だけ適当に合わせている *)
   | (NonTail(z), IfFEq(x, y, e1, e2)) ->
       (*  *)
       (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
-      g'_non_tail_if oc (NonTail(z)) e2 e1 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
-  (*g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)*)
+      g'_non_tail_if oc (NonTail(z)) e2 e1 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfFLE(x, y, e1, e2)) ->
       dump oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
-      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (add_per reg_cmp) (add_per reg_zero)
-  (*****************************************************)
+      g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (Tail, CallCls(x, ys, zs)) ->
       g'_args oc [(x, reg_cl)] ys zs;
       dump oc "\tLW\t%s, 0(%s)\n" (reg reg_sw) (reg reg_cl);
@@ -290,8 +265,6 @@ and g' oc = function
       (if List.mem a allregs && a <> regs.(0) then 
          dump oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0 
        else if List.mem a allfregs && a <> fregs.(0) then
-         (* TODO *)
-         (*Printf.fprintf oc "\tFMR\t%s, %s\n" (reg a) (reg fregs.(0)));*)
          dump oc "\tADD.s\t%s, %s, %s\n" (reg x) (reg fregs.(0)) reg_fzero);
       dump oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
   | (NonTail(a), CallDir(Id.L(x), ys, zs)) -> 
@@ -307,15 +280,12 @@ and g' oc = function
       (if List.mem a allregs && a <> regs.(0) then
          dump oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0
        else if List.mem a allfregs && a <> fregs.(0) then
-         (* TODO *)
-         (*Printf.fprintf oc "\tFMR\t%s, %s\n" (reg a) (reg fregs.(0)));*)
          dump oc "\tADD.s\t%s, %s, %s\n" (reg a) (reg fregs.(0)) reg_fzero);
       dump oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
 (* g'_tail_if oc e1 e2 b bn は元々は
    bnでcr7を見ながらe2に飛ぶ
    飛ばない場合はe1を続ける. 
    今は rxとryを比べてbnでb_elseにジャンプする.
-
    bとbnを入れ替えた
 *)
 and g'_tail_if oc e1 e2 b bn rx ry = 
@@ -340,7 +310,7 @@ and g'_non_tail_if oc dest e1 e2 b bn rx ry =
   dump oc "%s:\n" b_cont;
   let stackset2 = !stackset in
   stackset := S.inter stackset1 stackset2
-and g'_args oc x_reg_cl ys zs = 
+and g'_args oc x_reg_cl ys zs =
   let (i, yrs) = 
     List.fold_left
       (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))
@@ -353,8 +323,6 @@ and g'_args oc x_reg_cl ys zs =
       (fun (d, zfrs) z -> (d + 1, (z, fregs.(d)) :: zfrs))
       (0, []) zs in
   List.iter
-    (* TODO *)
-    (*(fun (z, fr) -> Printf.fprintf oc "\tFMR\t%s, %s\n" (reg fr) (reg z))*)
     (fun (z, fr) -> dump oc "\tADD.s\t%s, %s, %s # args\n" (reg fr) (reg z) reg_fzero)
     (shuffle reg_fsw zfrs)
 
@@ -367,25 +335,18 @@ let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
 let f oc (Prog(data, fundefs, e)) =
   Format.eprintf "generating assembly...@.";
   (if data <> [] then
-     (dump oc "\t.data\n"; (* "\t.literal8\n";*)
+     (dump oc "\t.data\n";
       List.iter
         (fun (Id.L(x), d) ->
-           (*Printf.fprintf oc "\t.align 3\n";*)
            dump oc "%s:\t # %f\n" x d;
            dump oc "\t.word\t%ld\n" (get32 d))
-        (*Printf.fprintf oc "\t.long\t%ld\n" (gethi d);*)
-        (*Printf.fprintf oc "\t.long\t%ld\n" (getlo d))*)
         data));
-  (* TODO *)
   dump oc "\t.text\n";
   dump oc "\t.globl  _min_caml_start\n";
-  (*Printf.fprintf oc "\t.align 2\n";*)
   List.iter (fun fundef -> h oc fundef) fundefs;
   dump oc "_min_caml_start: # main entry point\n";
-  (*Printf.fprintf oc "main: # main entry point\n";*)
-  (*Printf.fprintf oc "\tmflr\tr0\n";*)
   dump oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
-  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero (*65535*) 32668;
+  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero 32668;
   (* TODO どうしよう *) 
   (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
     Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
