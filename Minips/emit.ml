@@ -99,18 +99,18 @@ and g' oc = function
   (* TODO *)
   | (NonTail(x), Mul(y, V(z))) -> 
       (*Printf.fprintf oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
-      dump oc "\tSLL\t%s, %s, 2" (reg x) (reg y)
+      dump oc "\tSLL\t%s, %s, 2\n" (reg x) (reg y)
   | (NonTail(x), Mul(y, C(z))) ->
       (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z; *)
       (*dump oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
-      dump oc "\tSLL\t%s, %s, 2" (reg x) (reg y)
+      dump oc "\tSLL\t%s, %s, 2\n" (reg x) (reg y)
   | (NonTail(x), Div(y, V(z))) -> 
       (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
-      dump oc "\tSRL\t%s, %s, 1" (reg x) (reg y)
+      dump oc "\tSRA\t%s, %s, 1\n" (reg x) (reg y)
   | (NonTail(x), Div(y, C(z))) -> 
       (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z;*)
       (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
-      dump oc "\tSRL\t%s, %s, 1" (reg x) (reg y)
+      dump oc "\tSRA\t%s, %s, 1\n" (reg x) (reg y)
   | (NonTail(x), Sll(y, V(z))) -> 
       dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sll(y, C(z))) ->
@@ -222,7 +222,7 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) reg_cmp
   | (NonTail(z), IfLE(x, V(y), e1, e2)) ->
-      dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
+      dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
       g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfLE(x, C(y), e1, e2)) ->
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
