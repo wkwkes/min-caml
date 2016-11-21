@@ -19,7 +19,7 @@ let lexbuf outchan l =
        (Simm.f
           (Virtual.f
              (Closure.f
-                (*(iter !limit*)
+                (iter !limit
                    (let ast = Alpha.f
                         (let ast =  KNormal.f
                              (Typing.f
@@ -27,7 +27,7 @@ let lexbuf outchan l =
                                  if !syntax_option then print_endline (Syntax.show ast) else () ; ast))
                          in if !knormal_option then print_endline (KNormal.show ast) else () ; ast)
                     in if !alpha_option then print_endline  (KNormal.show ast) else (); ast) 
-    ))) in ast (* print_endline (Asm.show_prog ast); ast*))
+       )))) in ast (* print_endline (Asm.show_prog ast); ast*))
 
 let string s = lexbuf stdout (Lexing.from_string s)
 
