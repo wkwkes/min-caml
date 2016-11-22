@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
   int binary_output = 0;
   execute = 1;
   debug = 0;
-  iter_max = 0x7fffffff;
+  iter_max = 0xffffffff;
   input_file = stdin;
   output_file = stdout;
 

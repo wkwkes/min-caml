@@ -116,11 +116,8 @@ and g' oc = function
   | (NonTail(x), Sll(y, C(z))) ->
       dump oc "\tSLL\t%s, %s, %d\n" (reg x) (reg y) z
   | (NonTail(x), Lw(y, V(z))) ->
-      let rx = reg x in
-      let ry = reg y in
-      let rz = reg z in
-      dump oc "\tADD\t%s, %s, %s\n" reg_tmp ry rz;
-      dump oc "\tLW\t%s, %d(%s)\n" rx 0 reg_tmp
+      dump oc "\tADD\t%s, %s, %s\n" reg_tmp (reg y) (reg z);
+      dump oc "\tLW\t%s, %d(%s)\n" (reg x) 0 reg_tmp
   | (NonTail(x), Lw(y, C(z))) ->
       dump oc "\tLW\t%s, %d(%s)\n" (reg x) z (reg y)
   | (NonTail(_), Sw(x, y, V(z))) ->

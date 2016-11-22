@@ -5,3 +5,4 @@
 *.dSYM
 #*
 .depend
+*.ppm

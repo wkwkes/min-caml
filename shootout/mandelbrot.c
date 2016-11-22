@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-double dbl(double f) {
+float dbl(float f) {
   return f + f;
 }
 
@@ -9,8 +9,8 @@ int main ()
 {
   int w, h, x, y;
   int i, iter = 1000;
-  double limit = 2.0;
-  double zr, zi, zr2, zi2, cr, ci, tr, ti;
+  float limit = 2.0;
+  float zr, zi, zr2, zi2, cr, ci, tr, ti;
 
   w = 400;
   h = w;
@@ -20,7 +20,7 @@ int main ()
       for(x=0;x<w;x++)
         {
 	  zr = 0.0; zi = 0.0; zr2 = 0.0; zi2 = 0.0;
-	  cr = (dbl((double)x)/w - 1.5); ci=(dbl((double)y)/h - 1.0);
+	  cr = (dbl((float)x)/w - 1.5); ci=(dbl((float)y)/h - 1.0);
 
 	  for (i=0;i<iter;i++)
             {

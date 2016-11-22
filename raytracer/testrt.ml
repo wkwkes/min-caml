@@ -1,7 +1,7 @@
-
-(**************** グローバル変数の宣言 ****************)
-
+(*open MiniMLRuntime;;*)
 (* オブジェクトの個数 *)
+
+(*let create_array = Array.create in*)
 let n_objects = create_array 1 0 in
 
 (* オブジェクトのデータを入れるベクトル（最大60個）*)
@@ -23,7 +23,6 @@ let and_net = create_array 50 (create_array 1 (-1)) in
 (* OR ネットワークを保持 *)
 let or_net = create_array 1 (create_array 1 (and_net.(0))) in
 
-
 (* 以下、交差判定ルーチンの返り値格納用 *)
 (* solver の交点 の t の値 *)
 let solver_dist = create_array 1 0.0 in
@@ -38,7 +37,7 @@ let intersected_object_id = create_array 1 0 in
 (* 法線ベクトル *)
 let nvector = create_array 3 0.0 in
 (* 交点の色 *)
-let texture_color = create_array 3 0.0 in
+let texture_color = create_array 3 0.0 in 
 
 (* 計算中の間接受光強度を保持 *)
 let diffuse_ray = create_array 3 0.0 in
@@ -56,6 +55,7 @@ let scan_pitch = create_array 1 0.0 in
 let startp = create_array 3 0.0 in
 (* judge_intersection_fastに与える光線始点 *)
 let startp_fast = create_array 3 0.0 in
+
 (* 画面上のx,y,z軸の3次元空間上の方向 *)
 let screenx_dir = create_array 3 0.0 in
 let screeny_dir = create_array 3 0.0 in
@@ -71,6 +71,7 @@ let dirvecs =
   let dummy_vs = create_array 0 (dummyf, dummyff) in
   create_array 5 dummy_vs
 in
+
 (* 光源光の前処理済み方向ベクトル *)
 let light_dirvec =
   let dummyf2 = create_array 0 0.0 in
@@ -78,6 +79,7 @@ let light_dirvec =
   let consts = create_array 60 dummyf2 in
   (v3, consts)
 in
+
 (* 鏡平面の反射情報 *)
 let reflections =
   let dummyf3 = create_array 0 0.0 in
@@ -88,7 +90,6 @@ in
 (* reflectionsの有効な要素数 *) 
 
 let n_reflections = create_array 1 0 in
-
 
 
 (****************************************************************)
