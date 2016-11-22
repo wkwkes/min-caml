@@ -34,11 +34,6 @@ let reg r =
 
 let dump = Printf.fprintf
 
-(*TODO*)
-(*let load_label r label =
-  "\tlis\t" ^ (reg r) ^ ", ha16(" ^ label ^ ")\n" ^
-  "\tADDI\t" ^ (reg r) ^ ", " ^ (reg r) ^ ", lo16(" ^ label ^ ")\n"*)
-
 let load_label r label =
   let r = reg r in
   let r = if r = "r29" then "%r29" else r in
@@ -84,10 +79,8 @@ and g' oc = function
   | (NonTail(x), Mr(y)) -> 
       dump oc "\tADDI\t%s, %s, %d\n" (reg x) (reg y) 0
   | (NonTail(x), Neg(y)) ->
-      let rx = reg x in
-      let ry = reg y in
-      dump oc "\tSUB\t%s, %s, %s\n" reg_tmp reg_zero ry;
-      dump oc "\tADDI\t%s, %s, %d\n" rx reg_tmp 0
+      dump oc "\tSUB\t%s, %s, %s\n" reg_tmp reg_zero (reg y);
+      dump oc "\tADDI\t%s, %s, %d\n" (reg x) reg_tmp 0
   | (NonTail(x), Add(y, V(z))) ->
       dump oc "\tADD\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Add(y, C(z))) -> 
@@ -96,20 +89,13 @@ and g' oc = function
       dump oc "\tSUB\t%s, %s, %s\n" (reg x) (reg y) (reg z)
   | (NonTail(x), Sub(y, C(z))) -> 
       dump oc "\tADDI\t%s, %s, %d\n" (reg x) (reg y) (-1 * z)
-  (* TODO *)
   | (NonTail(x), Mul(y, V(z))) -> 
-      (*Printf.fprintf oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
       dump oc "\tSLL\t%s, %s, 2\n" (reg x) (reg y)
   | (NonTail(x), Mul(y, C(z))) ->
-      (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z; *)
-      (*dump oc "\tMULT\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
       dump oc "\tSLL\t%s, %s, 2\n" (reg x) (reg y)
   | (NonTail(x), Div(y, V(z))) -> 
-      (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) (reg z)*)
       dump oc "\tSRA\t%s, %s, 1\n" (reg x) (reg y)
   | (NonTail(x), Div(y, C(z))) -> 
-      (*dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero z;*)
-      (*Printf.fprintf oc "\tDIV\t%s, %s, %s\n" (reg x) (reg y) reg_tmp*)
       dump oc "\tSRA\t%s, %s, 1\n" (reg x) (reg y)
   | (NonTail(x), Sll(y, V(z))) -> 
       dump oc "\tSLL\t%s, %s, %s\n" (reg x) (reg y) (reg z)
@@ -161,7 +147,6 @@ and g' oc = function
   | (NonTail(_), Save(x, y)) -> assert (S.mem y !stackset); ()
   | (NonTail(x), Restore(y)) when List.mem x allregs ->
       dump oc "\tLW\t%s, %d(%s) # restore1\n" (reg x) (offset y) reg_sp
-  (* TODO *)
   | (NonTail(x), Restore(y)) ->
       assert (List.mem x allfregs);
       dump oc "\tLWC1\t%s, %d(%s) # restore2\n" (reg x) (offset y) reg_sp
@@ -194,7 +179,6 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp reg_cmp (reg x);
       g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
-  (* TODO : LEとGEの向きの確認 => 解決 => してない*)
   | (Tail, IfGE(x, V(y), e1, e2)) ->
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
       g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
@@ -202,17 +186,12 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp; 
       g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
-  (* TODO *)
-  (* 今は適当に型を合わせている float用のcompの仕様が決まるまで待つ *)
   | (Tail, IfFEq(x, y, e1, e2)) ->
-      (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
       g'_tail_if oc e2 e1 "BEQ" "BNE" reg_cmp reg_zero
   | (Tail, IfFLE(x, y, e1, e2)) ->
-      (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.lt.s\t%s, %s, %s\n" reg_cmp (reg y) (reg x);
       g'_tail_if oc e1 e2 "BEQ" "BNE" reg_cmp reg_zero
-  (*********)
   | (NonTail(z), IfEq(x, V(y), e1, e2)) ->
       g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" (reg x) (reg y)
   | (NonTail(z), IfEq(x, C(y), e1, e2)) ->
@@ -232,11 +211,7 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_cmp reg_zero y;
       dump oc "\tSLT\t%s, %s, %s\n" reg_cmp (reg x) reg_cmp;
       g'_non_tail_if oc (NonTail(z)) e1 e2 "BEQ" "BNE" reg_cmp reg_zero
-  (* TODO *)
-  (* 型だけ適当に合わせている *)
   | (NonTail(z), IfFEq(x, y, e1, e2)) ->
-      (*  *)
-      (*Printf.fprintf oc "\tfcmpu\tcr7, %s, %s\n" (reg x) (reg y);*)
       dump oc "\tC.eq.s\t%s, %s, %s\n" reg_cmp (reg x) (reg y);
       g'_non_tail_if oc (NonTail(z)) e2 e1 "BEQ" "BNE" reg_cmp reg_zero
   | (NonTail(z), IfFLE(x, y, e1, e2)) ->
@@ -256,12 +231,7 @@ and g' oc = function
       dump oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
       dump oc "\tLW\t%s, 0(%s)\n" reg_tmp (reg reg_cl);
-      (*おそらくjamp and linkでいいと思うけどbctrlが何かいまいちわからない*)
       dump oc "\tJALR\t%s\n" reg_tmp;
-    (*
-    subiがないのでreg_tmpにimmを一時的に入れてSUBを使う.
-    大丈夫なはず.
-    *)
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
       dump oc "\tSUB\t%s, %s, %s\n" reg_sp reg_sp reg_tmp;
       dump oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
@@ -285,12 +255,6 @@ and g' oc = function
        else if List.mem a allfregs && a <> fregs.(0) then
          dump oc "\tADD.s\t%s, %s, %s\n" (reg a) (reg fregs.(0)) reg_fzero);
       dump oc "\tADDI\t%s, %s, %d\n" reg_link reg_tmp 0
-(* g'_tail_if oc e1 e2 b bn は元々は
-   bnでcr7を見ながらe2に飛ぶ
-   飛ばない場合はe1を続ける. 
-   今は rxとryを比べてbnでb_elseにジャンプする.
-   bとbnを入れ替えた
-*)
 and g'_tail_if oc e1 e2 b bn rx ry = 
   let b_else = Id.genid (b ^ "_else") in
   dump oc "\t%s\t%s, %s, %s\n" bn rx ry b_else;
@@ -350,20 +314,8 @@ let f oc (Prog(data, fundefs, e)) =
   dump oc "_min_caml_start: # main entry point\n";
   dump oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
   dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero 32668;
-  (* TODO どうしよう *) 
-  (*Printf.fprintf oc "\tstmw\tr30, -8(r1)\n";
-    Printf.fprintf oc "\tstw\tr0, 8(r1)\n";
-    Printf.fprintf oc "\tstwu\tr1, -96(r1)\n";*)
   dump oc "   # main program start\n";
   stackset := S.empty;
   stackmap := [];
   g oc (NonTail("_R_0"), e);
-  dump oc "   # main program end\n";
-  (* TODO どうしよう *)
-  (*Printf.fprintf oc "\tmr\tr3, %s\n" regs.(0);
-    Printf.fprintf oc "\tlwz\tr1, 0(r1)\n";
-    Printf.fprintf oc "\tlwz\tr0, 8(r1)\n";
-    Printf.fprintf oc "\tmtlr\tr0\n";
-    Printf.fprintf oc "\tlmw\tr30, -8(r1)\n";
-    Printf.fprintf oc "\tblr\n"*)
-
+  dump oc "   # main program end\n"
