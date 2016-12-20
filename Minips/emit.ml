@@ -318,4 +318,4 @@ let f oc (Prog(data, fundefs, e)) =
   stackset := S.empty;
   stackmap := [];
   g oc (NonTail("_R_0"), e);
-  dump oc "   # main program end\n"
+  dump oc "halt   # main program end\n"
