@@ -21,8 +21,8 @@ let locate x =
     | y :: zs when x = y -> 0 :: List.map succ (loc zs)
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
-let offset x = 4 * List.hd (locate x)
-let stacksize () = align ((List.length !stackmap + 1) * 4)
+let offset x = List.hd (locate x)
+let stacksize () = align (List.length !stackmap + 1) 
 (* have to investigate in detail *)
 (*let stacksize () = (List.length !stackmap + 1) * 4*)
 
@@ -228,13 +228,13 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
       g'_args oc [(x, reg_cl)] ys zs;
       let ss = stacksize () in
-      dump oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
+      dump oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 1) reg_sp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
       dump oc "\tLW\t%s, 0(%s)\n" reg_tmp (reg reg_cl);
       dump oc "\tJALR\t%s\n" reg_tmp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
       dump oc "\tSUB\t%s, %s, %s\n" reg_sp reg_sp reg_tmp;
-      dump oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
+      dump oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 1) reg_sp;
       (if List.mem a allregs && a <> regs.(0) then 
          dump oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0 
        else if List.mem a allfregs && a <> fregs.(0) then
@@ -244,12 +244,12 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
       g'_args oc [] ys zs;
       let ss = stacksize () in
-      dump oc "\tSW\t%s, %d(%s) # save link register\n" reg_tmp (ss - 4) reg_sp;
+      dump oc "\tSW\t%s, %d(%s) # save link register\n" reg_tmp (ss - 1) reg_sp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
       dump oc "\tJAL\t%s\n" x;
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
       dump oc "\tSUB\t%s, %s, %s\n" reg_sp reg_sp reg_tmp;
-      dump oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 4) reg_sp;
+      dump oc "\tLW\t%s, %d(%s)\n" reg_tmp (ss - 1) reg_sp;
       (if List.mem a allregs && a <> regs.(0) then
          dump oc "\tADDI\t%s, %s, %d\n" (reg a) (reg regs.(0)) 0
        else if List.mem a allfregs && a <> fregs.(0) then
