@@ -1,61 +1,61 @@
 	.data
-l.6608:	 # 128.000000
+l.6584:	 # 128.000000
 	.word	1124073472
-l.6575:	 # 0.900000
+l.6551:	 # 0.900000
 	.word	1063675494
-l.6574:	 # 0.200000
+l.6550:	 # 0.200000
 	.word	1045220557
-l.6480:	 # 150.000000
+l.6456:	 # 150.000000
 	.word	1125515264
-l.6478:	 # -150.000000
+l.6454:	 # -150.000000
 	.word	-1021968384
-l.6462:	 # 0.100000
+l.6438:	 # 0.100000
 	.word	1036831949
-l.6459:	 # -2.000000
+l.6435:	 # -2.000000
 	.word	-1073741824
-l.6457:	 # 256.000000
-	.word	1132462080
-l.6435:	 # 20.000000
+l.6433:	 # 0.003906
+	.word	998244352
+l.6411:	 # 20.000000
 	.word	1101004800
-l.6434:	 # 0.050000
+l.6410:	 # 0.050000
 	.word	1028443341
-l.6430:	 # 0.250000
+l.6406:	 # 0.250000
 	.word	1048576000
-l.6426:	 # 10.000000
+l.6402:	 # 10.000000
 	.word	1092616192
-l.6422:	 # 0.300000
+l.6398:	 # 0.300000
 	.word	1050253722
-l.6421:	 # 255.000000
+l.6397:	 # 255.000000
 	.word	1132396544
-l.6420:	 # 0.500000
+l.6396:	 # 0.500000
 	.word	1056964608
-l.6419:	 # 0.150000
+l.6395:	 # 0.150000
 	.word	1041865114
-l.6417:	 # 3.141593
+l.6393:	 # 3.141593
 	.word	1078530011
-l.6416:	 # 30.000000
+l.6392:	 # 30.000000
 	.word	1106247680
-l.6415:	 # 15.000000
+l.6391:	 # 15.000000
 	.word	1097859072
-l.6414:	 # 0.000100
+l.6390:	 # 0.000100
 	.word	953267991
-l.6371:	 # 100000000.000000
+l.6347:	 # 100000000.000000
 	.word	1287568416
-l.6367:	 # 1000000000.000000
+l.6343:	 # 1000000000.000000
 	.word	1315859240
-l.6347:	 # -0.100000
+l.6323:	 # -0.100000
 	.word	-1110651699
-l.6334:	 # 0.010000
+l.6310:	 # 0.010000
 	.word	1008981770
-l.6333:	 # -0.200000
+l.6309:	 # -0.200000
 	.word	-1102263091
-l.6142:	 # 2.000000
+l.6118:	 # 2.000000
 	.word	1073741824
-l.6108:	 # -200.000000
+l.6084:	 # -200.000000
 	.word	-1018691584
-l.6106:	 # 200.000000
+l.6082:	 # 200.000000
 	.word	1128792064
-l.6102:	 # 0.017453
+l.6078:	 # 0.017453
 	.word	1016003125
 l.5995:	 # -1.000000
 	.word	-1082130432
@@ -67,15 +67,15 @@ l.5993:	 # 0.000000
 	.globl  _min_caml_start
 xor.2461:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8681
+	BNE	%r1, %r27, BEQ_else.8643
 	ADDI	%r1, %r2, 0
 	JR	%r31
-BEQ_else.8681:
+BEQ_else.8643:
 	ADDI	%r27, %r0, 0
-	BNE	%r2, %r27, BEQ_else.8682
+	BNE	%r2, %r27, BEQ_else.8644
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8682:
+BEQ_else.8644:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 sgn.2464:
@@ -89,7 +89,7 @@ sgn.2464:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8683
+	BNE	%r1, %r27, BEQ_else.8645
 	LWC1	%f1, 0(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 12(%r30) # save link register
@@ -100,32 +100,32 @@ sgn.2464:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8684
+	BNE	%r1, %r27, BEQ_else.8646
 	LA	%r29, l.5995
 	LWC1	%f1, 0(%r29)
 	JR	%r31
-BEQ_else.8684:
+BEQ_else.8646:
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	JR	%r31
-BEQ_else.8683:
+BEQ_else.8645:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
 	JR	%r31
 fneg_cond.2466:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8685
+	BNE	%r1, %r27, BEQ_else.8647
 	J	min_caml_fneg
-BEQ_else.8685:
+BEQ_else.8647:
 	JR	%r31
 add_mod5.2469:
 	ADD	%r1, %r1, %r2
 	ADDI	%r27, %r0, 5
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.8686
+	BNE	%r27, %r0, BEQ_else.8648
 	ADDI	%r1, %r1, -5
 	JR	%r31
-BEQ_else.8686:
+BEQ_else.8648:
 	JR	%r31
 vecset.2472:
 	SWC1	%f1, 0(%r1)
@@ -147,119 +147,6 @@ veccpy.2482:
 	LWC1	%f1, 4(%r2)
 	SWC1	%f1, 4(%r1)
 	LWC1	%f1, 8(%r2)
-	SWC1	%f1, 8(%r1)
-	JR	%r31
-vecdist2.2485:
-	LWC1	%f1, 0(%r1)
-	LWC1	%f2, 0(%r2)
-	SUB.s	%f1, %f1, %f2
-	SW	%r2, 0(%r30)
-	SW	%r1, 4(%r30)
-	ADDI	%r29, %r31, 0
-	SW	%r29, 12(%r30) # save link register
-	ADDI	%r30, %r30, 16
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 16
-	SUB	%r30, %r30, %r29
-	LW	%r29, 12(%r30)
-	ADDI	%r31, %r29, 0
-	LW	%r1, 4(%r30) # restore1
-	LWC1	%f2, 4(%r1)
-	LW	%r2, 0(%r30) # restore1
-	LWC1	%f3, 4(%r2)
-	SUB.s	%f2, %f2, %f3
-	SWC1	%f1, 8(%r30)
-	ADDI	%r29, %r31, 0
-	ADD.s	%f1, %f2, %f0 # args
-	SW	%r29, 20(%r30) # save link register
-	ADDI	%r30, %r30, 24
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 24
-	SUB	%r30, %r30, %r29
-	LW	%r29, 20(%r30)
-	ADDI	%r31, %r29, 0
-	LWC1	%f2, 8(%r30) # restore2
-	ADD.s	%f1, %f2, %f1
-	LW	%r1, 4(%r30) # restore1
-	LWC1	%f2, 8(%r1)
-	LW	%r1, 0(%r30) # restore1
-	LWC1	%f3, 8(%r1)
-	SUB.s	%f2, %f2, %f3
-	SWC1	%f1, 16(%r30)
-	ADDI	%r29, %r31, 0
-	ADD.s	%f1, %f2, %f0 # args
-	SW	%r29, 28(%r30) # save link register
-	ADDI	%r30, %r30, 32
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 32
-	SUB	%r30, %r30, %r29
-	LW	%r29, 28(%r30)
-	ADDI	%r31, %r29, 0
-	LWC1	%f2, 16(%r30) # restore2
-	ADD.s	%f1, %f2, %f1
-	JR	%r31
-vecunit.2488:
-	LA	%r29, l.5994
-	LWC1	%f1, 0(%r29)
-	LWC1	%f2, 0(%r1)
-	SWC1	%f1, 0(%r30)
-	SW	%r1, 8(%r30)
-	ADDI	%r29, %r31, 0
-	ADD.s	%f1, %f2, %f0 # args
-	SW	%r29, 12(%r30) # save link register
-	ADDI	%r30, %r30, 16
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 16
-	SUB	%r30, %r30, %r29
-	LW	%r29, 12(%r30)
-	ADDI	%r31, %r29, 0
-	LW	%r1, 8(%r30) # restore1
-	LWC1	%f2, 4(%r1)
-	SWC1	%f1, 16(%r30)
-	ADDI	%r29, %r31, 0
-	ADD.s	%f1, %f2, %f0 # args
-	SW	%r29, 28(%r30) # save link register
-	ADDI	%r30, %r30, 32
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 32
-	SUB	%r30, %r30, %r29
-	LW	%r29, 28(%r30)
-	ADDI	%r31, %r29, 0
-	LWC1	%f2, 16(%r30) # restore2
-	ADD.s	%f1, %f2, %f1
-	LW	%r1, 8(%r30) # restore1
-	LWC1	%f2, 8(%r1)
-	SWC1	%f1, 24(%r30)
-	ADDI	%r29, %r31, 0
-	ADD.s	%f1, %f2, %f0 # args
-	SW	%r29, 36(%r30) # save link register
-	ADDI	%r30, %r30, 40
-	JAL	min_caml_fsqr
-	ADDI	%r29, %r0, 40
-	SUB	%r30, %r30, %r29
-	LW	%r29, 36(%r30)
-	ADDI	%r31, %r29, 0
-	LWC1	%f2, 24(%r30) # restore2
-	ADD.s	%f1, %f2, %f1
-	ADDI	%r29, %r31, 0
-	SW	%r29, 36(%r30) # save link register
-	ADDI	%r30, %r30, 40
-	JAL	min_caml_sqrt
-	ADDI	%r29, %r0, 40
-	SUB	%r30, %r30, %r29
-	LW	%r29, 36(%r30)
-	ADDI	%r31, %r29, 0
-	LWC1	%f2, 0(%r30) # restore2
-	DIV.s	%f1, %f2, %f1
-	LW	%r1, 8(%r30) # restore1
-	LWC1	%f2, 0(%r1)
-	MUL.s	%f2, %f2, %f1
-	SWC1	%f2, 0(%r1)
-	LWC1	%f2, 4(%r1)
-	MUL.s	%f2, %f2, %f1
-	SWC1	%f2, 4(%r1)
-	LWC1	%f2, 8(%r1)
-	MUL.s	%f1, %f2, %f1
 	SWC1	%f1, 8(%r1)
 	JR	%r31
 vecunit_sgn.2490:
@@ -320,26 +207,26 @@ vecunit_sgn.2490:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8692
+	BNE	%r1, %r27, BEQ_else.8652
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8694
+	BNE	%r1, %r27, BEQ_else.8654
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 24(%r30) # restore2
 	DIV.s	%f1, %f1, %f2
-	J	BEQ_cont.8695
-BEQ_else.8694:
+	J	BEQ_cont.8655
+BEQ_else.8654:
 	LA	%r29, l.5995
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 24(%r30) # restore2
 	DIV.s	%f1, %f1, %f2
-BEQ_cont.8695:
-	J	BEQ_cont.8693
-BEQ_else.8692:
+BEQ_cont.8655:
+	J	BEQ_cont.8653
+BEQ_else.8652:
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8693:
+BEQ_cont.8653:
 	LW	%r1, 4(%r30) # restore1
 	LWC1	%f2, 0(%r1)
 	MUL.s	%f2, %f2, %f1
@@ -403,20 +290,6 @@ vecadd.2505:
 	LWC1	%f1, 8(%r1)
 	LWC1	%f2, 8(%r2)
 	ADD.s	%f1, %f1, %f2
-	SWC1	%f1, 8(%r1)
-	JR	%r31
-vecmul.2508:
-	LWC1	%f1, 0(%r1)
-	LWC1	%f2, 0(%r2)
-	MUL.s	%f1, %f1, %f2
-	SWC1	%f1, 0(%r1)
-	LWC1	%f1, 4(%r1)
-	LWC1	%f2, 4(%r2)
-	MUL.s	%f1, %f1, %f2
-	SWC1	%f1, 4(%r1)
-	LWC1	%f1, 8(%r1)
-	LWC1	%f2, 8(%r2)
-	MUL.s	%f1, %f1, %f2
 	SWC1	%f1, 8(%r1)
 	JR	%r31
 vecscale.2511:
@@ -572,7 +445,7 @@ r_bright.2587:
 	LWC1	%f1, 8(%r1)
 	JR	%r31
 rad.2589:
-	LA	%r29, l.6102
+	LA	%r29, l.6078
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	JR	%r31
@@ -692,19 +565,19 @@ read_screen_settings.2591:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 32(%r30) # restore2
 	MUL.s	%f3, %f2, %f1
-	LA	%r29, l.6106
+	LA	%r29, l.6082
 	LWC1	%f4, 0(%r29)
 	MUL.s	%f3, %f3, %f4
 	LW	%r1, 12(%r30) # restore1
 	SWC1	%f3, 0(%r1)
-	LA	%r29, l.6108
+	LA	%r29, l.6084
 	LWC1	%f3, 0(%r29)
 	LWC1	%f4, 40(%r30) # restore2
 	MUL.s	%f3, %f4, %f3
 	SWC1	%f3, 4(%r1)
 	LWC1	%f3, 56(%r30) # restore2
 	MUL.s	%f5, %f2, %f3
-	LA	%r29, l.6106
+	LA	%r29, l.6082
 	LWC1	%f6, 0(%r29)
 	MUL.s	%f5, %f5, %f6
 	SWC1	%f5, 8(%r1)
@@ -1146,7 +1019,7 @@ rotate_quadratic_matrix.2595:
 	ADD.s	%f1, %f3, %f1
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 8(%r1)
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f1, 0(%r29)
 	LWC1	%f3, 72(%r30) # restore2
 	LWC1	%f4, 136(%r30) # restore2
@@ -1167,7 +1040,7 @@ rotate_quadratic_matrix.2595:
 	MUL.s	%f1, %f1, %f5
 	LW	%r1, 4(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f1, 0(%r29)
 	LWC1	%f5, 88(%r30) # restore2
 	MUL.s	%f11, %f4, %f5
@@ -1182,7 +1055,7 @@ rotate_quadratic_matrix.2595:
 	ADD.s	%f6, %f6, %f12
 	MUL.s	%f1, %f1, %f6
 	SWC1	%f1, 4(%r1)
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f1, 0(%r29)
 	MUL.s	%f4, %f4, %f5
 	MUL.s	%f3, %f4, %f3
@@ -1207,13 +1080,11 @@ read_nth_object.2598:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
-	ADDI	%r2, %r0, 1
-	SUB	%r29, %r0, %r2
-	ADDI	%r2, %r29, 0
-	BNE	%r1, %r2, BEQ_else.8707
+	ADDI	%r27, %r0, -1
+	BNE	%r1, %r27, BEQ_else.8666
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8707:
+BEQ_else.8666:
 	SW	%r1, 8(%r30)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 12(%r30) # save link register
@@ -1435,9 +1306,9 @@ BEQ_else.8707:
 	ADDI	%r31, %r29, 0
 	LW	%r2, 20(%r30) # restore1
 	ADDI	%r27, %r0, 0
-	BNE	%r2, %r27, BEQ_else.8708
-	J	BEQ_cont.8709
-BEQ_else.8708:
+	BNE	%r2, %r27, BEQ_else.8667
+	J	BEQ_cont.8668
+BEQ_else.8667:
 	SW	%r1, 44(%r30)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 52(%r30) # save link register
@@ -1493,15 +1364,15 @@ BEQ_else.8708:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 44(%r30) # restore1
 	SWC1	%f1, 8(%r1)
-BEQ_cont.8709:
+BEQ_cont.8668:
 	LW	%r2, 12(%r30) # restore1
 	ADDI	%r27, %r0, 2
-	BNE	%r2, %r27, BEQ_else.8710
+	BNE	%r2, %r27, BEQ_else.8669
 	ADDI	%r3, %r0, 1
-	J	BEQ_cont.8711
-BEQ_else.8710:
+	J	BEQ_cont.8670
+BEQ_else.8669:
 	LW	%r3, 32(%r30) # restore1
-BEQ_cont.8711:
+BEQ_cont.8670:
 	ADDI	%r4, %r0, 4
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
@@ -1545,7 +1416,7 @@ BEQ_cont.8711:
 	ADD	%r29, %r7, %r6
 	SW	%r2, 0(%r29)
 	ADDI	%r27, %r0, 3
-	BNE	%r5, %r27, BEQ_else.8712
+	BNE	%r5, %r27, BEQ_else.8671
 	LWC1	%f1, 0(%r3)
 	SWC1	%f1, 56(%r30)
 	ADDI	%r29, %r31, 0
@@ -1557,7 +1428,7 @@ BEQ_cont.8711:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8715
+	BNE	%r1, %r27, BEQ_else.8674
 	LWC1	%f1, 56(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 68(%r30) # save link register
@@ -1580,11 +1451,11 @@ BEQ_cont.8711:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 64(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
-	J	BEQ_cont.8716
-BEQ_else.8715:
+	J	BEQ_cont.8675
+BEQ_else.8674:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8716:
+BEQ_cont.8675:
 	LW	%r1, 24(%r30) # restore1
 	SWC1	%f1, 0(%r1)
 	LWC1	%f1, 4(%r1)
@@ -1598,7 +1469,7 @@ BEQ_cont.8716:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8717
+	BNE	%r1, %r27, BEQ_else.8676
 	LWC1	%f1, 72(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -1621,11 +1492,11 @@ BEQ_cont.8716:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 80(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
-	J	BEQ_cont.8718
-BEQ_else.8717:
+	J	BEQ_cont.8677
+BEQ_else.8676:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8718:
+BEQ_cont.8677:
 	LW	%r1, 24(%r30) # restore1
 	SWC1	%f1, 4(%r1)
 	LWC1	%f1, 8(%r1)
@@ -1639,7 +1510,7 @@ BEQ_cont.8718:
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8719
+	BNE	%r1, %r27, BEQ_else.8678
 	LWC1	%f1, 88(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 100(%r30) # save link register
@@ -1662,25 +1533,25 @@ BEQ_cont.8718:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 96(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
-	J	BEQ_cont.8720
-BEQ_else.8719:
+	J	BEQ_cont.8679
+BEQ_else.8678:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8720:
+BEQ_cont.8679:
 	LW	%r1, 24(%r30) # restore1
 	SWC1	%f1, 8(%r1)
-	J	BEQ_cont.8713
-BEQ_else.8712:
+	J	BEQ_cont.8672
+BEQ_else.8671:
 	ADDI	%r27, %r0, 2
-	BNE	%r5, %r27, BEQ_else.8721
+	BNE	%r5, %r27, BEQ_else.8680
 	LW	%r2, 32(%r30) # restore1
 	ADDI	%r27, %r0, 0
-	BNE	%r2, %r27, BEQ_else.8723
+	BNE	%r2, %r27, BEQ_else.8682
 	ADDI	%r2, %r0, 1
-	J	BEQ_cont.8724
-BEQ_else.8723:
+	J	BEQ_cont.8683
+BEQ_else.8682:
 	ADDI	%r2, %r0, 0
-BEQ_cont.8724:
+BEQ_cont.8683:
 	ADDI	%r29, %r31, 0
 	ADDI	%r1, %r3, 0 # args
 	SW	%r29, 108(%r30) # save link register
@@ -1690,15 +1561,15 @@ BEQ_cont.8724:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 108(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8722
-BEQ_else.8721:
-BEQ_cont.8722:
-BEQ_cont.8713:
+	J	BEQ_cont.8681
+BEQ_else.8680:
+BEQ_cont.8681:
+BEQ_cont.8672:
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8725
-	J	BEQ_cont.8726
-BEQ_else.8725:
+	BNE	%r1, %r27, BEQ_else.8684
+	J	BEQ_cont.8685
+BEQ_else.8684:
 	LW	%r1, 24(%r30) # restore1
 	LW	%r2, 44(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -1709,7 +1580,7 @@ BEQ_else.8725:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 108(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8726:
+BEQ_cont.8685:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 read_object.2600:
@@ -1717,9 +1588,9 @@ read_object.2600:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 60
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.8727
+	BNE	%r27, %r0, BEQ_else.8686
 	JR	%r31
-BEQ_else.8727:
+BEQ_else.8686:
 	SW	%r26, 0(%r30)
 	SW	%r3, 4(%r30)
 	SW	%r1, 8(%r30)
@@ -1734,12 +1605,12 @@ BEQ_else.8727:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8729
+	BNE	%r1, %r27, BEQ_else.8688
 	LW	%r1, 4(%r30) # restore1
 	LW	%r2, 8(%r30) # restore1
 	SW	%r2, 0(%r1)
 	JR	%r31
-BEQ_else.8729:
+BEQ_else.8688:
 	LW	%r1, 8(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r26, 0(%r30) # restore1
@@ -1760,17 +1631,13 @@ read_net_item.2604:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 4(%r30)
 	ADDI	%r31, %r29, 0
-	ADDI	%r2, %r0, 1
-	SUB	%r29, %r0, %r2
-	ADDI	%r2, %r29, 0
-	BNE	%r1, %r2, BEQ_else.8731
+	ADDI	%r27, %r0, -1
+	BNE	%r1, %r27, BEQ_else.8690
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r1, %r1, 1
-	ADDI	%r2, %r0, 1
-	SUB	%r29, %r0, %r2
-	ADDI	%r2, %r29, 0
+	ADDI	%r2, %r0, -1
 	J	min_caml_create_array
-BEQ_else.8731:
+BEQ_else.8690:
 	LW	%r2, 0(%r30) # restore1
 	ADDI	%r3, %r2, 1
 	SW	%r1, 4(%r30)
@@ -1803,14 +1670,12 @@ read_or_network.2606:
 	ADDI	%r2, %r1, 0
 	ADDI	%r31, %r29, 0
 	LW	%r1, 0(%r2)
-	ADDI	%r3, %r0, 1
-	SUB	%r29, %r0, %r3
-	ADDI	%r3, %r29, 0
-	BNE	%r1, %r3, BEQ_else.8732
+	ADDI	%r27, %r0, -1
+	BNE	%r1, %r27, BEQ_else.8691
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	J	min_caml_create_array
-BEQ_else.8732:
+BEQ_else.8691:
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r3, %r1, 1
 	SW	%r2, 4(%r30)
@@ -1845,12 +1710,10 @@ read_and_network.2608:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 0(%r1)
-	ADDI	%r3, %r0, 1
-	SUB	%r29, %r0, %r3
-	ADDI	%r3, %r29, 0
-	BNE	%r2, %r3, BEQ_else.8733
+	ADDI	%r27, %r0, -1
+	BNE	%r2, %r27, BEQ_else.8692
 	JR	%r31
-BEQ_else.8733:
+BEQ_else.8692:
 	LW	%r2, 8(%r30) # restore1
 	SLL	%r3, %r2, 2
 	LW	%r4, 4(%r30) # restore1
@@ -1947,7 +1810,7 @@ solver_rect_surface.2612:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8739
+	BNE	%r1, %r27, BEQ_else.8698
 	LW	%r1, 56(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 60(%r30) # save link register
@@ -2044,10 +1907,10 @@ solver_rect_surface.2612:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8741
+	BNE	%r1, %r27, BEQ_else.8700
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8741:
+BEQ_else.8700:
 	LW	%r1, 16(%r30) # restore1
 	SLL	%r2, %r1, 2
 	LW	%r3, 48(%r30) # restore1
@@ -2079,16 +1942,16 @@ BEQ_else.8741:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8742
+	BNE	%r1, %r27, BEQ_else.8701
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8742:
+BEQ_else.8701:
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f1, 72(%r30) # restore2
 	SWC1	%f1, 0(%r1)
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8739:
+BEQ_else.8698:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 solver_rect.2621:
@@ -2112,7 +1975,7 @@ solver_rect.2621:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8743
+	BNE	%r1, %r27, BEQ_else.8702
 	ADDI	%r3, %r0, 1
 	ADDI	%r4, %r0, 2
 	ADDI	%r5, %r0, 0
@@ -2132,7 +1995,7 @@ solver_rect.2621:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8744
+	BNE	%r1, %r27, BEQ_else.8703
 	ADDI	%r3, %r0, 2
 	ADDI	%r4, %r0, 0
 	ADDI	%r5, %r0, 1
@@ -2152,16 +2015,16 @@ solver_rect.2621:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8745
+	BNE	%r1, %r27, BEQ_else.8704
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8745:
+BEQ_else.8704:
 	ADDI	%r1, %r0, 3
 	JR	%r31
-BEQ_else.8744:
+BEQ_else.8703:
 	ADDI	%r1, %r0, 2
 	JR	%r31
-BEQ_else.8743:
+BEQ_else.8702:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 solver_surface.2627:
@@ -2200,10 +2063,10 @@ solver_surface.2627:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8747
+	BNE	%r1, %r27, BEQ_else.8706
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8747:
+BEQ_else.8706:
 	LWC1	%f1, 24(%r30) # restore2
 	LWC1	%f2, 16(%r30) # restore2
 	LWC1	%f3, 8(%r30) # restore2
@@ -2316,10 +2179,10 @@ quadratic.2633:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8749
+	BNE	%r1, %r27, BEQ_else.8708
 	LWC1	%f1, 72(%r30) # restore2
 	JR	%r31
-BEQ_else.8749:
+BEQ_else.8708:
 	LWC1	%f1, 8(%r30) # restore2
 	LWC1	%f2, 16(%r30) # restore2
 	MUL.s	%f3, %f2, %f1
@@ -2441,10 +2304,10 @@ bilinear.2638:
 	LW	%r29, 108(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8751
+	BNE	%r1, %r27, BEQ_else.8710
 	LWC1	%f1, 96(%r30) # restore2
 	JR	%r31
-BEQ_else.8751:
+BEQ_else.8710:
 	LWC1	%f1, 40(%r30) # restore2
 	LWC1	%f2, 24(%r30) # restore2
 	MUL.s	%f3, %f2, %f1
@@ -2551,7 +2414,7 @@ solver_second.2646:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8753
+	BNE	%r1, %r27, BEQ_else.8712
 	LW	%r1, 36(%r30) # restore1
 	LWC1	%f1, 0(%r1)
 	LWC1	%f2, 4(%r1)
@@ -2595,15 +2458,15 @@ solver_second.2646:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 3
-	BNE	%r1, %r27, BEQ_else.8754
+	BNE	%r1, %r27, BEQ_else.8713
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 56(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	J	BEQ_cont.8755
-BEQ_else.8754:
+	J	BEQ_cont.8714
+BEQ_else.8713:
 	LWC1	%f1, 56(%r30) # restore2
-BEQ_cont.8755:
+BEQ_cont.8714:
 	LWC1	%f2, 48(%r30) # restore2
 	SWC1	%f1, 64(%r30)
 	ADDI	%r29, %r31, 0
@@ -2629,10 +2492,10 @@ BEQ_cont.8755:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8756
+	BNE	%r1, %r27, BEQ_else.8715
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8756:
+BEQ_else.8715:
 	LWC1	%f1, 72(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -2653,7 +2516,7 @@ BEQ_else.8756:
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8757
+	BNE	%r1, %r27, BEQ_else.8716
 	LWC1	%f1, 80(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 92(%r30) # save link register
@@ -2663,10 +2526,10 @@ BEQ_else.8756:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8758
-BEQ_else.8757:
+	J	BEQ_cont.8717
+BEQ_else.8716:
 	LWC1	%f1, 80(%r30) # restore2
-BEQ_cont.8758:
+BEQ_cont.8717:
 	LWC1	%f2, 48(%r30) # restore2
 	SUB.s	%f1, %f1, %f2
 	LWC1	%f2, 40(%r30) # restore2
@@ -2675,7 +2538,7 @@ BEQ_cont.8758:
 	SWC1	%f1, 0(%r1)
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8753:
+BEQ_else.8712:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 solver.2652:
@@ -2746,7 +2609,7 @@ solver.2652:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8759
+	BNE	%r1, %r27, BEQ_else.8718
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 48(%r30) # restore2
 	LWC1	%f3, 64(%r30) # restore2
@@ -2755,9 +2618,9 @@ solver.2652:
 	LW	%r26, 12(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8759:
+BEQ_else.8718:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8760
+	BNE	%r1, %r27, BEQ_else.8719
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 48(%r30) # restore2
 	LWC1	%f3, 64(%r30) # restore2
@@ -2766,7 +2629,7 @@ BEQ_else.8759:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8760:
+BEQ_else.8719:
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 48(%r30) # restore2
 	LWC1	%f3, 64(%r30) # restore2
@@ -2822,10 +2685,10 @@ solver_rect_fast.2656:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8763
+	BNE	%r1, %r27, BEQ_else.8722
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8764
-BEQ_else.8763:
+	J	BEQ_cont.8723
+BEQ_else.8722:
 	LW	%r1, 48(%r30) # restore1
 	LWC1	%f1, 8(%r1)
 	LWC1	%f2, 40(%r30) # restore2
@@ -2861,10 +2724,10 @@ BEQ_else.8763:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8765
+	BNE	%r1, %r27, BEQ_else.8724
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8766
-BEQ_else.8765:
+	J	BEQ_cont.8725
+BEQ_else.8724:
 	LW	%r1, 24(%r30) # restore1
 	LWC1	%f1, 4(%r1)
 	ADDI	%r29, %r31, 0
@@ -2876,16 +2739,16 @@ BEQ_else.8765:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8767
+	BNE	%r1, %r27, BEQ_else.8726
 	ADDI	%r1, %r0, 1
-	J	BEQ_cont.8768
-BEQ_else.8767:
+	J	BEQ_cont.8727
+BEQ_else.8726:
 	ADDI	%r1, %r0, 0
-BEQ_cont.8768:
-BEQ_cont.8766:
-BEQ_cont.8764:
+BEQ_cont.8727:
+BEQ_cont.8725:
+BEQ_cont.8723:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8769
+	BNE	%r1, %r27, BEQ_else.8728
 	LW	%r1, 24(%r30) # restore1
 	LWC1	%f1, 8(%r1)
 	LWC1	%f2, 16(%r30) # restore2
@@ -2928,10 +2791,10 @@ BEQ_cont.8764:
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8770
+	BNE	%r1, %r27, BEQ_else.8729
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8771
-BEQ_else.8770:
+	J	BEQ_cont.8730
+BEQ_else.8729:
 	LW	%r1, 48(%r30) # restore1
 	LWC1	%f1, 8(%r1)
 	LWC1	%f2, 72(%r30) # restore2
@@ -2967,10 +2830,10 @@ BEQ_else.8770:
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8772
+	BNE	%r1, %r27, BEQ_else.8731
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8773
-BEQ_else.8772:
+	J	BEQ_cont.8732
+BEQ_else.8731:
 	LW	%r1, 24(%r30) # restore1
 	LWC1	%f1, 12(%r1)
 	ADDI	%r29, %r31, 0
@@ -2982,16 +2845,16 @@ BEQ_else.8772:
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8774
+	BNE	%r1, %r27, BEQ_else.8733
 	ADDI	%r1, %r0, 1
-	J	BEQ_cont.8775
-BEQ_else.8774:
+	J	BEQ_cont.8734
+BEQ_else.8733:
 	ADDI	%r1, %r0, 0
-BEQ_cont.8775:
-BEQ_cont.8773:
-BEQ_cont.8771:
+BEQ_cont.8734:
+BEQ_cont.8732:
+BEQ_cont.8730:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8776
+	BNE	%r1, %r27, BEQ_else.8735
 	LW	%r1, 24(%r30) # restore1
 	LWC1	%f1, 16(%r1)
 	LWC1	%f2, 32(%r30) # restore2
@@ -3034,10 +2897,10 @@ BEQ_cont.8771:
 	LW	%r29, 116(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8777
+	BNE	%r1, %r27, BEQ_else.8736
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8778
-BEQ_else.8777:
+	J	BEQ_cont.8737
+BEQ_else.8736:
 	LW	%r1, 48(%r30) # restore1
 	LWC1	%f1, 4(%r1)
 	LWC1	%f2, 96(%r30) # restore2
@@ -3073,10 +2936,10 @@ BEQ_else.8777:
 	LW	%r29, 124(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8779
+	BNE	%r1, %r27, BEQ_else.8738
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8780
-BEQ_else.8779:
+	J	BEQ_cont.8739
+BEQ_else.8738:
 	LW	%r1, 24(%r30) # restore1
 	LWC1	%f1, 20(%r1)
 	ADDI	%r29, %r31, 0
@@ -3088,31 +2951,31 @@ BEQ_else.8779:
 	LW	%r29, 124(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8781
+	BNE	%r1, %r27, BEQ_else.8740
 	ADDI	%r1, %r0, 1
-	J	BEQ_cont.8782
-BEQ_else.8781:
+	J	BEQ_cont.8741
+BEQ_else.8740:
 	ADDI	%r1, %r0, 0
-BEQ_cont.8782:
-BEQ_cont.8780:
-BEQ_cont.8778:
+BEQ_cont.8741:
+BEQ_cont.8739:
+BEQ_cont.8737:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8783
+	BNE	%r1, %r27, BEQ_else.8742
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8783:
+BEQ_else.8742:
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f1, 96(%r30) # restore2
 	SWC1	%f1, 0(%r1)
 	ADDI	%r1, %r0, 3
 	JR	%r31
-BEQ_else.8776:
+BEQ_else.8735:
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f1, 72(%r30) # restore2
 	SWC1	%f1, 0(%r1)
 	ADDI	%r1, %r0, 2
 	JR	%r31
-BEQ_else.8769:
+BEQ_else.8728:
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f1, 40(%r30) # restore2
 	SWC1	%f1, 0(%r1)
@@ -3136,10 +2999,10 @@ solver_surface_fast.2663:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8785
+	BNE	%r1, %r27, BEQ_else.8744
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8785:
+BEQ_else.8744:
 	LW	%r1, 32(%r30) # restore1
 	LWC1	%f1, 4(%r1)
 	LWC1	%f2, 24(%r30) # restore2
@@ -3176,7 +3039,7 @@ solver_second_fast.2669:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8788
+	BNE	%r1, %r27, BEQ_else.8747
 	LW	%r1, 48(%r30) # restore1
 	LWC1	%f1, 4(%r1)
 	LWC1	%f2, 40(%r30) # restore2
@@ -3214,15 +3077,15 @@ solver_second_fast.2669:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 3
-	BNE	%r1, %r27, BEQ_else.8790
+	BNE	%r1, %r27, BEQ_else.8749
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 64(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	J	BEQ_cont.8791
-BEQ_else.8790:
+	J	BEQ_cont.8750
+BEQ_else.8749:
 	LWC1	%f1, 64(%r30) # restore2
-BEQ_cont.8791:
+BEQ_cont.8750:
 	LWC1	%f2, 56(%r30) # restore2
 	SWC1	%f1, 72(%r30)
 	ADDI	%r29, %r31, 0
@@ -3248,10 +3111,10 @@ BEQ_cont.8791:
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8792
+	BNE	%r1, %r27, BEQ_else.8751
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8792:
+BEQ_else.8751:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 92(%r30) # save link register
@@ -3262,7 +3125,7 @@ BEQ_else.8792:
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8793
+	BNE	%r1, %r27, BEQ_else.8752
 	LWC1	%f1, 80(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 92(%r30) # save link register
@@ -3279,8 +3142,8 @@ BEQ_else.8792:
 	MUL.s	%f1, %f1, %f2
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-	J	BEQ_cont.8794
-BEQ_else.8793:
+	J	BEQ_cont.8753
+BEQ_else.8752:
 	LWC1	%f1, 80(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 92(%r30) # save link register
@@ -3297,10 +3160,10 @@ BEQ_else.8793:
 	MUL.s	%f1, %f1, %f2
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-BEQ_cont.8794:
+BEQ_cont.8753:
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8788:
+BEQ_else.8747:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 solver_fast.2675:
@@ -3388,7 +3251,7 @@ solver_fast.2675:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8796
+	BNE	%r1, %r27, BEQ_else.8755
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -3407,9 +3270,9 @@ solver_fast.2675:
 	LW	%r26, 8(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8796:
+BEQ_else.8755:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8797
+	BNE	%r1, %r27, BEQ_else.8756
 	LWC1	%f1, 40(%r30) # restore2
 	LWC1	%f2, 56(%r30) # restore2
 	LWC1	%f3, 72(%r30) # restore2
@@ -3418,7 +3281,7 @@ BEQ_else.8796:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8797:
+BEQ_else.8756:
 	LWC1	%f1, 40(%r30) # restore2
 	LWC1	%f2, 56(%r30) # restore2
 	LWC1	%f3, 72(%r30) # restore2
@@ -3442,10 +3305,10 @@ solver_surface_fast2.2679:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8798
+	BNE	%r1, %r27, BEQ_else.8757
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8798:
+BEQ_else.8757:
 	LW	%r1, 8(%r30) # restore1
 	LWC1	%f1, 0(%r1)
 	LW	%r1, 4(%r30) # restore1
@@ -3476,7 +3339,7 @@ solver_second_fast2.2686:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8800
+	BNE	%r1, %r27, BEQ_else.8759
 	LW	%r1, 48(%r30) # restore1
 	LWC1	%f1, 4(%r1)
 	LWC1	%f2, 40(%r30) # restore2
@@ -3515,10 +3378,10 @@ solver_second_fast2.2686:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8802
+	BNE	%r1, %r27, BEQ_else.8761
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8802:
+BEQ_else.8761:
 	LW	%r1, 4(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -3529,7 +3392,7 @@ BEQ_else.8802:
 	LW	%r29, 84(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8803
+	BNE	%r1, %r27, BEQ_else.8762
 	LWC1	%f1, 72(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -3546,8 +3409,8 @@ BEQ_else.8802:
 	MUL.s	%f1, %f1, %f2
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-	J	BEQ_cont.8804
-BEQ_else.8803:
+	J	BEQ_cont.8763
+BEQ_else.8762:
 	LWC1	%f1, 72(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 84(%r30) # save link register
@@ -3564,10 +3427,10 @@ BEQ_else.8803:
 	MUL.s	%f1, %f1, %f2
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-BEQ_cont.8804:
+BEQ_cont.8763:
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8800:
+BEQ_else.8759:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 solver_fast2.2693:
@@ -3626,7 +3489,7 @@ solver_fast2.2693:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8806
+	BNE	%r1, %r27, BEQ_else.8765
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 60(%r30) # save link register
@@ -3645,9 +3508,9 @@ solver_fast2.2693:
 	LW	%r26, 8(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8806:
+BEQ_else.8765:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8807
+	BNE	%r1, %r27, BEQ_else.8766
 	LWC1	%f1, 48(%r30) # restore2
 	LWC1	%f2, 40(%r30) # restore2
 	LWC1	%f3, 32(%r30) # restore2
@@ -3657,7 +3520,7 @@ BEQ_else.8806:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8807:
+BEQ_else.8766:
 	LWC1	%f1, 48(%r30) # restore2
 	LWC1	%f2, 40(%r30) # restore2
 	LWC1	%f3, 32(%r30) # restore2
@@ -3694,7 +3557,7 @@ setup_rect_table.2696:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8808
+	BNE	%r1, %r27, BEQ_else.8767
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 12(%r30) # save link register
@@ -3753,13 +3616,13 @@ setup_rect_table.2696:
 	LWC1	%f2, 0(%r2)
 	DIV.s	%f1, %f1, %f2
 	SWC1	%f1, 4(%r1)
-	J	BEQ_cont.8809
-BEQ_else.8808:
+	J	BEQ_cont.8768
+BEQ_else.8767:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 4(%r1)
-BEQ_cont.8809:
+BEQ_cont.8768:
 	LW	%r2, 4(%r30) # restore1
 	LWC1	%f1, 4(%r2)
 	ADDI	%r29, %r31, 0
@@ -3771,7 +3634,7 @@ BEQ_cont.8809:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8810
+	BNE	%r1, %r27, BEQ_else.8769
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 20(%r30) # save link register
@@ -3830,13 +3693,13 @@ BEQ_cont.8809:
 	LWC1	%f2, 4(%r2)
 	DIV.s	%f1, %f1, %f2
 	SWC1	%f1, 12(%r1)
-	J	BEQ_cont.8811
-BEQ_else.8810:
+	J	BEQ_cont.8770
+BEQ_else.8769:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 12(%r1)
-BEQ_cont.8811:
+BEQ_cont.8770:
 	LW	%r2, 4(%r30) # restore1
 	LWC1	%f1, 8(%r2)
 	ADDI	%r29, %r31, 0
@@ -3848,7 +3711,7 @@ BEQ_cont.8811:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8812
+	BNE	%r1, %r27, BEQ_else.8771
 	LW	%r1, 0(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 28(%r30) # save link register
@@ -3907,13 +3770,13 @@ BEQ_cont.8811:
 	LWC1	%f2, 8(%r2)
 	DIV.s	%f1, %f1, %f2
 	SWC1	%f1, 20(%r1)
-	J	BEQ_cont.8813
-BEQ_else.8812:
+	J	BEQ_cont.8772
+BEQ_else.8771:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 20(%r1)
-BEQ_cont.8813:
+BEQ_cont.8772:
 	JR	%r31
 setup_surface_table.2699:
 	ADDI	%r3, %r0, 4
@@ -3991,13 +3854,13 @@ setup_surface_table.2699:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8815
+	BNE	%r1, %r27, BEQ_else.8774
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 0(%r1)
-	J	BEQ_cont.8816
-BEQ_else.8815:
+	J	BEQ_cont.8775
+BEQ_else.8774:
 	LA	%r29, l.5995
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 56(%r30) # restore2
@@ -4070,7 +3933,7 @@ BEQ_else.8815:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 12(%r1)
-BEQ_cont.8816:
+BEQ_cont.8775:
 	JR	%r31
 setup_second_table.2702:
 	ADDI	%r3, %r0, 5
@@ -4189,7 +4052,7 @@ setup_second_table.2702:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8818
+	BNE	%r1, %r27, BEQ_else.8777
 	LW	%r1, 8(%r30) # restore1
 	LWC1	%f1, 32(%r30) # restore2
 	SWC1	%f1, 4(%r1)
@@ -4197,8 +4060,8 @@ setup_second_table.2702:
 	SWC1	%f1, 8(%r1)
 	LWC1	%f1, 64(%r30) # restore2
 	SWC1	%f1, 12(%r1)
-	J	BEQ_cont.8819
-BEQ_else.8818:
+	J	BEQ_cont.8778
+BEQ_else.8777:
 	LW	%r1, 4(%r30) # restore1
 	LWC1	%f1, 8(%r1)
 	LW	%r2, 0(%r30) # restore1
@@ -4333,7 +4196,7 @@ BEQ_else.8818:
 	SUB.s	%f1, %f2, %f1
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 12(%r1)
-BEQ_cont.8819:
+BEQ_cont.8778:
 	LWC1	%f1, 16(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 148(%r30) # save link register
@@ -4344,23 +4207,23 @@ BEQ_cont.8819:
 	LW	%r29, 148(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8820
+	BNE	%r1, %r27, BEQ_else.8779
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 16(%r30) # restore2
 	DIV.s	%f1, %f1, %f2
 	LW	%r1, 8(%r30) # restore1
 	SWC1	%f1, 16(%r1)
-	J	BEQ_cont.8821
-BEQ_else.8820:
-BEQ_cont.8821:
+	J	BEQ_cont.8780
+BEQ_else.8779:
+BEQ_cont.8780:
 	LW	%r1, 8(%r30) # restore1
 	JR	%r31
 iter_setup_dirvec_constants.2705:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.8822
+	BNE	%r27, %r0, BEQ_else.8781
 	SLL	%r4, %r2, 2
 	ADD	%r29, %r3, %r4
 	LW	%r3, 0(%r29)
@@ -4399,7 +4262,7 @@ iter_setup_dirvec_constants.2705:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8823
+	BNE	%r1, %r27, BEQ_else.8782
 	LW	%r1, 20(%r30) # restore1
 	LW	%r2, 8(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -4415,10 +4278,10 @@ iter_setup_dirvec_constants.2705:
 	LW	%r4, 16(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	SW	%r1, 0(%r29)
-	J	BEQ_cont.8824
-BEQ_else.8823:
+	J	BEQ_cont.8783
+BEQ_else.8782:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8825
+	BNE	%r1, %r27, BEQ_else.8784
 	LW	%r1, 20(%r30) # restore1
 	LW	%r2, 8(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -4434,8 +4297,8 @@ BEQ_else.8823:
 	LW	%r4, 16(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	SW	%r1, 0(%r29)
-	J	BEQ_cont.8826
-BEQ_else.8825:
+	J	BEQ_cont.8785
+BEQ_else.8784:
 	LW	%r1, 20(%r30) # restore1
 	LW	%r2, 8(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -4451,14 +4314,14 @@ BEQ_else.8825:
 	LW	%r4, 16(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	SW	%r1, 0(%r29)
-BEQ_cont.8826:
-BEQ_cont.8824:
+BEQ_cont.8785:
+BEQ_cont.8783:
 	ADDI	%r2, %r2, -1
 	LW	%r1, 12(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8822:
+BEQ_else.8781:
 	JR	%r31
 setup_dirvec_constants.2708:
 	LW	%r2, 8(%r26)
@@ -4471,7 +4334,7 @@ setup_startp_constants.2710:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.8828
+	BNE	%r27, %r0, BEQ_else.8787
 	SLL	%r4, %r2, 2
 	ADD	%r29, %r3, %r4
 	LW	%r3, 0(%r29)
@@ -4553,7 +4416,7 @@ setup_startp_constants.2710:
 	SWC1	%f1, 8(%r1)
 	LW	%r2, 20(%r30) # restore1
 	ADDI	%r27, %r0, 2
-	BNE	%r2, %r27, BEQ_else.8829
+	BNE	%r2, %r27, BEQ_else.8788
 	LW	%r2, 12(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	ADDI	%r1, %r2, 0 # args
@@ -4578,13 +4441,13 @@ setup_startp_constants.2710:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 16(%r30) # restore1
 	SWC1	%f1, 12(%r1)
-	J	BEQ_cont.8830
-BEQ_else.8829:
+	J	BEQ_cont.8789
+BEQ_else.8788:
 	ADDI	%r27, %r0, 2
 	SLT	%r27, %r27, %r2
-	BNE	%r27, %r0, BEQ_else.8831
-	J	BEQ_cont.8832
-BEQ_else.8831:
+	BNE	%r27, %r0, BEQ_else.8790
+	J	BEQ_cont.8791
+BEQ_else.8790:
 	LWC1	%f1, 0(%r1)
 	LWC1	%f2, 4(%r1)
 	LWC1	%f3, 8(%r1)
@@ -4600,24 +4463,24 @@ BEQ_else.8831:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r27, %r0, 3
-	BNE	%r1, %r27, BEQ_else.8833
+	BNE	%r1, %r27, BEQ_else.8792
 	LA	%r29, l.5994
 	LWC1	%f2, 0(%r29)
 	SUB.s	%f1, %f1, %f2
-	J	BEQ_cont.8834
-BEQ_else.8833:
-BEQ_cont.8834:
+	J	BEQ_cont.8793
+BEQ_else.8792:
+BEQ_cont.8793:
 	LW	%r1, 16(%r30) # restore1
 	SWC1	%f1, 12(%r1)
-BEQ_cont.8832:
-BEQ_cont.8830:
+BEQ_cont.8791:
+BEQ_cont.8789:
 	LW	%r1, 4(%r30) # restore1
 	ADDI	%r2, %r1, -1
 	LW	%r1, 8(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8828:
+BEQ_else.8787:
 	JR	%r31
 setup_startp.2713:
 	LW	%r2, 12(%r26)
@@ -4677,10 +4540,10 @@ is_rect_outside.2715:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8837
+	BNE	%r1, %r27, BEQ_else.8796
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8838
-BEQ_else.8837:
+	J	BEQ_cont.8797
+BEQ_else.8796:
 	LWC1	%f1, 8(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 36(%r30) # save link register
@@ -4711,10 +4574,10 @@ BEQ_else.8837:
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8839
+	BNE	%r1, %r27, BEQ_else.8798
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8840
-BEQ_else.8839:
+	J	BEQ_cont.8799
+BEQ_else.8798:
 	LWC1	%f1, 0(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 44(%r30) # save link register
@@ -4744,10 +4607,10 @@ BEQ_else.8839:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8840:
-BEQ_cont.8838:
+BEQ_cont.8799:
+BEQ_cont.8797:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8841
+	BNE	%r1, %r27, BEQ_else.8800
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 52(%r30) # save link register
@@ -4758,13 +4621,13 @@ BEQ_cont.8838:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8842
+	BNE	%r1, %r27, BEQ_else.8801
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8842:
+BEQ_else.8801:
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8841:
+BEQ_else.8800:
 	LW	%r1, 16(%r30) # restore1
 	J	o_isinvert.2524
 is_plane_outside.2720:
@@ -4822,10 +4685,10 @@ is_plane_outside.2720:
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8844
+	BNE	%r1, %r27, BEQ_else.8803
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8844:
+BEQ_else.8803:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 is_second_outside.2725:
@@ -4849,15 +4712,15 @@ is_second_outside.2725:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 3
-	BNE	%r1, %r27, BEQ_else.8846
+	BNE	%r1, %r27, BEQ_else.8805
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 8(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	J	BEQ_cont.8847
-BEQ_else.8846:
+	J	BEQ_cont.8806
+BEQ_else.8805:
 	LWC1	%f1, 8(%r30) # restore2
-BEQ_cont.8847:
+BEQ_cont.8806:
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 16(%r30)
 	ADDI	%r29, %r31, 0
@@ -4889,10 +4752,10 @@ BEQ_cont.8847:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8848
+	BNE	%r1, %r27, BEQ_else.8807
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8848:
+BEQ_else.8807:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 is_outside.2730:
@@ -4945,21 +4808,21 @@ is_outside.2730:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8850
+	BNE	%r1, %r27, BEQ_else.8809
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 40(%r30) # restore2
 	LWC1	%f3, 48(%r30) # restore2
 	LW	%r1, 16(%r30) # restore1
 	J	is_rect_outside.2715
-BEQ_else.8850:
+BEQ_else.8809:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8851
+	BNE	%r1, %r27, BEQ_else.8810
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 40(%r30) # restore2
 	LWC1	%f3, 48(%r30) # restore2
 	LW	%r1, 16(%r30) # restore1
 	J	is_plane_outside.2720
-BEQ_else.8851:
+BEQ_else.8810:
 	LWC1	%f1, 32(%r30) # restore2
 	LWC1	%f2, 40(%r30) # restore2
 	LWC1	%f3, 48(%r30) # restore2
@@ -4970,13 +4833,11 @@ check_all_inside.2735:
 	SLL	%r4, %r1, 2
 	ADD	%r29, %r2, %r4
 	LW	%r4, 0(%r29)
-	ADDI	%r5, %r0, 1
-	SUB	%r29, %r0, %r5
-	ADDI	%r5, %r29, 0
-	BNE	%r4, %r5, BEQ_else.8852
+	ADDI	%r27, %r0, -1
+	BNE	%r4, %r27, BEQ_else.8811
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.8852:
+BEQ_else.8811:
 	SLL	%r4, %r4, 2
 	ADD	%r29, %r3, %r4
 	LW	%r3, 0(%r29)
@@ -4996,7 +4857,7 @@ BEQ_else.8852:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8853
+	BNE	%r1, %r27, BEQ_else.8812
 	LW	%r1, 32(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LWC1	%f1, 16(%r30) # restore2
@@ -5006,7 +4867,7 @@ BEQ_else.8852:
 	LW	%r26, 28(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8853:
+BEQ_else.8812:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 shadow_check_and_group.2741:
@@ -5020,13 +4881,11 @@ shadow_check_and_group.2741:
 	SLL	%r10, %r1, 2
 	ADD	%r29, %r2, %r10
 	LW	%r10, 0(%r29)
-	ADDI	%r11, %r0, 1
-	SUB	%r29, %r0, %r11
-	ADDI	%r11, %r29, 0
-	BNE	%r10, %r11, BEQ_else.8854
+	ADDI	%r27, %r0, -1
+	BNE	%r10, %r27, BEQ_else.8813
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8854:
+BEQ_else.8813:
 	SLL	%r10, %r1, 2
 	ADD	%r29, %r2, %r10
 	LW	%r10, 0(%r29)
@@ -5056,11 +4915,11 @@ BEQ_else.8854:
 	LWC1	%f1, 0(%r2)
 	SWC1	%f1, 40(%r30)
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8856
+	BNE	%r1, %r27, BEQ_else.8815
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8857
-BEQ_else.8856:
-	LA	%r29, l.6333
+	J	BEQ_cont.8816
+BEQ_else.8815:
+	LA	%r29, l.6309
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 52(%r30) # save link register
@@ -5070,9 +4929,9 @@ BEQ_else.8856:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8857:
+BEQ_cont.8816:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8858
+	BNE	%r1, %r27, BEQ_else.8817
 	LW	%r1, 28(%r30) # restore1
 	SLL	%r1, %r1, 2
 	LW	%r2, 24(%r30) # restore1
@@ -5087,18 +4946,18 @@ BEQ_cont.8857:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8859
+	BNE	%r1, %r27, BEQ_else.8818
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8859:
+BEQ_else.8818:
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 12(%r30) # restore1
 	LW	%r26, 16(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8858:
-	LA	%r29, l.6334
+BEQ_else.8817:
+	LA	%r29, l.6310
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 40(%r30) # restore2
 	ADD.s	%f1, %f2, %f1
@@ -5133,14 +4992,14 @@ BEQ_else.8858:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8860
+	BNE	%r1, %r27, BEQ_else.8819
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 12(%r30) # restore1
 	LW	%r26, 16(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8860:
+BEQ_else.8819:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 shadow_check_one_or_group.2744:
@@ -5149,13 +5008,11 @@ shadow_check_one_or_group.2744:
 	SLL	%r5, %r1, 2
 	ADD	%r29, %r2, %r5
 	LW	%r5, 0(%r29)
-	ADDI	%r6, %r0, 1
-	SUB	%r29, %r0, %r6
-	ADDI	%r6, %r29, 0
-	BNE	%r5, %r6, BEQ_else.8861
+	ADDI	%r27, %r0, -1
+	BNE	%r5, %r27, BEQ_else.8820
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8861:
+BEQ_else.8820:
 	SLL	%r5, %r5, 2
 	ADD	%r29, %r4, %r5
 	LW	%r4, 0(%r29)
@@ -5176,14 +5033,14 @@ BEQ_else.8861:
 	LW	%r29, 12(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8862
+	BNE	%r1, %r27, BEQ_else.8821
 	LW	%r1, 8(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 0(%r30) # restore1
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8862:
+BEQ_else.8821:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 shadow_check_one_or_matrix.2747:
@@ -5196,23 +5053,21 @@ shadow_check_one_or_matrix.2747:
 	ADD	%r29, %r2, %r8
 	LW	%r8, 0(%r29)
 	LW	%r9, 0(%r8)
-	ADDI	%r10, %r0, 1
-	SUB	%r29, %r0, %r10
-	ADDI	%r10, %r29, 0
-	BNE	%r9, %r10, BEQ_else.8863
+	ADDI	%r27, %r0, -1
+	BNE	%r9, %r27, BEQ_else.8822
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8863:
+BEQ_else.8822:
 	SW	%r8, 0(%r30)
 	SW	%r5, 4(%r30)
 	SW	%r2, 8(%r30)
 	SW	%r26, 12(%r30)
 	SW	%r1, 16(%r30)
 	ADDI	%r27, %r0, 99
-	BNE	%r9, %r27, BEQ_else.8864
+	BNE	%r9, %r27, BEQ_else.8823
 	ADDI	%r1, %r0, 1
-	J	BEQ_cont.8865
-BEQ_else.8864:
+	J	BEQ_cont.8824
+BEQ_else.8823:
 	SW	%r4, 20(%r30)
 	ADDI	%r29, %r31, 0
 	ADDI	%r2, %r6, 0 # args
@@ -5228,13 +5083,13 @@ BEQ_else.8864:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8866
+	BNE	%r1, %r27, BEQ_else.8825
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8867
-BEQ_else.8866:
+	J	BEQ_cont.8826
+BEQ_else.8825:
 	LW	%r1, 20(%r30) # restore1
 	LWC1	%f1, 0(%r1)
-	LA	%r29, l.6347
+	LA	%r29, l.6323
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 28(%r30) # save link register
@@ -5245,10 +5100,10 @@ BEQ_else.8866:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8868
+	BNE	%r1, %r27, BEQ_else.8827
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8869
-BEQ_else.8868:
+	J	BEQ_cont.8828
+BEQ_else.8827:
 	ADDI	%r1, %r0, 1
 	LW	%r2, 0(%r30) # restore1
 	LW	%r26, 4(%r30) # restore1
@@ -5262,24 +5117,24 @@ BEQ_else.8868:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8870
+	BNE	%r1, %r27, BEQ_else.8829
 	ADDI	%r1, %r0, 0
-	J	BEQ_cont.8871
-BEQ_else.8870:
+	J	BEQ_cont.8830
+BEQ_else.8829:
 	ADDI	%r1, %r0, 1
-BEQ_cont.8871:
-BEQ_cont.8869:
-BEQ_cont.8867:
-BEQ_cont.8865:
+BEQ_cont.8830:
+BEQ_cont.8828:
+BEQ_cont.8826:
+BEQ_cont.8824:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8872
+	BNE	%r1, %r27, BEQ_else.8831
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 8(%r30) # restore1
 	LW	%r26, 12(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8872:
+BEQ_else.8831:
 	ADDI	%r1, %r0, 1
 	LW	%r2, 0(%r30) # restore1
 	LW	%r26, 4(%r30) # restore1
@@ -5293,14 +5148,14 @@ BEQ_else.8872:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8873
+	BNE	%r1, %r27, BEQ_else.8832
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 8(%r30) # restore1
 	LW	%r26, 12(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8873:
+BEQ_else.8832:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 solve_each_element.2750:
@@ -5316,12 +5171,10 @@ solve_each_element.2750:
 	SLL	%r13, %r1, 2
 	ADD	%r29, %r2, %r13
 	LW	%r13, 0(%r29)
-	ADDI	%r14, %r0, 1
-	SUB	%r29, %r0, %r14
-	ADDI	%r14, %r29, 0
-	BNE	%r13, %r14, BEQ_else.8874
+	ADDI	%r27, %r0, -1
+	BNE	%r13, %r27, BEQ_else.8833
 	JR	%r31
-BEQ_else.8874:
+BEQ_else.8833:
 	SW	%r9, 0(%r30)
 	SW	%r11, 4(%r30)
 	SW	%r10, 8(%r30)
@@ -5349,7 +5202,7 @@ BEQ_else.8874:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8876
+	BNE	%r1, %r27, BEQ_else.8835
 	LW	%r1, 48(%r30) # restore1
 	SLL	%r1, %r1, 2
 	LW	%r2, 44(%r30) # restore1
@@ -5364,9 +5217,9 @@ BEQ_else.8874:
 	LW	%r29, 52(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8877
+	BNE	%r1, %r27, BEQ_else.8836
 	JR	%r31
-BEQ_else.8877:
+BEQ_else.8836:
 	LW	%r1, 40(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 32(%r30) # restore1
@@ -5374,7 +5227,7 @@ BEQ_else.8877:
 	LW	%r26, 36(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8876:
+BEQ_else.8835:
 	LW	%r2, 24(%r30) # restore1
 	LWC1	%f2, 0(%r2)
 	LA	%r29, l.5993
@@ -5390,9 +5243,9 @@ BEQ_else.8876:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8879
-	J	BEQ_cont.8880
-BEQ_else.8879:
+	BNE	%r1, %r27, BEQ_else.8838
+	J	BEQ_cont.8839
+BEQ_else.8838:
 	LW	%r1, 20(%r30) # restore1
 	LWC1	%f2, 0(%r1)
 	LWC1	%f1, 56(%r30) # restore2
@@ -5405,10 +5258,10 @@ BEQ_else.8879:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8881
-	J	BEQ_cont.8882
-BEQ_else.8881:
-	LA	%r29, l.6334
+	BNE	%r1, %r27, BEQ_else.8840
+	J	BEQ_cont.8841
+BEQ_else.8840:
+	LA	%r29, l.6310
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 56(%r30) # restore2
 	ADD.s	%f1, %f2, %f1
@@ -5448,9 +5301,9 @@ BEQ_else.8881:
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8883
-	J	BEQ_cont.8884
-BEQ_else.8883:
+	BNE	%r1, %r27, BEQ_else.8842
+	J	BEQ_cont.8843
+BEQ_else.8842:
 	LW	%r1, 20(%r30) # restore1
 	LWC1	%f1, 88(%r30) # restore2
 	SWC1	%f1, 0(%r1)
@@ -5472,9 +5325,9 @@ BEQ_else.8883:
 	LW	%r1, 0(%r30) # restore1
 	LW	%r2, 52(%r30) # restore1
 	SW	%r2, 0(%r1)
-BEQ_cont.8884:
-BEQ_cont.8882:
-BEQ_cont.8880:
+BEQ_cont.8843:
+BEQ_cont.8841:
+BEQ_cont.8839:
 	LW	%r1, 40(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 32(%r30) # restore1
@@ -5488,12 +5341,10 @@ solve_one_or_network.2754:
 	SLL	%r6, %r1, 2
 	ADD	%r29, %r2, %r6
 	LW	%r6, 0(%r29)
-	ADDI	%r7, %r0, 1
-	SUB	%r29, %r0, %r7
-	ADDI	%r7, %r29, 0
-	BNE	%r6, %r7, BEQ_else.8885
+	ADDI	%r27, %r0, -1
+	BNE	%r6, %r27, BEQ_else.8844
 	JR	%r31
-BEQ_else.8885:
+BEQ_else.8844:
 	SLL	%r6, %r6, 2
 	ADD	%r29, %r5, %r6
 	LW	%r5, 0(%r29)
@@ -5531,18 +5382,16 @@ trace_or_matrix.2758:
 	ADD	%r29, %r2, %r9
 	LW	%r9, 0(%r29)
 	LW	%r10, 0(%r9)
-	ADDI	%r11, %r0, 1
-	SUB	%r29, %r0, %r11
-	ADDI	%r11, %r29, 0
-	BNE	%r10, %r11, BEQ_else.8887
+	ADDI	%r27, %r0, -1
+	BNE	%r10, %r27, BEQ_else.8846
 	JR	%r31
-BEQ_else.8887:
+BEQ_else.8846:
 	SW	%r3, 0(%r30)
 	SW	%r2, 4(%r30)
 	SW	%r26, 8(%r30)
 	SW	%r1, 12(%r30)
 	ADDI	%r27, %r0, 99
-	BNE	%r10, %r27, BEQ_else.8889
+	BNE	%r10, %r27, BEQ_else.8848
 	ADDI	%r4, %r0, 1
 	ADDI	%r29, %r31, 0
 	ADDI	%r2, %r9, 0 # args
@@ -5556,8 +5405,8 @@ BEQ_else.8887:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8890
-BEQ_else.8889:
+	J	BEQ_cont.8849
+BEQ_else.8848:
 	SW	%r9, 16(%r30)
 	SW	%r8, 20(%r30)
 	SW	%r4, 24(%r30)
@@ -5576,9 +5425,9 @@ BEQ_else.8889:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8891
-	J	BEQ_cont.8892
-BEQ_else.8891:
+	BNE	%r1, %r27, BEQ_else.8850
+	J	BEQ_cont.8851
+BEQ_else.8850:
 	LW	%r1, 28(%r30) # restore1
 	LWC1	%f1, 0(%r1)
 	LW	%r1, 24(%r30) # restore1
@@ -5592,9 +5441,9 @@ BEQ_else.8891:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8893
-	J	BEQ_cont.8894
-BEQ_else.8893:
+	BNE	%r1, %r27, BEQ_else.8852
+	J	BEQ_cont.8853
+BEQ_else.8852:
 	ADDI	%r1, %r0, 1
 	LW	%r2, 16(%r30) # restore1
 	LW	%r3, 0(%r30) # restore1
@@ -5608,9 +5457,9 @@ BEQ_else.8893:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8894:
-BEQ_cont.8892:
-BEQ_cont.8890:
+BEQ_cont.8853:
+BEQ_cont.8851:
+BEQ_cont.8849:
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 4(%r30) # restore1
@@ -5622,7 +5471,7 @@ judge_intersection.2762:
 	LW	%r2, 12(%r26)
 	LW	%r3, 8(%r26)
 	LW	%r4, 4(%r26)
-	LA	%r29, l.6367
+	LA	%r29, l.6343
 	LWC1	%f1, 0(%r29)
 	SWC1	%f1, 0(%r3)
 	ADDI	%r5, %r0, 0
@@ -5643,7 +5492,7 @@ judge_intersection.2762:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f2, 0(%r1)
-	LA	%r29, l.6347
+	LA	%r29, l.6323
 	LWC1	%f1, 0(%r29)
 	SWC1	%f2, 8(%r30)
 	ADDI	%r29, %r31, 0
@@ -5655,11 +5504,11 @@ judge_intersection.2762:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8896
+	BNE	%r1, %r27, BEQ_else.8855
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8896:
-	LA	%r29, l.6371
+BEQ_else.8855:
+	LA	%r29, l.6347
 	LWC1	%f2, 0(%r29)
 	LWC1	%f1, 8(%r30) # restore2
 	J	min_caml_fless
@@ -5700,12 +5549,10 @@ solve_each_element_fast.2764:
 	LW	%r4, 44(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	LW	%r3, 0(%r29)
-	ADDI	%r5, %r0, 1
-	SUB	%r29, %r0, %r5
-	ADDI	%r5, %r29, 0
-	BNE	%r3, %r5, BEQ_else.8897
+	ADDI	%r27, %r0, -1
+	BNE	%r3, %r27, BEQ_else.8856
 	JR	%r31
-BEQ_else.8897:
+BEQ_else.8856:
 	LW	%r5, 36(%r30) # restore1
 	LW	%r26, 40(%r30) # restore1
 	SW	%r1, 52(%r30)
@@ -5722,7 +5569,7 @@ BEQ_else.8897:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8899
+	BNE	%r1, %r27, BEQ_else.8858
 	LW	%r1, 56(%r30) # restore1
 	SLL	%r1, %r1, 2
 	LW	%r2, 32(%r30) # restore1
@@ -5737,9 +5584,9 @@ BEQ_else.8897:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8900
+	BNE	%r1, %r27, BEQ_else.8859
 	JR	%r31
-BEQ_else.8900:
+BEQ_else.8859:
 	LW	%r1, 48(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 44(%r30) # restore1
@@ -5747,7 +5594,7 @@ BEQ_else.8900:
 	LW	%r26, 28(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8899:
+BEQ_else.8858:
 	LW	%r2, 24(%r30) # restore1
 	LWC1	%f2, 0(%r2)
 	LA	%r29, l.5993
@@ -5763,9 +5610,9 @@ BEQ_else.8899:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8902
-	J	BEQ_cont.8903
-BEQ_else.8902:
+	BNE	%r1, %r27, BEQ_else.8861
+	J	BEQ_cont.8862
+BEQ_else.8861:
 	LW	%r1, 20(%r30) # restore1
 	LWC1	%f2, 0(%r1)
 	LWC1	%f1, 64(%r30) # restore2
@@ -5778,10 +5625,10 @@ BEQ_else.8902:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8904
-	J	BEQ_cont.8905
-BEQ_else.8904:
-	LA	%r29, l.6334
+	BNE	%r1, %r27, BEQ_else.8863
+	J	BEQ_cont.8864
+BEQ_else.8863:
+	LA	%r29, l.6310
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 64(%r30) # restore2
 	ADD.s	%f1, %f2, %f1
@@ -5819,9 +5666,9 @@ BEQ_else.8904:
 	LW	%r29, 108(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8906
-	J	BEQ_cont.8907
-BEQ_else.8906:
+	BNE	%r1, %r27, BEQ_else.8865
+	J	BEQ_cont.8866
+BEQ_else.8865:
 	LW	%r1, 20(%r30) # restore1
 	LWC1	%f1, 96(%r30) # restore2
 	SWC1	%f1, 0(%r1)
@@ -5843,9 +5690,9 @@ BEQ_else.8906:
 	LW	%r1, 0(%r30) # restore1
 	LW	%r2, 60(%r30) # restore1
 	SW	%r2, 0(%r1)
-BEQ_cont.8907:
-BEQ_cont.8905:
-BEQ_cont.8903:
+BEQ_cont.8866:
+BEQ_cont.8864:
+BEQ_cont.8862:
 	LW	%r1, 48(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 44(%r30) # restore1
@@ -5859,12 +5706,10 @@ solve_one_or_network_fast.2768:
 	SLL	%r6, %r1, 2
 	ADD	%r29, %r2, %r6
 	LW	%r6, 0(%r29)
-	ADDI	%r7, %r0, 1
-	SUB	%r29, %r0, %r7
-	ADDI	%r7, %r29, 0
-	BNE	%r6, %r7, BEQ_else.8908
+	ADDI	%r27, %r0, -1
+	BNE	%r6, %r27, BEQ_else.8867
 	JR	%r31
-BEQ_else.8908:
+BEQ_else.8867:
 	SLL	%r6, %r6, 2
 	ADD	%r29, %r5, %r6
 	LW	%r5, 0(%r29)
@@ -5901,18 +5746,16 @@ trace_or_matrix_fast.2772:
 	ADD	%r29, %r2, %r8
 	LW	%r8, 0(%r29)
 	LW	%r9, 0(%r8)
-	ADDI	%r10, %r0, 1
-	SUB	%r29, %r0, %r10
-	ADDI	%r10, %r29, 0
-	BNE	%r9, %r10, BEQ_else.8910
+	ADDI	%r27, %r0, -1
+	BNE	%r9, %r27, BEQ_else.8869
 	JR	%r31
-BEQ_else.8910:
+BEQ_else.8869:
 	SW	%r3, 0(%r30)
 	SW	%r2, 4(%r30)
 	SW	%r26, 8(%r30)
 	SW	%r1, 12(%r30)
 	ADDI	%r27, %r0, 99
-	BNE	%r9, %r27, BEQ_else.8912
+	BNE	%r9, %r27, BEQ_else.8871
 	ADDI	%r4, %r0, 1
 	ADDI	%r29, %r31, 0
 	ADDI	%r2, %r8, 0 # args
@@ -5926,8 +5769,8 @@ BEQ_else.8910:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8913
-BEQ_else.8912:
+	J	BEQ_cont.8872
+BEQ_else.8871:
 	SW	%r8, 16(%r30)
 	SW	%r7, 20(%r30)
 	SW	%r4, 24(%r30)
@@ -5945,9 +5788,9 @@ BEQ_else.8912:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8914
-	J	BEQ_cont.8915
-BEQ_else.8914:
+	BNE	%r1, %r27, BEQ_else.8873
+	J	BEQ_cont.8874
+BEQ_else.8873:
 	LW	%r1, 28(%r30) # restore1
 	LWC1	%f1, 0(%r1)
 	LW	%r1, 24(%r30) # restore1
@@ -5961,9 +5804,9 @@ BEQ_else.8914:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8916
-	J	BEQ_cont.8917
-BEQ_else.8916:
+	BNE	%r1, %r27, BEQ_else.8875
+	J	BEQ_cont.8876
+BEQ_else.8875:
 	ADDI	%r1, %r0, 1
 	LW	%r2, 16(%r30) # restore1
 	LW	%r3, 0(%r30) # restore1
@@ -5977,9 +5820,9 @@ BEQ_else.8916:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8917:
-BEQ_cont.8915:
-BEQ_cont.8913:
+BEQ_cont.8876:
+BEQ_cont.8874:
+BEQ_cont.8872:
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	LW	%r2, 4(%r30) # restore1
@@ -5991,7 +5834,7 @@ judge_intersection_fast.2776:
 	LW	%r2, 12(%r26)
 	LW	%r3, 8(%r26)
 	LW	%r4, 4(%r26)
-	LA	%r29, l.6367
+	LA	%r29, l.6343
 	LWC1	%f1, 0(%r29)
 	SWC1	%f1, 0(%r3)
 	ADDI	%r5, %r0, 0
@@ -6012,7 +5855,7 @@ judge_intersection_fast.2776:
 	ADDI	%r31, %r29, 0
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f2, 0(%r1)
-	LA	%r29, l.6347
+	LA	%r29, l.6323
 	LWC1	%f1, 0(%r29)
 	SWC1	%f2, 8(%r30)
 	ADDI	%r29, %r31, 0
@@ -6024,11 +5867,11 @@ judge_intersection_fast.2776:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8919
+	BNE	%r1, %r27, BEQ_else.8878
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.8919:
-	LA	%r29, l.6371
+BEQ_else.8878:
+	LA	%r29, l.6347
 	LWC1	%f2, 0(%r29)
 	LWC1	%f1, 8(%r30) # restore2
 	J	min_caml_fless
@@ -6237,7 +6080,7 @@ get_nvector_second.2782:
 	LW	%r29, 92(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8923
+	BNE	%r1, %r27, BEQ_else.8882
 	LW	%r1, 0(%r30) # restore1
 	LWC1	%f1, 64(%r30) # restore2
 	SWC1	%f1, 0(%r1)
@@ -6245,8 +6088,8 @@ get_nvector_second.2782:
 	SWC1	%f1, 4(%r1)
 	LWC1	%f1, 80(%r30) # restore2
 	SWC1	%f1, 8(%r1)
-	J	BEQ_cont.8924
-BEQ_else.8923:
+	J	BEQ_cont.8883
+BEQ_else.8882:
 	LW	%r1, 4(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 92(%r30) # save link register
@@ -6360,7 +6203,7 @@ BEQ_else.8923:
 	ADD.s	%f1, %f2, %f1
 	LW	%r1, 0(%r30) # restore1
 	SWC1	%f1, 8(%r1)
-BEQ_cont.8924:
+BEQ_cont.8883:
 	LW	%r2, 4(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	ADDI	%r1, %r2, 0 # args
@@ -6392,19 +6235,19 @@ get_nvector.2784:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8925
+	BNE	%r1, %r27, BEQ_else.8884
 	LW	%r1, 12(%r30) # restore1
 	LW	%r26, 16(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8925:
+BEQ_else.8884:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.8926
+	BNE	%r1, %r27, BEQ_else.8885
 	LW	%r1, 4(%r30) # restore1
 	LW	%r26, 8(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8926:
+BEQ_else.8885:
 	LW	%r1, 4(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
@@ -6461,7 +6304,7 @@ utexture.2787:
 	SWC1	%f1, 8(%r1)
 	LW	%r2, 12(%r30) # restore1
 	ADDI	%r27, %r0, 1
-	BNE	%r2, %r27, BEQ_else.8927
+	BNE	%r2, %r27, BEQ_else.8886
 	LW	%r2, 0(%r30) # restore1
 	LWC1	%f1, 0(%r2)
 	LW	%r3, 8(%r30) # restore1
@@ -6477,7 +6320,7 @@ utexture.2787:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 16(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6434
+	LA	%r29, l.6410
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f2, %f1, %f2
 	SWC1	%f1, 24(%r30)
@@ -6490,12 +6333,12 @@ utexture.2787:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6435
+	LA	%r29, l.6411
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	LWC1	%f2, 24(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6426
+	LA	%r29, l.6402
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 36(%r30) # save link register
@@ -6521,7 +6364,7 @@ utexture.2787:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 40(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6434
+	LA	%r29, l.6410
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f2, %f1, %f2
 	SWC1	%f1, 48(%r30)
@@ -6534,12 +6377,12 @@ utexture.2787:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6435
+	LA	%r29, l.6411
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	LWC1	%f2, 48(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6426
+	LA	%r29, l.6402
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 60(%r30) # save link register
@@ -6551,37 +6394,37 @@ utexture.2787:
 	ADDI	%r31, %r29, 0
 	LW	%r2, 32(%r30) # restore1
 	ADDI	%r27, %r0, 0
-	BNE	%r2, %r27, BEQ_else.8929
+	BNE	%r2, %r27, BEQ_else.8888
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8931
-	LA	%r29, l.6421
+	BNE	%r1, %r27, BEQ_else.8890
+	LA	%r29, l.6397
 	LWC1	%f1, 0(%r29)
-	J	BEQ_cont.8932
-BEQ_else.8931:
+	J	BEQ_cont.8891
+BEQ_else.8890:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8932:
-	J	BEQ_cont.8930
-BEQ_else.8929:
+BEQ_cont.8891:
+	J	BEQ_cont.8889
+BEQ_else.8888:
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8933
+	BNE	%r1, %r27, BEQ_else.8892
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-	J	BEQ_cont.8934
-BEQ_else.8933:
-	LA	%r29, l.6421
+	J	BEQ_cont.8893
+BEQ_else.8892:
+	LA	%r29, l.6397
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8934:
-BEQ_cont.8930:
+BEQ_cont.8893:
+BEQ_cont.8889:
 	LW	%r1, 4(%r30) # restore1
 	SWC1	%f1, 4(%r1)
 	JR	%r31
-BEQ_else.8927:
+BEQ_else.8886:
 	ADDI	%r27, %r0, 2
-	BNE	%r2, %r27, BEQ_else.8936
+	BNE	%r2, %r27, BEQ_else.8895
 	LW	%r2, 0(%r30) # restore1
 	LWC1	%f1, 4(%r2)
-	LA	%r29, l.6430
+	LA	%r29, l.6406
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	ADDI	%r29, %r31, 0
@@ -6600,12 +6443,12 @@ BEQ_else.8927:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6421
+	LA	%r29, l.6397
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f2, %f2, %f1
 	LW	%r1, 4(%r30) # restore1
 	SWC1	%f2, 0(%r1)
-	LA	%r29, l.6421
+	LA	%r29, l.6397
 	LWC1	%f2, 0(%r29)
 	LA	%r29, l.5994
 	LWC1	%f3, 0(%r29)
@@ -6613,9 +6456,9 @@ BEQ_else.8927:
 	MUL.s	%f1, %f2, %f1
 	SWC1	%f1, 4(%r1)
 	JR	%r31
-BEQ_else.8936:
+BEQ_else.8895:
 	ADDI	%r27, %r0, 3
-	BNE	%r2, %r27, BEQ_else.8938
+	BNE	%r2, %r27, BEQ_else.8897
 	LW	%r2, 0(%r30) # restore1
 	LWC1	%f1, 0(%r2)
 	LW	%r3, 8(%r30) # restore1
@@ -6678,7 +6521,7 @@ BEQ_else.8936:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6426
+	LA	%r29, l.6402
 	LWC1	%f2, 0(%r29)
 	DIV.s	%f1, %f1, %f2
 	SWC1	%f1, 96(%r30)
@@ -6692,7 +6535,7 @@ BEQ_else.8936:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 96(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6417
+	LA	%r29, l.6393
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	ADDI	%r29, %r31, 0
@@ -6711,7 +6554,7 @@ BEQ_else.8936:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 108(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6421
+	LA	%r29, l.6397
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f2, %f1, %f2
 	LW	%r1, 4(%r30) # restore1
@@ -6719,14 +6562,14 @@ BEQ_else.8936:
 	LA	%r29, l.5994
 	LWC1	%f2, 0(%r29)
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6421
+	LA	%r29, l.6397
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
 	SWC1	%f1, 8(%r1)
 	JR	%r31
-BEQ_else.8938:
+BEQ_else.8897:
 	ADDI	%r27, %r0, 4
-	BNE	%r2, %r27, BEQ_else.8940
+	BNE	%r2, %r27, BEQ_else.8899
 	LW	%r2, 0(%r30) # restore1
 	LWC1	%f1, 0(%r2)
 	LW	%r3, 8(%r30) # restore1
@@ -6833,7 +6676,7 @@ BEQ_else.8938:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 172(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6414
+	LA	%r29, l.6390
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 172(%r30) # save link register
@@ -6844,7 +6687,7 @@ BEQ_else.8938:
 	LW	%r29, 172(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8941
+	BNE	%r1, %r27, BEQ_else.8900
 	LWC1	%f1, 120(%r30) # restore2
 	LWC1	%f2, 144(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
@@ -6864,17 +6707,17 @@ BEQ_else.8938:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 172(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6416
+	LA	%r29, l.6392
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
-	LA	%r29, l.6417
+	LA	%r29, l.6393
 	LWC1	%f2, 0(%r29)
 	DIV.s	%f1, %f1, %f2
-	J	BEQ_cont.8942
-BEQ_else.8941:
-	LA	%r29, l.6415
+	J	BEQ_cont.8901
+BEQ_else.8900:
+	LA	%r29, l.6391
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8942:
+BEQ_cont.8901:
 	SWC1	%f1, 168(%r30)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 180(%r30) # save link register
@@ -6932,7 +6775,7 @@ BEQ_cont.8942:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 212(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6414
+	LA	%r29, l.6390
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 212(%r30) # save link register
@@ -6943,7 +6786,7 @@ BEQ_cont.8942:
 	LW	%r29, 212(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8943
+	BNE	%r1, %r27, BEQ_else.8902
 	LWC1	%f1, 160(%r30) # restore2
 	LWC1	%f2, 200(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
@@ -6963,17 +6806,17 @@ BEQ_cont.8942:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 212(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6416
+	LA	%r29, l.6392
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
-	LA	%r29, l.6417
+	LA	%r29, l.6393
 	LWC1	%f2, 0(%r29)
 	DIV.s	%f1, %f1, %f2
-	J	BEQ_cont.8944
-BEQ_else.8943:
-	LA	%r29, l.6415
+	J	BEQ_cont.8903
+BEQ_else.8902:
+	LA	%r29, l.6391
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8944:
+BEQ_cont.8903:
 	SWC1	%f1, 208(%r30)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 220(%r30) # save link register
@@ -6985,9 +6828,9 @@ BEQ_cont.8944:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 208(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6419
+	LA	%r29, l.6395
 	LWC1	%f2, 0(%r29)
-	LA	%r29, l.6420
+	LA	%r29, l.6396
 	LWC1	%f3, 0(%r29)
 	LWC1	%f4, 176(%r30) # restore2
 	SUB.s	%f3, %f3, %f4
@@ -7004,7 +6847,7 @@ BEQ_cont.8944:
 	ADDI	%r31, %r29, 0
 	LWC1	%f2, 224(%r30) # restore2
 	SUB.s	%f1, %f2, %f1
-	LA	%r29, l.6420
+	LA	%r29, l.6396
 	LWC1	%f2, 0(%r29)
 	LWC1	%f3, 216(%r30) # restore2
 	SUB.s	%f2, %f2, %f3
@@ -7030,23 +6873,23 @@ BEQ_cont.8944:
 	LW	%r29, 252(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8945
+	BNE	%r1, %r27, BEQ_else.8904
 	LWC1	%f1, 240(%r30) # restore2
-	J	BEQ_cont.8946
-BEQ_else.8945:
+	J	BEQ_cont.8905
+BEQ_else.8904:
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-BEQ_cont.8946:
-	LA	%r29, l.6421
+BEQ_cont.8905:
+	LA	%r29, l.6397
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f2, %f1
-	LA	%r29, l.6422
+	LA	%r29, l.6398
 	LWC1	%f2, 0(%r29)
 	DIV.s	%f1, %f1, %f2
 	LW	%r1, 4(%r30) # restore1
 	SWC1	%f1, 8(%r1)
 	JR	%r31
-BEQ_else.8940:
+BEQ_else.8899:
 	JR	%r31
 add_light.2790:
 	LW	%r1, 8(%r26)
@@ -7065,9 +6908,9 @@ add_light.2790:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8949
-	J	BEQ_cont.8950
-BEQ_else.8949:
+	BNE	%r1, %r27, BEQ_else.8908
+	J	BEQ_cont.8909
+BEQ_else.8908:
 	LWC1	%f1, 16(%r30) # restore2
 	LW	%r1, 28(%r30) # restore1
 	LW	%r2, 24(%r30) # restore1
@@ -7079,7 +6922,7 @@ BEQ_else.8949:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8950:
+BEQ_cont.8909:
 	LWC1	%f1, 8(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 36(%r30) # save link register
@@ -7090,9 +6933,9 @@ BEQ_cont.8950:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8951
+	BNE	%r1, %r27, BEQ_else.8910
 	JR	%r31
-BEQ_else.8951:
+BEQ_else.8910:
 	LWC1	%f1, 8(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 36(%r30) # save link register
@@ -7134,7 +6977,7 @@ trace_reflections.2794:
 	LW	%r10, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.8954
+	BNE	%r27, %r0, BEQ_else.8913
 	SLL	%r11, %r1, 2
 	ADD	%r29, %r4, %r11
 	LW	%r4, 0(%r29)
@@ -7172,9 +7015,9 @@ trace_reflections.2794:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8955
-	J	BEQ_cont.8956
-BEQ_else.8955:
+	BNE	%r1, %r27, BEQ_else.8914
+	J	BEQ_cont.8915
+BEQ_else.8914:
 	LW	%r1, 52(%r30) # restore1
 	LW	%r1, 0(%r1)
 	SLL	%r1, %r1, 2
@@ -7193,7 +7036,7 @@ BEQ_else.8955:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 64(%r30) # restore1
-	BNE	%r2, %r1, BEQ_else.8957
+	BNE	%r2, %r1, BEQ_else.8916
 	ADDI	%r1, %r0, 0
 	LW	%r2, 40(%r30) # restore1
 	LW	%r2, 0(%r2)
@@ -7208,7 +7051,7 @@ BEQ_else.8955:
 	LW	%r29, 68(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8959
+	BNE	%r1, %r27, BEQ_else.8918
 	LW	%r1, 60(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 68(%r30) # save link register
@@ -7277,13 +7120,13 @@ BEQ_else.8955:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 100(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8960
-BEQ_else.8959:
-BEQ_cont.8960:
-	J	BEQ_cont.8958
-BEQ_else.8957:
-BEQ_cont.8958:
-BEQ_cont.8956:
+	J	BEQ_cont.8919
+BEQ_else.8918:
+BEQ_cont.8919:
+	J	BEQ_cont.8917
+BEQ_else.8916:
+BEQ_cont.8917:
+BEQ_cont.8915:
 	LW	%r1, 4(%r30) # restore1
 	ADDI	%r1, %r1, -1
 	LWC1	%f1, 24(%r30) # restore2
@@ -7292,7 +7135,7 @@ BEQ_cont.8956:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8954:
+BEQ_else.8913:
 	JR	%r31
 trace_ray.2799:
 	LW	%r4, 80(%r26)
@@ -7317,7 +7160,7 @@ trace_ray.2799:
 	LW	%r23, 4(%r26)
 	ADDI	%r27, %r0, 4
 	SLT	%r27, %r27, %r1
-	BNE	%r27, %r0, BEQ_else.8963
+	BNE	%r27, %r0, BEQ_else.8922
 	SW	%r26, 0(%r30)
 	SWC1	%f2, 8(%r30)
 	SW	%r6, 16(%r30)
@@ -7367,19 +7210,17 @@ trace_ray.2799:
 	LW	%r29, 124(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8966
-	ADDI	%r1, %r0, 1
-	SUB	%r29, %r0, %r1
-	ADDI	%r1, %r29, 0
+	BNE	%r1, %r27, BEQ_else.8925
+	ADDI	%r1, %r0, -1
 	LW	%r2, 108(%r30) # restore1
 	SLL	%r3, %r2, 2
 	LW	%r4, 120(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	SW	%r1, 0(%r29)
 	ADDI	%r27, %r0, 0
-	BNE	%r2, %r27, BEQ_else.8967
+	BNE	%r2, %r27, BEQ_else.8926
 	JR	%r31
-BEQ_else.8967:
+BEQ_else.8926:
 	LW	%r1, 112(%r30) # restore1
 	LW	%r2, 104(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -7408,9 +7249,9 @@ BEQ_else.8967:
 	LW	%r29, 140(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8970
+	BNE	%r1, %r27, BEQ_else.8929
 	JR	%r31
-BEQ_else.8970:
+BEQ_else.8929:
 	LWC1	%f1, 128(%r30) # restore2
 	ADDI	%r29, %r31, 0
 	SW	%r29, 140(%r30) # save link register
@@ -7438,7 +7279,7 @@ BEQ_else.8970:
 	ADD.s	%f1, %f2, %f1
 	SWC1	%f1, 8(%r1)
 	JR	%r31
-BEQ_else.8966:
+BEQ_else.8925:
 	LW	%r1, 80(%r30) # restore1
 	LW	%r1, 0(%r1)
 	SLL	%r2, %r1, 2
@@ -7557,7 +7398,7 @@ BEQ_else.8966:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 164(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6420
+	LA	%r29, l.6396
 	LWC1	%f2, 0(%r29)
 	ADDI	%r29, %r31, 0
 	SW	%r29, 164(%r30) # save link register
@@ -7568,7 +7409,7 @@ BEQ_else.8966:
 	LW	%r29, 164(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8974
+	BNE	%r1, %r27, BEQ_else.8933
 	ADDI	%r1, %r0, 1
 	LW	%r2, 108(%r30) # restore1
 	SLL	%r3, %r2, 2
@@ -7605,11 +7446,8 @@ BEQ_else.8966:
 	LW	%r3, 164(%r30) # restore1
 	ADD	%r29, %r3, %r2
 	LW	%r2, 0(%r29)
-	LA	%r29, l.5994
+	LA	%r29, l.6433
 	LWC1	%f1, 0(%r29)
-	LA	%r29, l.6457
-	LWC1	%f2, 0(%r29)
-	DIV.s	%f1, %f1, %f2
 	LWC1	%f2, 152(%r30) # restore2
 	MUL.s	%f1, %f1, %f2
 	ADDI	%r29, %r31, 0
@@ -7644,16 +7482,16 @@ BEQ_else.8966:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 172(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8975
-BEQ_else.8974:
+	J	BEQ_cont.8934
+BEQ_else.8933:
 	ADDI	%r1, %r0, 0
 	LW	%r2, 108(%r30) # restore1
 	SLL	%r3, %r2, 2
 	LW	%r4, 160(%r30) # restore1
 	ADD	%r29, %r4, %r3
 	SW	%r1, 0(%r29)
-BEQ_cont.8975:
-	LA	%r29, l.6459
+BEQ_cont.8934:
+	LA	%r29, l.6435
 	LWC1	%f1, 0(%r29)
 	LW	%r1, 112(%r30) # restore1
 	LW	%r2, 44(%r30) # restore1
@@ -7704,7 +7542,7 @@ BEQ_cont.8975:
 	LW	%r29, 188(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8976
+	BNE	%r1, %r27, BEQ_else.8935
 	LW	%r1, 44(%r30) # restore1
 	LW	%r2, 104(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -7757,9 +7595,9 @@ BEQ_cont.8975:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 196(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8977
-BEQ_else.8976:
-BEQ_cont.8977:
+	J	BEQ_cont.8936
+BEQ_else.8935:
+BEQ_cont.8936:
 	LW	%r1, 64(%r30) # restore1
 	LW	%r26, 28(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -7787,7 +7625,7 @@ BEQ_cont.8977:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 196(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6462
+	LA	%r29, l.6438
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 96(%r30) # restore2
 	ADDI	%r29, %r31, 0
@@ -7799,27 +7637,25 @@ BEQ_cont.8977:
 	LW	%r29, 196(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8978
+	BNE	%r1, %r27, BEQ_else.8937
 	JR	%r31
-BEQ_else.8978:
+BEQ_else.8937:
 	LW	%r1, 108(%r30) # restore1
 	ADDI	%r27, %r0, 4
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.8980
-	J	BEQ_cont.8981
-BEQ_else.8980:
+	BNE	%r27, %r0, BEQ_else.8939
+	J	BEQ_cont.8940
+BEQ_else.8939:
 	ADDI	%r2, %r1, 1
-	ADDI	%r3, %r0, 1
-	SUB	%r29, %r0, %r3
-	ADDI	%r3, %r29, 0
+	ADDI	%r3, %r0, -1
 	SLL	%r2, %r2, 2
 	LW	%r4, 120(%r30) # restore1
 	ADD	%r29, %r4, %r2
 	SW	%r3, 0(%r29)
-BEQ_cont.8981:
+BEQ_cont.8940:
 	LW	%r2, 144(%r30) # restore1
 	ADDI	%r27, %r0, 2
-	BNE	%r2, %r27, BEQ_else.8982
+	BNE	%r2, %r27, BEQ_else.8941
 	LA	%r29, l.5994
 	LWC1	%f1, 0(%r29)
 	LW	%r2, 140(%r30) # restore1
@@ -7848,9 +7684,9 @@ BEQ_cont.8981:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8982:
+BEQ_else.8941:
 	JR	%r31
-BEQ_else.8963:
+BEQ_else.8922:
 	JR	%r31
 trace_diffuse_ray.2805:
 	LW	%r2, 48(%r26)
@@ -7889,9 +7725,9 @@ trace_diffuse_ray.2805:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8985
+	BNE	%r1, %r27, BEQ_else.8944
 	JR	%r31
-BEQ_else.8985:
+BEQ_else.8944:
 	LW	%r1, 52(%r30) # restore1
 	LW	%r1, 0(%r1)
 	SLL	%r1, %r1, 2
@@ -7947,7 +7783,7 @@ BEQ_else.8985:
 	LW	%r29, 60(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8987
+	BNE	%r1, %r27, BEQ_else.8946
 	LW	%r1, 20(%r30) # restore1
 	LW	%r2, 16(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -7976,13 +7812,13 @@ BEQ_else.8985:
 	LW	%r29, 76(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8989
+	BNE	%r1, %r27, BEQ_else.8948
 	LA	%r29, l.5993
 	LWC1	%f1, 0(%r29)
-	J	BEQ_cont.8990
-BEQ_else.8989:
+	J	BEQ_cont.8949
+BEQ_else.8948:
 	LWC1	%f1, 64(%r30) # restore2
-BEQ_cont.8990:
+BEQ_cont.8949:
 	LWC1	%f2, 8(%r30) # restore2
 	MUL.s	%f1, %f2, %f1
 	LW	%r1, 56(%r30) # restore1
@@ -8000,13 +7836,13 @@ BEQ_cont.8990:
 	LW	%r1, 4(%r30) # restore1
 	LW	%r2, 0(%r30) # restore1
 	J	vecaccum.2501
-BEQ_else.8987:
+BEQ_else.8946:
 	JR	%r31
 iter_trace_diffuse_rays.2808:
 	LW	%r5, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r4, %r27
-	BNE	%r27, %r0, BEQ_else.8992
+	BNE	%r27, %r0, BEQ_else.8951
 	SLL	%r6, %r4, 2
 	ADD	%r29, %r1, %r6
 	LW	%r6, 0(%r29)
@@ -8044,13 +7880,13 @@ iter_trace_diffuse_rays.2808:
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8993
+	BNE	%r1, %r27, BEQ_else.8952
 	LW	%r1, 16(%r30) # restore1
 	SLL	%r2, %r1, 2
 	LW	%r3, 12(%r30) # restore1
 	ADD	%r29, %r3, %r2
 	LW	%r2, 0(%r29)
-	LA	%r29, l.6480
+	LA	%r29, l.6456
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 24(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
@@ -8065,15 +7901,15 @@ iter_trace_diffuse_rays.2808:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.8994
-BEQ_else.8993:
+	J	BEQ_cont.8953
+BEQ_else.8952:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r2, %r1, 1
 	SLL	%r2, %r2, 2
 	LW	%r3, 12(%r30) # restore1
 	ADD	%r29, %r3, %r2
 	LW	%r2, 0(%r29)
-	LA	%r29, l.6478
+	LA	%r29, l.6454
 	LWC1	%f1, 0(%r29)
 	LWC1	%f2, 24(%r30) # restore2
 	DIV.s	%f1, %f2, %f1
@@ -8088,7 +7924,7 @@ BEQ_else.8993:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8994:
+BEQ_cont.8953:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r4, %r1, -2
 	LW	%r1, 12(%r30) # restore1
@@ -8097,7 +7933,7 @@ BEQ_cont.8994:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.8992:
+BEQ_else.8951:
 	JR	%r31
 trace_diffuse_rays.2813:
 	LW	%r4, 8(%r26)
@@ -8133,9 +7969,9 @@ trace_diffuse_ray_80percent.2817:
 	SW	%r5, 12(%r30)
 	SW	%r1, 16(%r30)
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.8996
-	J	BEQ_cont.8997
-BEQ_else.8996:
+	BNE	%r1, %r27, BEQ_else.8955
+	J	BEQ_cont.8956
+BEQ_else.8955:
 	LW	%r6, 0(%r5)
 	ADDI	%r29, %r31, 0
 	ADDI	%r1, %r6, 0 # args
@@ -8148,12 +7984,12 @@ BEQ_else.8996:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8997:
+BEQ_cont.8956:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.8998
-	J	BEQ_cont.8999
-BEQ_else.8998:
+	BNE	%r1, %r27, BEQ_else.8957
+	J	BEQ_cont.8958
+BEQ_else.8957:
 	LW	%r2, 12(%r30) # restore1
 	LW	%r3, 4(%r2)
 	LW	%r4, 4(%r30) # restore1
@@ -8171,12 +8007,12 @@ BEQ_else.8998:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.8999:
+BEQ_cont.8958:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.9000
-	J	BEQ_cont.9001
-BEQ_else.9000:
+	BNE	%r1, %r27, BEQ_else.8959
+	J	BEQ_cont.8960
+BEQ_else.8959:
 	LW	%r2, 12(%r30) # restore1
 	LW	%r3, 8(%r2)
 	LW	%r4, 4(%r30) # restore1
@@ -8194,12 +8030,12 @@ BEQ_else.9000:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9001:
+BEQ_cont.8960:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r27, %r0, 3
-	BNE	%r1, %r27, BEQ_else.9002
-	J	BEQ_cont.9003
-BEQ_else.9002:
+	BNE	%r1, %r27, BEQ_else.8961
+	J	BEQ_cont.8962
+BEQ_else.8961:
 	LW	%r2, 12(%r30) # restore1
 	LW	%r3, 12(%r2)
 	LW	%r4, 4(%r30) # restore1
@@ -8217,12 +8053,12 @@ BEQ_else.9002:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9003:
+BEQ_cont.8962:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r27, %r0, 4
-	BNE	%r1, %r27, BEQ_else.9004
+	BNE	%r1, %r27, BEQ_else.8963
 	JR	%r31
-BEQ_else.9004:
+BEQ_else.8963:
 	LW	%r1, 12(%r30) # restore1
 	LW	%r1, 16(%r1)
 	LW	%r2, 4(%r30) # restore1
@@ -8519,7 +8355,7 @@ do_without_neighbors.2830:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 4
 	SLT	%r27, %r27, %r2
-	BNE	%r27, %r0, BEQ_else.9006
+	BNE	%r27, %r0, BEQ_else.8965
 	SW	%r26, 0(%r30)
 	SW	%r3, 4(%r30)
 	SW	%r1, 8(%r30)
@@ -8538,7 +8374,7 @@ do_without_neighbors.2830:
 	LW	%r1, 0(%r29)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9007
+	BNE	%r27, %r0, BEQ_else.8966
 	LW	%r1, 8(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 20(%r30) # save link register
@@ -8553,9 +8389,9 @@ do_without_neighbors.2830:
 	ADD	%r29, %r1, %r3
 	LW	%r1, 0(%r29)
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9008
-	J	BEQ_cont.9009
-BEQ_else.9008:
+	BNE	%r1, %r27, BEQ_else.8967
+	J	BEQ_cont.8968
+BEQ_else.8967:
 	LW	%r1, 8(%r30) # restore1
 	LW	%r26, 4(%r30) # restore1
 	ADDI	%r29, %r31, 0
@@ -8567,45 +8403,45 @@ BEQ_else.9008:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9009:
+BEQ_cont.8968:
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r2, %r1, 1
 	LW	%r1, 8(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9007:
+BEQ_else.8966:
 	JR	%r31
-BEQ_else.9006:
+BEQ_else.8965:
 	JR	%r31
 neighbors_exist.2833:
 	LW	%r3, 4(%r26)
 	LW	%r4, 4(%r3)
 	ADDI	%r5, %r2, 1
 	SLT	%r27, %r5, %r4
-	BNE	%r27, %r0, BEQ_else.9012
+	BNE	%r27, %r0, BEQ_else.8971
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9012:
+BEQ_else.8971:
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r27, %r2
-	BNE	%r27, %r0, BEQ_else.9013
+	BNE	%r27, %r0, BEQ_else.8972
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9013:
+BEQ_else.8972:
 	LW	%r2, 0(%r3)
 	ADDI	%r3, %r1, 1
 	SLT	%r27, %r3, %r2
-	BNE	%r27, %r0, BEQ_else.9014
+	BNE	%r27, %r0, BEQ_else.8973
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9014:
+BEQ_else.8973:
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r27, %r1
-	BNE	%r27, %r0, BEQ_else.9015
+	BNE	%r27, %r0, BEQ_else.8974
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9015:
+BEQ_else.8974:
 	ADDI	%r1, %r0, 1
 	JR	%r31
 get_surface_id.2837:
@@ -8660,7 +8496,7 @@ neighbors_are_available.2840:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 20(%r30) # restore1
-	BNE	%r1, %r2, BEQ_else.9016
+	BNE	%r1, %r2, BEQ_else.8975
 	LW	%r1, 16(%r30) # restore1
 	SLL	%r3, %r1, 2
 	LW	%r4, 4(%r30) # restore1
@@ -8678,7 +8514,7 @@ neighbors_are_available.2840:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 20(%r30) # restore1
-	BNE	%r1, %r2, BEQ_else.9017
+	BNE	%r1, %r2, BEQ_else.8976
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r3, %r1, -1
 	SLL	%r3, %r3, 2
@@ -8697,7 +8533,7 @@ neighbors_are_available.2840:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 20(%r30) # restore1
-	BNE	%r1, %r2, BEQ_else.9018
+	BNE	%r1, %r2, BEQ_else.8977
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r1, %r1, 1
 	SLL	%r1, %r1, 2
@@ -8715,19 +8551,19 @@ neighbors_are_available.2840:
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
 	LW	%r2, 20(%r30) # restore1
-	BNE	%r1, %r2, BEQ_else.9019
+	BNE	%r1, %r2, BEQ_else.8978
 	ADDI	%r1, %r0, 1
 	JR	%r31
-BEQ_else.9019:
+BEQ_else.8978:
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9018:
+BEQ_else.8977:
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9017:
+BEQ_else.8976:
 	ADDI	%r1, %r0, 0
 	JR	%r31
-BEQ_else.9016:
+BEQ_else.8975:
 	ADDI	%r1, %r0, 0
 	JR	%r31
 try_exploit_neighbors.2846:
@@ -8738,7 +8574,7 @@ try_exploit_neighbors.2846:
 	LW	%r9, 0(%r29)
 	ADDI	%r27, %r0, 4
 	SLT	%r27, %r27, %r6
-	BNE	%r27, %r0, BEQ_else.9020
+	BNE	%r27, %r0, BEQ_else.8979
 	SW	%r2, 0(%r30)
 	SW	%r26, 4(%r30)
 	SW	%r8, 8(%r30)
@@ -8761,7 +8597,7 @@ try_exploit_neighbors.2846:
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9021
+	BNE	%r27, %r0, BEQ_else.8980
 	LW	%r1, 36(%r30) # restore1
 	LW	%r2, 32(%r30) # restore1
 	LW	%r3, 28(%r30) # restore1
@@ -8776,7 +8612,7 @@ try_exploit_neighbors.2846:
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9022
+	BNE	%r1, %r27, BEQ_else.8981
 	LW	%r1, 36(%r30) # restore1
 	SLL	%r1, %r1, 2
 	LW	%r2, 28(%r30) # restore1
@@ -8786,7 +8622,7 @@ try_exploit_neighbors.2846:
 	LW	%r26, 16(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9022:
+BEQ_else.8981:
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 44(%r30) # save link register
@@ -8801,9 +8637,9 @@ BEQ_else.9022:
 	ADD	%r29, %r1, %r2
 	LW	%r1, 0(%r29)
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9023
-	J	BEQ_cont.9024
-BEQ_else.9023:
+	BNE	%r1, %r27, BEQ_else.8982
+	J	BEQ_cont.8983
+BEQ_else.8982:
 	LW	%r1, 36(%r30) # restore1
 	LW	%r2, 32(%r30) # restore1
 	LW	%r3, 28(%r30) # restore1
@@ -8818,7 +8654,7 @@ BEQ_else.9023:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9024:
+BEQ_cont.8983:
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r6, %r1, 1
 	LW	%r1, 36(%r30) # restore1
@@ -8829,9 +8665,9 @@ BEQ_cont.9024:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9021:
+BEQ_else.8980:
 	JR	%r31
-BEQ_else.9020:
+BEQ_else.8979:
 	JR	%r31
 write_ppm_header.2853:
 	LW	%r1, 4(%r26)
@@ -8846,8 +8682,7 @@ write_ppm_header.2853:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 4(%r30)
 	ADDI	%r31, %r29, 0
-	ADDI	%r1, %r0, 48
-	ADDI	%r1, %r1, 3
+	ADDI	%r1, %r0, 51
 	ADDI	%r29, %r31, 0
 	SW	%r29, 4(%r30) # save link register
 	ADDI	%r30, %r30, 8
@@ -8926,18 +8761,18 @@ write_rgb_element.2855:
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 255
 	SLT	%r27, %r27, %r1
-	BNE	%r27, %r0, BEQ_else.9027
+	BNE	%r27, %r0, BEQ_else.8986
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9029
-	J	BEQ_cont.9030
-BEQ_else.9029:
+	BNE	%r27, %r0, BEQ_else.8988
+	J	BEQ_cont.8989
+BEQ_else.8988:
 	ADDI	%r1, %r0, 0
-BEQ_cont.9030:
-	J	BEQ_cont.9028
-BEQ_else.9027:
+BEQ_cont.8989:
+	J	BEQ_cont.8987
+BEQ_else.8986:
 	ADDI	%r1, %r0, 255
-BEQ_cont.9028:
+BEQ_cont.8987:
 	J	min_caml_print_int
 write_rgb.2857:
 	LW	%r1, 4(%r26)
@@ -8997,7 +8832,7 @@ pretrace_diffuse_rays.2859:
 	LW	%r5, 4(%r26)
 	ADDI	%r27, %r0, 4
 	SLT	%r27, %r27, %r2
-	BNE	%r27, %r0, BEQ_else.9031
+	BNE	%r27, %r0, BEQ_else.8990
 	SW	%r26, 0(%r30)
 	SW	%r3, 4(%r30)
 	SW	%r4, 8(%r30)
@@ -9014,7 +8849,7 @@ pretrace_diffuse_rays.2859:
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9032
+	BNE	%r27, %r0, BEQ_else.8991
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 28(%r30) # save link register
@@ -9029,9 +8864,9 @@ pretrace_diffuse_rays.2859:
 	ADD	%r29, %r1, %r3
 	LW	%r1, 0(%r29)
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9033
-	J	BEQ_cont.9034
-BEQ_else.9033:
+	BNE	%r1, %r27, BEQ_else.8992
+	J	BEQ_cont.8993
+BEQ_else.8992:
 	LW	%r1, 20(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 28(%r30) # save link register
@@ -9121,16 +8956,16 @@ BEQ_else.9033:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 36(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9034:
+BEQ_cont.8993:
 	LW	%r1, 16(%r30) # restore1
 	ADDI	%r2, %r1, 1
 	LW	%r1, 20(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9032:
+BEQ_else.8991:
 	JR	%r31
-BEQ_else.9031:
+BEQ_else.8990:
 	JR	%r31
 pretrace_pixels.2862:
 	LW	%r4, 36(%r26)
@@ -9144,7 +8979,7 @@ pretrace_pixels.2862:
 	LW	%r12, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.9037
+	BNE	%r27, %r0, BEQ_else.8996
 	LWC1	%f4, 0(%r8)
 	LW	%r8, 0(%r12)
 	SUB	%r8, %r2, %r8
@@ -9324,7 +9159,7 @@ pretrace_pixels.2862:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9037:
+BEQ_else.8996:
 	JR	%r31
 pretrace_line.2869:
 	LW	%r4, 24(%r26)
@@ -9389,9 +9224,9 @@ scan_pixel.2873:
 	LW	%r11, 4(%r26)
 	LW	%r10, 0(%r10)
 	SLT	%r27, %r1, %r10
-	BNE	%r27, %r0, BEQ_else.9042
+	BNE	%r27, %r0, BEQ_else.9001
 	JR	%r31
-BEQ_else.9042:
+BEQ_else.9001:
 	SLL	%r10, %r1, 2
 	ADD	%r29, %r4, %r10
 	LW	%r10, 0(%r29)
@@ -9439,7 +9274,7 @@ BEQ_else.9042:
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9044
+	BNE	%r1, %r27, BEQ_else.9003
 	LW	%r1, 32(%r30) # restore1
 	SLL	%r2, %r1, 2
 	LW	%r3, 20(%r30) # restore1
@@ -9458,8 +9293,8 @@ BEQ_else.9042:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
-	J	BEQ_cont.9045
-BEQ_else.9044:
+	J	BEQ_cont.9004
+BEQ_else.9003:
 	ADDI	%r6, %r0, 0
 	LW	%r1, 32(%r30) # restore1
 	LW	%r2, 28(%r30) # restore1
@@ -9476,7 +9311,7 @@ BEQ_else.9044:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9045:
+BEQ_cont.9004:
 	LW	%r26, 4(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 44(%r30)
@@ -9502,9 +9337,9 @@ scan_line.2879:
 	LW	%r8, 4(%r26)
 	LW	%r9, 4(%r8)
 	SLT	%r27, %r1, %r9
-	BNE	%r27, %r0, BEQ_else.9046
+	BNE	%r27, %r0, BEQ_else.9005
 	JR	%r31
-BEQ_else.9046:
+BEQ_else.9005:
 	LW	%r8, 4(%r8)
 	ADDI	%r8, %r8, -1
 	SW	%r26, 0(%r30)
@@ -9514,10 +9349,10 @@ BEQ_else.9046:
 	SW	%r2, 16(%r30)
 	SW	%r1, 20(%r30)
 	SW	%r6, 24(%r30)
-	SLT	%r27, %r8, %r1
-	BNE	%r27, %r0, BEQ_else.9048
-	J	BEQ_cont.9049
-BEQ_else.9048:
+	SLT	%r27, %r1, %r8
+	BNE	%r27, %r0, BEQ_else.9007
+	J	BEQ_cont.9008
+BEQ_else.9007:
 	ADDI	%r8, %r1, 1
 	ADDI	%r29, %r31, 0
 	ADDI	%r3, %r5, 0 # args
@@ -9532,7 +9367,7 @@ BEQ_else.9048:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
-BEQ_cont.9049:
+BEQ_cont.9008:
 	ADDI	%r1, %r0, 0
 	LW	%r2, 20(%r30) # restore1
 	LW	%r3, 16(%r30) # restore1
@@ -9757,7 +9592,7 @@ create_pixel.2887:
 init_line_elements.2889:
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.9050
+	BNE	%r27, %r0, BEQ_else.9009
 	SW	%r1, 0(%r30)
 	SW	%r2, 4(%r30)
 	ADDI	%r29, %r31, 0
@@ -9776,7 +9611,7 @@ init_line_elements.2889:
 	ADDI	%r2, %r2, -1
 	ADDI	%r1, %r4, 0 # args
 	J	init_line_elements.2889
-BEQ_else.9050:
+BEQ_else.9009:
 	JR	%r31
 create_pixelline.2892:
 	LW	%r1, 4(%r26)
@@ -9831,7 +9666,7 @@ tan.2894:
 	JR	%r31
 adjust_position.2896:
 	MUL.s	%f1, %f1, %f1
-	LA	%r29, l.6462
+	LA	%r29, l.6438
 	LWC1	%f3, 0(%r29)
 	ADD.s	%f1, %f1, %f3
 	SWC1	%f2, 0(%r30)
@@ -9873,7 +9708,7 @@ calc_dirvec.2899:
 	LW	%r4, 4(%r26)
 	ADDI	%r27, %r0, 5
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9051
+	BNE	%r27, %r0, BEQ_else.9010
 	SW	%r3, 0(%r30)
 	SW	%r4, 4(%r30)
 	SW	%r2, 8(%r30)
@@ -10171,7 +10006,7 @@ calc_dirvec.2899:
 	LWC1	%f3, 56(%r30) # restore2
 	LW	%r1, 128(%r30) # restore1
 	J	vecset.2472
-BEQ_else.9051:
+BEQ_else.9010:
 	SWC1	%f3, 136(%r30)
 	SW	%r3, 0(%r30)
 	SW	%r2, 8(%r30)
@@ -10215,7 +10050,7 @@ calc_dirvecs.2907:
 	LW	%r4, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9059
+	BNE	%r27, %r0, BEQ_else.9018
 	SW	%r26, 0(%r30)
 	SW	%r1, 4(%r30)
 	SWC1	%f1, 8(%r30)
@@ -10230,10 +10065,10 @@ calc_dirvecs.2907:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6574
+	LA	%r29, l.6550
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
-	LA	%r29, l.6575
+	LA	%r29, l.6551
 	LWC1	%f2, 0(%r29)
 	SUB.s	%f3, %f1, %f2
 	ADDI	%r1, %r0, 0
@@ -10263,10 +10098,10 @@ calc_dirvecs.2907:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 28(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6574
+	LA	%r29, l.6550
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
-	LA	%r29, l.6462
+	LA	%r29, l.6438
 	LWC1	%f2, 0(%r29)
 	ADD.s	%f3, %f1, %f2
 	ADDI	%r1, %r0, 0
@@ -10310,13 +10145,13 @@ calc_dirvecs.2907:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9059:
+BEQ_else.9018:
 	JR	%r31
 calc_dirvec_rows.2912:
 	LW	%r4, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9061
+	BNE	%r27, %r0, BEQ_else.9020
 	SW	%r26, 0(%r30)
 	SW	%r1, 4(%r30)
 	SW	%r3, 8(%r30)
@@ -10330,10 +10165,10 @@ calc_dirvec_rows.2912:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6574
+	LA	%r29, l.6550
 	LWC1	%f2, 0(%r29)
 	MUL.s	%f1, %f1, %f2
-	LA	%r29, l.6575
+	LA	%r29, l.6551
 	LWC1	%f2, 0(%r29)
 	SUB.s	%f1, %f1, %f2
 	ADDI	%r1, %r0, 4
@@ -10370,7 +10205,7 @@ calc_dirvec_rows.2912:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9061:
+BEQ_else.9020:
 	JR	%r31
 create_dirvec.2916:
 	LW	%r1, 4(%r26)
@@ -10410,7 +10245,7 @@ create_dirvec_elements.2918:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.9063
+	BNE	%r27, %r0, BEQ_else.9022
 	SW	%r26, 0(%r30)
 	SW	%r1, 4(%r30)
 	SW	%r2, 8(%r30)
@@ -10434,7 +10269,7 @@ create_dirvec_elements.2918:
 	ADDI	%r1, %r4, 0 # args
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9063:
+BEQ_else.9022:
 	JR	%r31
 create_dirvecs.2921:
 	LW	%r2, 12(%r26)
@@ -10442,7 +10277,7 @@ create_dirvecs.2921:
 	LW	%r4, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9065
+	BNE	%r27, %r0, BEQ_else.9024
 	ADDI	%r5, %r0, 120
 	SW	%r26, 0(%r30)
 	SW	%r3, 4(%r30)
@@ -10494,13 +10329,13 @@ create_dirvecs.2921:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9065:
+BEQ_else.9024:
 	JR	%r31
 init_dirvec_constants.2923:
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r2, %r27
-	BNE	%r27, %r0, BEQ_else.9067
+	BNE	%r27, %r0, BEQ_else.9026
 	SLL	%r4, %r2, 2
 	ADD	%r29, %r1, %r4
 	LW	%r4, 0(%r29)
@@ -10524,14 +10359,14 @@ init_dirvec_constants.2923:
 	LW	%r26, 4(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9067:
+BEQ_else.9026:
 	JR	%r31
 init_vecset_constants.2926:
 	LW	%r2, 8(%r26)
 	LW	%r3, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9069
+	BNE	%r27, %r0, BEQ_else.9028
 	SLL	%r4, %r1, 2
 	ADD	%r29, %r3, %r4
 	LW	%r3, 0(%r29)
@@ -10555,7 +10390,7 @@ init_vecset_constants.2926:
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9069:
+BEQ_else.9028:
 	JR	%r31
 init_dirvecs.2928:
 	LW	%r1, 12(%r26)
@@ -10833,7 +10668,7 @@ setup_surface_reflection.2940:
 	SUB	%r30, %r30, %r29
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f2, 0(%r29)
 	LW	%r1, 20(%r30) # restore1
 	SWC1	%f1, 40(%r30)
@@ -10853,7 +10688,7 @@ setup_surface_reflection.2940:
 	LW	%r1, 16(%r30) # restore1
 	LWC1	%f3, 0(%r1)
 	SUB.s	%f1, %f1, %f3
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f3, 0(%r29)
 	LW	%r2, 20(%r30) # restore1
 	SWC1	%f1, 56(%r30)
@@ -10874,7 +10709,7 @@ setup_surface_reflection.2940:
 	LW	%r1, 16(%r30) # restore1
 	LWC1	%f3, 4(%r1)
 	SUB.s	%f1, %f1, %f3
-	LA	%r29, l.6142
+	LA	%r29, l.6118
 	LWC1	%f3, 0(%r29)
 	LW	%r2, 20(%r30) # restore1
 	SWC1	%f1, 72(%r30)
@@ -10921,7 +10756,7 @@ setup_reflections.2943:
 	LW	%r4, 4(%r26)
 	ADDI	%r27, %r0, 0
 	SLT	%r27, %r1, %r27
-	BNE	%r27, %r0, BEQ_else.9077
+	BNE	%r27, %r0, BEQ_else.9036
 	SLL	%r5, %r1, 2
 	ADD	%r29, %r4, %r5
 	LW	%r4, 0(%r29)
@@ -10939,7 +10774,7 @@ setup_reflections.2943:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.9078
+	BNE	%r1, %r27, BEQ_else.9037
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 20(%r30) # save link register
@@ -10960,9 +10795,9 @@ setup_reflections.2943:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 0
-	BNE	%r1, %r27, BEQ_else.9079
+	BNE	%r1, %r27, BEQ_else.9038
 	JR	%r31
-BEQ_else.9079:
+BEQ_else.9038:
 	LW	%r1, 12(%r30) # restore1
 	ADDI	%r29, %r31, 0
 	SW	%r29, 20(%r30) # save link register
@@ -10973,25 +10808,25 @@ BEQ_else.9079:
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r27, %r0, 1
-	BNE	%r1, %r27, BEQ_else.9081
+	BNE	%r1, %r27, BEQ_else.9040
 	LW	%r1, 4(%r30) # restore1
 	LW	%r2, 12(%r30) # restore1
 	LW	%r26, 8(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9081:
+BEQ_else.9040:
 	ADDI	%r27, %r0, 2
-	BNE	%r1, %r27, BEQ_else.9082
+	BNE	%r1, %r27, BEQ_else.9041
 	LW	%r1, 4(%r30) # restore1
 	LW	%r2, 12(%r30) # restore1
 	LW	%r26, 0(%r30) # restore1
 	LW	%r25, 0(%r26)
 	JR	%r25
-BEQ_else.9082:
+BEQ_else.9041:
 	JR	%r31
-BEQ_else.9078:
+BEQ_else.9037:
 	JR	%r31
-BEQ_else.9077:
+BEQ_else.9036:
 	JR	%r31
 rt.2945:
 	LW	%r3, 56(%r26)
@@ -11014,7 +10849,7 @@ rt.2945:
 	SW	%r14, 0(%r15)
 	SRA	%r2, %r2, 1
 	SW	%r2, 4(%r15)
-	LA	%r29, l.6608
+	LA	%r29, l.6584
 	LWC1	%f1, 0(%r29)
 	SW	%r7, 0(%r30)
 	SW	%r9, 4(%r30)
@@ -11265,7 +11100,7 @@ _min_caml_start: # main entry point
 	LW	%r29, 20(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r2, %r0, 1
-	LA	%r29, l.6421
+	LA	%r29, l.6397
 	LWC1	%f1, 0(%r29)
 	SW	%r1, 16(%r30)
 	ADDI	%r29, %r31, 0
@@ -11279,9 +11114,7 @@ _min_caml_start: # main entry point
 	ADDI	%r31, %r29, 0
 	ADDI	%r2, %r0, 50
 	ADDI	%r3, %r0, 1
-	ADDI	%r4, %r0, 1
-	SUB	%r29, %r0, %r4
-	ADDI	%r4, %r29, 0
+	ADDI	%r4, %r0, -1
 	SW	%r1, 20(%r30)
 	SW	%r2, 24(%r30)
 	ADDI	%r29, %r31, 0
@@ -11356,7 +11189,7 @@ _min_caml_start: # main entry point
 	LW	%r29, 44(%r30)
 	ADDI	%r31, %r29, 0
 	ADDI	%r2, %r0, 1
-	LA	%r29, l.6367
+	LA	%r29, l.6343
 	LWC1	%f1, 0(%r29)
 	SW	%r1, 44(%r30)
 	ADDI	%r29, %r31, 0
@@ -12300,4 +12133,4 @@ _min_caml_start: # main entry point
 	SUB	%r30, %r30, %r29
 	LW	%r29, 148(%r30)
 	ADDI	%r31, %r29, 0
-   # main program end
+halt   # main program end

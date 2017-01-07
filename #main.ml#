@@ -16,7 +16,7 @@ let rec iter n e =
 let lexbuf outchan l = 
   Id.counter := 0;
   Typing.extenv := M.empty;
-  Emit.f outchan          
+  Emit.f outchan
     (let ast = RegAlloc.f
          (Simm.f
             (let ast = Virtual.f
@@ -53,7 +53,7 @@ let () =
      ("-knormal", Arg.Unit(fun () -> knormal_option := true), "dump ast of knormal");
      ("-alpha", Arg.Unit(fun () -> alpha_option := true), "dump ast of alpha");
      ("-closure", Arg.Unit(fun () -> closure_option := true), "dump closure.prog");
-     ("-asm", Arg.Unit(fun () -> asm_option := true), "dump virtual asm")]
+     ("-asm", Arg.Unit(fun () -> asm_option := true), "dump virtual asm")] 
     (fun s -> files := !files @ [s])
     ("Mitou Min-Caml Compiler (C) Eijiro Sumii\n" ^
      Printf.sprintf "usage: %s [-inline m] [-iter n] ...filenames without \".ml\"..." Sys.argv.(0));

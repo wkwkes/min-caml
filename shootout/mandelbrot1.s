@@ -165,4 +165,4 @@ _min_caml_start: # main entry point
 	SUB	%r30, %r30, %r29
 	LW	%r29, 4(%r30)
 	ADDI	%r31, %r29, 0
-halt   # main program end
+   # main program end

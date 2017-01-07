@@ -1,10 +1,22 @@
-closure : 
-Closure.Prog ([],
-  Closure.Let (("Tt4.5", (Type.Tuple [Type.Int; Type.Int; Type.Int])),
-    Closure.Let (("Ti1.9", Type.Int), (Closure.Int 1),
-      Closure.Let (("Ti2.10", Type.Int), (Closure.Int 2),
-        Closure.Let (("Ti3.11", Type.Int), (Closure.Int 3),
-          (Closure.Tuple ["Ti1.9"; "Ti2.10"; "Ti3.11"])))),
-    Closure.LetTuple (
-      [("x.6", Type.Int); ("y.7", Type.Int); ("z.8", Type.Int)], "Tt4.5",
-      Closure.Unit)))
+Asm.Prog ([],
+  [{ Asm.name = (Id.L "fib.10"); args = ["n.11"]; fargs = [];
+     body = Asm.Let (("Ti3.14", Type.Int), (Asm.Set 1),
+              (Asm.Ans
+                 Asm.IfLE ("n.11", (Asm.V "Ti3.14"),
+                   (Asm.Ans (Asm.Mov "n.11")),
+                   Asm.Let (("Ti4.20", Type.Int), (Asm.Set 1),
+                     Asm.Let (("Ti5.19", Type.Int),
+                       Asm.Sub ("n.11", (Asm.V "Ti4.20")),
+                       Asm.Let (("Ti6.15", Type.Int),
+                         Asm.CallDir ((Id.L "fib.10"), ["Ti5.19"], []),
+                         Asm.Let (("Ti7.18", Type.Int), (Asm.Set 2),
+                           Asm.Let (("Ti8.17", Type.Int),
+                             Asm.Sub ("n.11", (Asm.V "Ti7.18")),
+                             Asm.Let (("Ti9.16", Type.Int),
+                               Asm.CallDir ((Id.L "fib.10"), ["Ti8.17"], []),
+                               (Asm.Ans Asm.Add ("Ti6.15", (Asm.V "Ti9.16"))))))))))));
+     ret = Type.Int }],
+  Asm.Let (("Ti1.13", Type.Int), (Asm.Set 30),
+    Asm.Let (("Ti2.12", Type.Int),
+      Asm.CallDir ((Id.L "fib.10"), ["Ti1.13"], []),
+      (Asm.Ans Asm.CallDir ((Id.L "min_caml_print_int"), ["Ti2.12"], [])))))

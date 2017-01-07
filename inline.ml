@@ -1,7 +1,7 @@
 open KNormal
 
-(* ¥¤¥ó¥é¥¤¥óÅ¸³«¤¹¤ë´Ø¿ô¤ÎºÇÂç¥µ¥¤¥º (caml2html: inline_threshold) *)
-let threshold = ref 0 (* Main¤Ç-inline¥ª¥×¥·¥ç¥ó¤Ë¤è¤ê¥»¥Ã¥È¤µ¤ì¤ë *)
+(* ï¿½ï¿½ï¿½ï¿½ï¿½é¥¤ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¿ï¿½ï¿½Îºï¿½ï¿½ç¥µï¿½ï¿½ï¿½ï¿½ (caml2html: inline_threshold) *)
+let threshold = ref 0 (* Mainï¿½ï¿½-inlineï¿½ï¿½ï¿½×¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¤ï¿½ï¿½ê¥»ï¿½Ã¥È¤ï¿½ï¿½ï¿½ï¿½ï¿½ *)
 
 let rec size = function
   | IfEq(_, _, e1, e2) | IfLE(_, _, e1, e2)
@@ -9,22 +9,22 @@ let rec size = function
   | LetTuple(_, _, e) -> 1 + size e
   | _ -> 1
 
-let rec g env = function (* ¥¤¥ó¥é¥¤¥óÅ¸³«¥ë¡¼¥Á¥óËÜÂÎ (caml2html: inline_g) *)
+let rec g env = function (* ï¿½ï¿½ï¿½ï¿½ï¿½é¥¤ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ë¡¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ (caml2html: inline_g) *)
   | IfEq(x, y, e1, e2) -> IfEq(x, y, g env e1, g env e2)
   | IfLE(x, y, e1, e2) -> IfLE(x, y, g env e1, g env e2)
   | Let(xt, e1, e2) -> Let(xt, g env e1, g env e2)
-  | LetRec({ name = (x, t); args = yts; body = e1 }, e2) -> (* ´Ø¿ôÄêµÁ¤Î¾ì¹ç (caml2html: inline_letrec) *)
+  | LetRec({ name = (x, t); args = yts; body = e1 }, e2) -> (* ï¿½Ø¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¾ï¿½ï¿½ï¿½ (caml2html: inline_letrec) *)
       let env = if size e1 > !threshold then env else M.add x (yts, e1) env in
       LetRec({ name = (x, t); args = yts; body = g env e1}, g env e2)
-  | App(x, ys) when M.mem x env -> (* ´Ø¿ôÅ¬ÍÑ¤Î¾ì¹ç (caml2html: inline_app) *)
+  | App(x, ys) when M.mem x env -> (* ï¿½Ø¿ï¿½Å¬ï¿½Ñ¤Î¾ï¿½ï¿½ï¿½ (caml2html: inline_app) *)
       let (zs, e) = M.find x env in
       Format.eprintf "inlining %s@." x;
       let env' =
-	List.fold_left2
-	  (fun env' (z, t) y -> M.add z y env')
-	  M.empty
-	  zs
-	  ys in
+        List.fold_left2
+          (fun env' (z, t) y -> M.add z y env')
+          M.empty
+          zs
+          ys in
       Alpha.g env' e
   | LetTuple(xts, y, e) -> LetTuple(xts, y, g env e)
   | e -> e
