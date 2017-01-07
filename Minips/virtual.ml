@@ -8,7 +8,7 @@ let classify xts ini addf addi =
   List.fold_left
     (fun acc (x, t) -> match t with
        | Type.Unit -> acc
-       | Type.Float -> addf acc x
+       (*| Type.Float -> addf acc x*)
        | _ -> addi acc x t) ini xts
 
 let separate xts = 
@@ -22,8 +22,8 @@ let expand xts ini addf addi =
   classify
     xts
     ini
-    (fun (offset, acc) x -> let offset = align offset in
-      (offset + 8, addf x offset acc)) (* 8 -> 4 *)
+    (fun (offset, acc) x -> (* let offset = align offset in *)
+      (offset + 4, addf x offset acc)) (* 8 -> 4 *)
     (fun (offset, acc) x t -> (offset + 4, addi x t offset acc))
 
 let rec g env = function 
