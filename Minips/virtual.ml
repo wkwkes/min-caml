@@ -23,8 +23,8 @@ let expand xts ini addf addi =
     xts
     ini
     (fun (offset, acc) x -> (* let offset = align offset in *)
-      (offset + 4, addf x offset acc)) (* 8 -> 4 *)
-    (fun (offset, acc) x t -> (offset + 4, addi x t offset acc))
+      (offset + 1, addf x offset acc)) (* 8 -> 4 *)
+    (fun (offset, acc) x t -> (offset + 1, addi x t offset acc))
 
 let rec g env = function 
   | Closure.Unit -> Ans (Nop)
@@ -75,7 +75,7 @@ let rec g env = function
     let (offset, store_fv) = 
       expand
         (List.map (fun y -> (y, M.find y env)) ys)
-        (4, e2')
+        (1, e2')
         (fun y offset store_fv -> seq (Stfd (y, x, C (offset)), store_fv))
         (fun y _ offset store_fv -> seq (Sw (y, x, C (offset)), store_fv)) in
     Let ((x, t), Mr (reg_hp), 
@@ -143,7 +143,7 @@ let h { Closure.name = (Id.L(x), t); Closure.args = yts;
   let (offset, load) = 
     expand
       zts
-      (4, g (M.add x t (M.add_list yts (M.add_list zts M.empty))) e)
+      (1, g (M.add x t (M.add_list yts (M.add_list zts M.empty))) e)
       (fun z offset load -> fletd (z, Lfd (x, C (offset)), load))
       (fun z t offset load -> Let ((z, t), Lw (x, C (offset)), load)) in
   match t with

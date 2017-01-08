@@ -120,4 +120,5 @@ let rec concat e1 xt e2 = match e1 with
   | Let (yt, exp, e1') -> Let (yt, exp, concat e1' xt e2)
 
 (* align : int -> int *)
-let align i = if i mod 8 = 0 then i else i + 4
+(*let align i = if i mod 8 = 0 then i else i + 4*)
+let align i = i
