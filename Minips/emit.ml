@@ -22,7 +22,7 @@ let locate x =
     | y :: zs -> List.map succ (loc zs) in
   loc !stackmap
 let offset x = List.hd (locate x)
-let stacksize () = align (List.length !stackmap + 1) 
+let stacksize () = align ((List.length !stackmap + 1))
 (* have to investigate in detail *)
 (*let stacksize () = (List.length !stackmap + 1) * 4*)
 
@@ -313,7 +313,7 @@ let f oc (Prog(data, fundefs, e)) =
   List.iter (fun fundef -> h oc fundef) fundefs;
   dump oc "_min_caml_start: # main entry point\n";
   dump oc "\tSUB\t%s, %s, %s\n" reg_zero reg_zero reg_zero;
-  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero 32668;
+  dump oc "\tADDI\t%s, %s, %d\n" reg_hp reg_zero 8192;
   dump oc "   # main program start\n";
   stackset := S.empty;
   stackmap := [];

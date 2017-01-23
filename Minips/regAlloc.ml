@@ -5,32 +5,32 @@ open Asm
          ���Τ����ˡ�Call�����ä����ɤ����פ��֤��ͤ���1���Ǥ˴ޤ��롣 *)
 let rec target' src (dest, t) = function
   | Mr(x) when x = src && is_reg dest ->
-    assert (t <> Type.Unit);
-    assert (t <> Type.Float);
-    false, [dest]
+      assert (t <> Type.Unit);
+      assert (t <> Type.Float);
+      false, [dest]
   | FMr(x) when x = src && is_reg dest ->
-    assert (t = Type.Float);
-    false, [dest]
+      assert (t = Type.Float);
+      false, [dest]
   | IfEq(_, _, e1, e2) | IfLE(_, _, e1, e2) | IfGE(_, _, e1, e2)
   | IfFEq(_, _, e1, e2) | IfFLE(_, _, e1, e2) ->
-    let c1, rs1 = target src (dest, t) e1 in
-    let c2, rs2 = target src (dest, t) e2 in
-    c1 && c2, rs1 @ rs2
+      let c1, rs1 = target src (dest, t) e1 in
+      let c2, rs2 = target src (dest, t) e2 in
+      c1 && c2, rs1 @ rs2
   | CallCls(x, ys, zs) ->
-    true, (target_args src regs 0 ys @
-           target_args src fregs 0 zs @
-           if x = src then [reg_cl] else [])
+      true, (target_args src regs 0 ys @
+             target_args src fregs 0 zs @
+             if x = src then [reg_cl] else [])
   | CallDir(_, ys, zs) ->
-    true, (target_args src regs 0 ys @
-           target_args src fregs 0 zs)
+      true, (target_args src regs 0 ys @
+             target_args src fregs 0 zs)
   | _ -> false, []
 and target src dest = function (* register targeting (caml2html: regalloc_target) *)
   | Ans(exp) -> target' src dest exp
   | Let(xt, exp, e) ->
-    let c1, rs1 = target' src xt exp in
-    if c1 then true, rs1 else
-      let c2, rs2 = target src dest e in
-      c2, rs1 @ rs2
+      let c1, rs1 = target' src xt exp in
+      if c1 then true, rs1 else
+        let c2, rs2 = target src dest e in
+        c2, rs1 @ rs2
 and target_args src all n = function (* auxiliary function for Call *)
   | [] -> []
   | y :: ys when src = y -> all.(n) :: target_args src all (n + 1) ys
@@ -97,20 +97,20 @@ let find' x' regenv =
 let rec g dest cont regenv = function (* ̿�����Υ쥸������������ (caml2html: regalloc_g) *)
   | Ans(exp) -> g'_and_restore dest cont regenv exp
   | Let((x, t) as xt, exp, e) ->
-    assert (not (M.mem x regenv));
-    let cont' = concat e dest cont in
-    let (e1', regenv1) = g'_and_restore xt cont' regenv exp in
-    (match alloc dest cont' regenv1 x t with
-     | Spill(y) ->
-       let r = M.find y regenv1 in
-       let (e2', regenv2) = g dest cont (add x r (M.remove y regenv1)) e in
-       let save =
-         try Save(M.find y regenv, y)
-         with Not_found -> Nop in	    
-       (seq(save, concat e1' (r, t) e2'), regenv2)
-     | Alloc(r) ->
-       let (e2', regenv2) = g dest cont (add x r regenv1) e in
-       (concat e1' (r, t) e2', regenv2))
+      assert (not (M.mem x regenv));
+      let cont' = concat e dest cont in
+      let (e1', regenv1) = g'_and_restore xt cont' regenv exp in
+      (match alloc dest cont' regenv1 x t with
+       | Spill(y) ->
+           let r = M.find y regenv1 in
+           let (e2', regenv2) = g dest cont (add x r (M.remove y regenv1)) e in
+           let save =
+             try Save(M.find y regenv, y)
+             with Not_found -> Nop in	    
+           (seq(save, concat e1' (r, t) e2'), regenv2)
+       | Alloc(r) ->
+           let (e2', regenv2) = g dest cont (add x r regenv1) e in
+           (concat e1' (r, t) e2', regenv2))
 and g'_and_restore dest cont regenv exp = (* ���Ѥ������ѿ��򥹥��å������쥸������Restore (caml2html: regalloc_unspill) *)
   try g' dest cont regenv exp
   with NoReg(x, t) ->
