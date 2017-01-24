@@ -12013,8 +12013,8 @@ _min_caml_start: # main entry point
 	SW	%r14, 3(%r26)
 	SW	%r5, 2(%r26)
 	SW	%r2, 1(%r26)
-	ADDI	%r1, %r0, 512
-	ADDI	%r2, %r0, 512
+	ADDI	%r1, %r0, 128
+	ADDI	%r2, %r0, 128
 	ADDI	%r29, %r31, 0
 	SW	%r29, 37(%r30)
 	ADDI	%r30, %r30, 38
