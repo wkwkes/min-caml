@@ -1,4 +1,5 @@
 type closure = { entry : Id.l; actual_fv : Id.t list }
+[@@deriving show]
 type t = (* �����������Ѵ����μ� (caml2html: closure_t) *)
   | Unit
   | Int of int
@@ -25,11 +26,15 @@ type t = (* �����������Ѵ����μ� (caml2html: clo
   | Get of Id.t * Id.t
   | Put of Id.t * Id.t * Id.t
   | ExtArray of Id.l
+[@@deriving show]
+
 type fundef = { name : Id.l * Type.t;
-		args : (Id.t * Type.t) list;
-		formal_fv : (Id.t * Type.t) list;
-		body : t }
+                args : (Id.t * Type.t) list;
+                formal_fv : (Id.t * Type.t) list;
+                body : t }
+[@@deriving show]
 type prog = Prog of fundef list * t
+[@@deriving show]
 
 let rec fv = function
   | Unit | Int(_) | Float(_) | ExtArray(_) -> S.empty
@@ -64,36 +69,30 @@ let rec g env known = function (* �����������Ѵ��롼�
   | KNormal.IfLE(x, y, e1, e2) -> IfLE(x, y, g env known e1, g env known e2)
   | KNormal.Let((x, t), e1, e2) -> Let((x, t), g env known e1, g (M.add x t env) known e2)
   | KNormal.Var(x) -> Var(x)
-  | KNormal.LetRec({ KNormal.name = (x, t); KNormal.args = yts; KNormal.body = e1 }, e2) -> (* �ؿ������ξ��� (caml2html: closure_letrec) *)
-      (* �ؿ�����let rec x y1 ... yn = e1 in e2�ξ����ϡ�
-	 x�˼�ͳ�ѿ����ʤ�(closure���𤵤�direct�˸ƤӽФ���)
-	 �Ȳ��ꤷ��known���ɲä���e1�򥯥��������Ѵ����Ƥߤ� *)
+  | KNormal.LetRec({ KNormal.name = (x, t); KNormal.args = yts; KNormal.body = e1 }, e2) ->  
       let toplevel_backup = !toplevel in
       let env' = M.add x t env in
       let known' = S.add x known in
       let e1' = g (M.add_list yts env') known' e1 in
-      (* �����˼�ͳ�ѿ����ʤ��ä������Ѵ�����e1'����ǧ���� *)
-      (* ����: e1'��x���Ȥ��ѿ��Ȥ��ƽи�����������closure��ɬ��!
-         (thanks to nuevo-namasute and azounoman; test/cls-bug2.ml����) *)
       let zs = S.diff (fv e1') (S.of_list (List.map fst yts)) in
       let known', e1' =
-	if S.is_empty zs then known', e1' else
-	(* ���ܤ��ä�������(toplevel����)���ᤷ�ơ������������Ѵ�������ľ�� *)
-	(Format.eprintf "free variable(s) %s found in function %s@." (Id.pp_list (S.elements zs)) x;
-	 Format.eprintf "function %s cannot be directly applied in fact@." x;
-	 toplevel := toplevel_backup;
-	 let e1' = g (M.add_list yts env') known e1 in
-	 known, e1') in
-      let zs = S.elements (S.diff (fv e1') (S.add x (S.of_list (List.map fst yts)))) in (* ��ͳ�ѿ��Υꥹ�� *)
-      let zts = List.map (fun z -> (z, M.find z env')) zs in (* �����Ǽ�ͳ�ѿ�z�η������������˰���env��ɬ�� *)
-      toplevel := { name = (Id.L(x), t); args = yts; formal_fv = zts; body = e1' } :: !toplevel; (* �ȥåץ��٥��ؿ����ɲ� *)
+        if S.is_empty zs then known', e1' else
+
+          (Format.eprintf "free variable(s) %s found in function %s@." (Id.pp_list (S.elements zs)) x;
+           Format.eprintf "function %s cannot be directly applied in fact@." x;
+           toplevel := toplevel_backup;
+           let e1' = g (M.add_list yts env') known e1 in
+           known, e1') in
+      let zs = S.elements (S.diff (fv e1') (S.add x (S.of_list (List.map fst yts)))) in 
+      let zts = List.map (fun z -> (z, M.find z env')) zs in
+      toplevel := { name = (Id.L(x), t); args = yts; formal_fv = zts; body = e1' } :: !toplevel; 
       let e2' = g env' known' e2 in
-      if S.mem x (fv e2') then (* x���ѿ��Ȥ���e2'�˽и����뤫 *)
-	MakeCls((x, t), { entry = Id.L(x); actual_fv = zs }, e2') (* �и����Ƥ������������ʤ� *)
+      if S.mem x (fv e2') then
+        MakeCls((x, t), { entry = Id.L(x); actual_fv = zs }, e2')
       else
-	(Format.eprintf "eliminating closure(s) %s@." x;
-	 e2') (* �и����ʤ�����MakeCls������ *)
-  | KNormal.App(x, ys) when S.mem x known -> (* �ؿ�Ŭ�Ѥξ��� (caml2html: closure_app) *)
+        (Format.eprintf "eliminating closure(s) %s@." x;
+         e2') 
+  | KNormal.App(x, ys) when S.mem x known ->
       Format.eprintf "directly applying %s@." x;
       AppDir(Id.L(x), ys)
   | KNormal.App(f, xs) -> AppCls(f, xs)
