@@ -11,7 +11,7 @@ OCAMLLDFLAGS = -warn-error -31
 OCAMLDOT = ~/Downloads/ocamldot/ocamldot
 
 default: debug-code top $(RESULT) do_test
-$(RESULT): debug-code #top
+$(RESULT): debug-code top
 
 clean:: nobackup cleand 
 
@@ -23,10 +23,11 @@ depc:
 
 SOURCES = float.c type.ml id.ml m.ml s.ml \
 syntax.ml parser.mly lexer.mll typing.mli typing.ml kNormal.mli kNormal.ml \
+arrayopt.ml \
 alpha.mli alpha.ml beta.mli beta.ml assoc.mli assoc.ml \
 inline.mli inline.ml constFold.mli constFold.ml elim.mli elim.ml \
 closure.mli closure.ml asm.mli asm.ml virtual.mli virtual.ml \
-simm.mli simm.ml regAlloc.mli regAlloc.ml emit.mli emit.ml \
+simm.mli simm.ml regAlloc.mli regAlloc.ml native.mli native.ml emit.mli emit_opt.mli emit_opt.ml emit.ml \
 main.mli main.ml
 
 #SOURCES = src/$(FILES)

@@ -1,39 +1,6 @@
 (*minips*)
 open Asm
-
-type register = string
-[@@deriving show]
-type native =
-  | SWC1 of register * int * register
-  | LWC1 of register * int * register
-  | SW of register * int * register
-  | LW of register * int * register
-  | ADD_S of register * register * register
-  | SUB_S of register * register * register
-  | MUL_S of register * register * register
-  | DIV_S of register * register * register
-  | C_EQ_S of register * register * register
-  | C_LE_S of register * register * register
-  | C_LT_S of register * register * register
-  | ORI of register * register * int
-  (*| ANDI of register * register * int *)
-  | ADDI of register * register * int
-  (*| BNE *)
-  (*| BEQ *)
-  (*| JAL of label *)
-  (*| J of label *)
-  (*| JALR of register *)
-  (*| JR of register *)
-  | SLL of register * register * int
-  | SRA of register * register * int
-  | ADD of register * register * register
-  | SUB of register * register * register
-  (*| AND *)
-  (*| OR *)
-  (*| XOR *)
-  | SLT of register * register * register
-  | OTHERS of string (* peephole 最適化しにくい命令 *)
-[@@deriving show]
+open Native
 
 (* 命令のリスト *)
 let instrs = ref []
@@ -359,29 +326,6 @@ let ff (Prog(data, fundefs, e)) =
   dump  (OTHERS "halt   # main program end\n"); (List.rev !instrs) (* !instrs *)
 (*List.iter (fun x -> print_endline (show_native x)) (List.rev !instrs)*)
 
-
-(***********************************************************************)
-
-let outPut = Printf.fprintf
-let outPut oc = function
-  | SWC1 (r1, i ,r2) -> outPut oc "\tSWC1\t%s, %d(%s)\n" r1 i r2
-  | LWC1 (r1, i, r2) -> outPut oc "\tLWC1\t%s, %d(%s)\n" r1 i r2
-  | SW (r1, i, r2) -> outPut oc "\tSW\t%s, %d(%s)\n" r1 i r2
-  | LW (r1, i, r2) -> outPut oc "\tLW\t%s, %d(%s)\n" r1 i r2
-  | ADD_S (r1, r2, r3) -> outPut oc "\tADD.s\t%s, %s, %s\n" r1 r2 r3
-  | SUB_S (r1, r2, r3) -> outPut oc "\tSUB.s\t%s, %s, %s\n" r1 r2 r3
-  | MUL_S (r1, r2, r3) -> outPut oc "\tMUL.s\t%s, %s, %s\n" r1 r2 r3
-  | DIV_S (r1, r2, r3) -> outPut oc "\tDIV.s\t%s, %s, %s\n" r1 r2 r3
-  | C_EQ_S (r1, r2, r3) -> outPut oc "\tC.eq.s\t%s, %s, %s\n" r1 r2 r3
-  | C_LE_S (r1, r2, r3) -> outPut oc "\tC.le.s\t%s, %s, %s\n" r1 r2 r3
-  | C_LT_S (r1, r2, r3) -> outPut oc "\tC.lt.s\t%s, %s, %s\n" r1 r2 r3
-  | ORI (r1, r2, i) -> outPut oc "\tORI\t%s, %s, %d\n" r1 r2 i
-  | ADDI (r1, r2, i) -> outPut oc "\tADDI\t%s, %s, %d\n" r1 r2 i
-  | SLL (r1, r2, i) -> outPut oc "\tSLL\t%s, %s, %d\n" r1 r2 i
-  | SRA (r1, r2, i) -> outPut oc "\tSRA\t%s, %s, %d\n" r1 r2 i
-  | ADD (r1, r2, r3) -> outPut oc "\tADD\t%s, %s, %s\n" r1 r2 r3
-  | SUB (r1, r2, r3) -> outPut oc "\tSUB\t%s, %s, %s\n" r1 r2 r3
-  | SLT (r1, r2, r3) -> outPut oc "\tSLT\t%s, %s, %s\n" r1 r2 r3
-  | OTHERS s -> outPut oc "%s" s
-
-let f oc p = List.iter (outPut oc) (ff p)
+let f oc p = 
+  let instrs = optpaths (ff p) in
+  List.iter (outPut oc) instrs

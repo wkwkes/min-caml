@@ -6,10 +6,13 @@ S beta
 S closure
 S constFold
 S elim
+S emit_opt
+S native
 S emit
 S id
 S inline
 S kNormal
+S arrayopt.ml
 S m
 S main
 S regAlloc
