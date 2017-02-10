@@ -1,7 +1,7 @@
 open KNormal
 
-let threshold = ref 100
-let recThreshold = ref 30
+let threshold = ref 150
+let recThreshold = ref 3
 
 let rec size = function
   | IfEq(_, _, e1, e2) | IfLE(_, _, e1, e2)
@@ -13,8 +13,8 @@ let rec g env = function
   | IfEq(x, y, e1, e2) -> IfEq(x, y, g env e1, g env e2)
   | IfLE(x, y, e1, e2) -> IfLE(x, y, g env e1, g env e2)
   | Let(xt, e1, e2) -> Let(xt, g env e1, g env e2)
-  | LetRec({ name = (x, t); args = yts; body = e1 }, e2) -> (* �ؿ������ξ��� (caml2html: inline_letrec) *)
-      let env = if (size e1 > !threshold) && (!recThreshold > 0) then env else M.add x (yts, e1) env in
+  | LetRec({ name = (x, t); args = yts; body = e1 }, e2) when (!recThreshold > 0)  -> (* �ؿ������ξ��� (caml2html: inline_letrec) *)
+      let env = if (size e1 > !threshold) then env else M.add x (yts, e1) env in
       LetRec({ name = (x, t); args = yts; body = g env e1}, g env e2)
   | App(x, ys) when M.mem x env ->
       let (zs, e) = M.find x env in
@@ -29,4 +29,4 @@ let rec g env = function
   | LetTuple(xts, y, e) -> LetTuple(xts, y, g env e)
   | e -> e
 
-let f e = (recThreshold := !recThreshold - 1); g M.empty e
+let f e = (Format.eprintf "iteration : %d\n" !recThreshold); (recThreshold := !recThreshold - 1); g M.empty e
