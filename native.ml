@@ -90,7 +90,7 @@ let rec elimUnusedVar s = function
   | x :: OTHERS st :: xs -> elimUnusedVar (OTHERS st :: x :: s) xs
   | x0 :: x1 :: xs ->
       let rx0 = targetReg x0 in
-      if rx0 = targetReg x1 && not (List.mem rx0 (sourceReg x1)) then (Format.eprintf "u";elimUnusedVar s (x1::xs)) else elimUnusedVar (x0::s) (x1::xs)
+      if rx0 <> "dummy" && rx0 = targetReg x1 && not (List.mem rx0 (sourceReg x1)) then (outPut stderr x0; outPut stderr x1; Format.eprintf "\n";elimUnusedVar s (x1::xs)) else elimUnusedVar (x0::s) (x1::xs)
 
 let optPaths s = 
   let s = elimSubst [] s in
