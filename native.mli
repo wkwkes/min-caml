@@ -21,4 +21,4 @@ type t =
   | OTHERS of string
 val outPut : out_channel -> t -> unit
 val timeMeasure : ('a -> 'b) -> 'a -> 'b
-val optpaths : t list -> t list
+val optPaths : t list -> t list

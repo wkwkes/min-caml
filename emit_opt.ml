@@ -327,5 +327,5 @@ let ff (Prog(data, fundefs, e)) =
 (*List.iter (fun x -> print_endline (show_native x)) (List.rev !instrs)*)
 
 let f oc p = 
-  let instrs = optpaths (ff p) in
+  let instrs = optPaths (ff p) in
   List.iter (outPut oc) instrs

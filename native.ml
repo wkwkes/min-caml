@@ -86,12 +86,12 @@ let rec elimSubst s = function
 let rec elimUnusedVar s = function
   | [] -> List.rev s
   | x :: [] -> List.rev (x::s)
-  | OTHERS _ :: x :: xs  -> elimUnusedVar s (x::xs)
-  | x :: OTHERS _ :: xs -> elimUnusedVar (x::s) xs
+  | OTHERS st :: x :: xs  -> elimUnusedVar (OTHERS st :: s) (x::xs)
+  | x :: OTHERS st :: xs -> elimUnusedVar (OTHERS st :: x :: s) xs
   | x0 :: x1 :: xs ->
       let rx0 = targetReg x0 in
-      if rx0 = targetReg x1 && not (List.mem rx0 (sourceReg x1)) then (Format.eprintf "u";elimUnusedVar s (x1::xs)) else elimUnusedVar (x0::xs) (x1::xs)
+      if rx0 = targetReg x1 && not (List.mem rx0 (sourceReg x1)) then (Format.eprintf "u";elimUnusedVar s (x1::xs)) else elimUnusedVar (x0::s) (x1::xs)
 
-let optpaths s = 
+let optPaths s = 
   let s = elimSubst [] s in
   elimUnusedVar [] s
