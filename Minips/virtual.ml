@@ -70,7 +70,6 @@ let rec g env = function
        | Type.Float -> Ans (FMr (x))
        | _ -> Ans (Mr (x)))
   | Closure.MakeCls ((x, t), {Closure.entry = l; Closure.actual_fv = ys}, e2) ->
-      (* closure �Υ��ɥ쥹�򥻥åȤ��Ƥ��饹�ȥ� *)
       let e2' = g (M.add x t env) e2 in
       let (offset, store_fv) = 
         expand
@@ -132,7 +131,7 @@ let rec g env = function
        | _ -> assert false)
   | Closure.ExtArray (Id.L(x)) -> Ans(SetL(Id.L("min_caml_" ^ x)))
 
-(* �ؿ��β��ۥޥ��󥳡������� *)
+
 let h { Closure.name = (Id.L(x), t); Closure.args = yts; 
         Closure.formal_fv = zts; Closure.body = e} =
   let (int, float) = separate yts in

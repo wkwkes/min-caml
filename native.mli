@@ -13,6 +13,7 @@ type t =
   | C_LT_S of register * register * register
   | ORI of register * register * int
   | ADDI of register * register * int
+  | BNE of register * register * string
   | SLL of register * register * int
   | SRA of register * register * int
   | ADD of register * register * register

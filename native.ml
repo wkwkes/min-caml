@@ -13,9 +13,8 @@ type t =
   | C_LE_S of register * register * register
   | C_LT_S of register * register * register
   | ORI of register * register * int
-  (*| ANDI of register * register * int *)
   | ADDI of register * register * int
-  (*| BNE *)
+  | BNE of register * register * string
   (*| BEQ *)
   (*| JAL of label *)
   (*| J of label *)
@@ -47,6 +46,7 @@ let outPut oc = function
   | C_LT_S (r1, r2, r3) -> outPut oc "\tC.lt.s\t%s, %s, %s\n" r1 r2 r3
   | ORI (r1, r2, i) -> outPut oc "\tORI\t%s, %s, %d\n" r1 r2 i
   | ADDI (r1, r2, i) -> outPut oc "\tADDI\t%s, %s, %d\n" r1 r2 i
+  | BNE (r1, r2, l) -> outPut oc "\tBNE\t%s, %s, %s\n" r1 r2 l
   | SLL (r1, r2, i) -> outPut oc "\tSLL\t%s, %s, %d\n" r1 r2 i
   | SRA (r1, r2, i) -> outPut oc "\tSRA\t%s, %s, %d\n" r1 r2 i
   | ADD (r1, r2, r3) -> outPut oc "\tADD\t%s, %s, %s\n" r1 r2 r3
@@ -60,10 +60,13 @@ let timeMeasure f s =
   let res = f s in
   print_float (Sys.time () -. a); res
 
+exception Unsafe  
+
 (* レジスタの中身を変更する命によって変更されるレジスタ *)
 (* native.t -> register *)
 let targetReg = function
   | LWC1 (r, _, _) | LW (r, _, _) | ADD_S (r, _, _) | SUB_S (r, _, _) | MUL_S (r, _, _) | DIV_S (r, _, _) | C_EQ_S (r, _, _) | C_LE_S (r, _, _) | C_LT_S (r, _, _) | ORI (r, _, _) | ADDI (r, _, _) | SLL (r, _, _) | SRA (r, _, _) | ADD (r, _, _) | SUB (r, _, _) | SLT (r, _, _) -> r
+  | OTHERS _ -> raise Unsafe
   | _ -> "dummy"
 
 (* 命令に使われるレジスタ *)
@@ -71,7 +74,8 @@ let targetReg = function
 let sourceReg = function
   | SWC1 (r1, _, r2) | SW(r1, _, r2) | ADD_S (_, r1, r2) | SUB_S (_, r1, r2) | MUL_S (_, r1, r2) | DIV_S (_, r1, r2) | C_EQ_S (_, r1, r2) | C_LE_S (_, r1, r2) | C_LT_S (_, r1, r2) | ADD (_, r1, r2) | SUB (_, r1, r2) | SLT (_, r1, r2) -> [r1; r2]
   | LWC1 (_, _, r1) | LW (_, _, r1) | ORI (_, r1, _) | ADDI (_, r1, _) | SLL (_, r1, _) | SRA (_, r1, _) -> [r1]
-  | OTHERS _ -> []
+  | OTHERS _ -> raise Unsafe
+  | _ -> []
 
 (* R1 = R1 を削除 *)
 (* どっちでも *)
@@ -92,6 +96,16 @@ let rec elimUnusedVar s = function
       let rx0 = targetReg x0 in
       if rx0 <> "dummy" && rx0 = targetReg x1 && not (List.mem rx0 (sourceReg x1)) then (outPut stderr x0; outPut stderr x1; Format.eprintf "\n";elimUnusedVar s (x1::xs)) else elimUnusedVar (x0::s) (x1::xs)
 
+(* ADDI R27, R0, 0 が本当に無駄なら削除 *)
+(* 上から下 *)
+
+let rec elimAddZero s = function
+  | [] -> List.rev s
+  | ADDI ("%r27", "%r0", 0) :: BNE (r1, "%r27", l) :: xs -> 
+      elimAddZero (BNE (r1, "%r0", l) :: s) xs
+  | x::xs -> elimAddZero (x :: s) xs
+
 let optPaths s = 
+  let s = elimAddZero [] s in
   let s = elimSubst [] s in
   elimUnusedVar [] s

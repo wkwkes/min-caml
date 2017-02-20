@@ -262,7 +262,8 @@ and g' = function
        dump  (ADDI (reg_link, reg_tmp, 0)))
 and g'_tail_if e1 e2 b bn rx ry = 
   let b_else = Id.genid (b ^ "_else") in
-  dump  (OTHERS (Printf.sprintf "\t%s\t%s, %s, %s\n" bn rx ry b_else));
+  (*dump  (OTHERS (Printf.sprintf "\t%s\t%s, %s, %s\n" bn rx ry b_else));*)
+  dump (BNE (rx, ry, b_else));
   let stackset_back = !stackset in
   g  (Tail, e1);
   dump  (OTHERS (Printf.sprintf "%s:\n" b_else));
@@ -271,7 +272,8 @@ and g'_tail_if e1 e2 b bn rx ry =
 and g'_non_tail_if  dest e1 e2 b bn rx ry =
   let b_else = Id.genid (b ^ "_else") in
   let b_cont = Id.genid (b ^ "_cont") in
-  dump  (OTHERS (Printf.sprintf "\t%s\t%s, %s, %s\n" bn rx ry b_else));
+  (*dump  (OTHERS (Printf.sprintf "\t%s\t%s, %s, %s\n" bn rx ry b_else));*)
+  dump (BNE (rx, ry, b_else));
   let stackset_back = !stackset in
   g  (dest, e1);
   let stackset1 = !stackset in

@@ -146,10 +146,10 @@ and g' oc = function
       dump oc "\tSWC1\t%s, %d(%s)\n" (reg x) (offset y) reg_sp
   | (NonTail(_), Save(x, y)) -> assert (S.mem y !stackset); ()
   | (NonTail(x), Restore(y)) when List.mem x allregs ->
-      dump oc "\tLW\t%s, %d(%s) # restore1\n" (reg x) (offset y) reg_sp
+      dump oc "\tLW\t%s, %d(%s)\n" (reg x) (offset y) reg_sp
   | (NonTail(x), Restore(y)) ->
       assert (List.mem x allfregs);
-      dump oc "\tLWC1\t%s, %d(%s) # restore2\n" (reg x) (offset y) reg_sp
+      dump oc "\tLWC1\t%s, %d(%s)\n" (reg x) (offset y) reg_sp
   | (Tail, (Nop | Sw _ | Stfd _ | Comment _ | Save _ as exp)) ->
       g' oc (NonTail(Id.gentmp Type.Unit), exp);
       dump oc "\tJR\t%%r31\n"
@@ -244,7 +244,7 @@ and g' oc = function
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_link 0;
       g'_args oc [] ys zs;
       let ss = stacksize () in
-      dump oc "\tSW\t%s, %d(%s) # save link register\n" reg_tmp (ss - 1) reg_sp;
+      dump oc "\tSW\t%s, %d(%s)\n" reg_tmp (ss - 1) reg_sp;
       dump oc "\tADDI\t%s, %s, %d\n" reg_sp reg_sp ss;
       dump oc "\tJAL\t%s\n" x;
       dump oc "\tADDI\t%s, %s, %d\n" reg_tmp reg_zero ss;
@@ -283,14 +283,14 @@ and g'_args oc x_reg_cl ys zs =
       (fun (i, yrs) y -> (i + 1, (y, regs.(i)) :: yrs))
       (0, x_reg_cl) ys in
   List.iter
-    (fun (y, r) -> dump oc "\tADDI\t%s, %s, %d # args\n" (reg r) (reg y) 0)
+    (fun (y, r) -> dump oc "\tADDI\t%s, %s, %d\n" (reg r) (reg y) 0)
     (shuffle reg_sw yrs);
   let (d, zfrs) = 
     List.fold_left
       (fun (d, zfrs) z -> (d + 1, (z, fregs.(d)) :: zfrs))
       (0, []) zs in
   List.iter
-    (fun (z, fr) -> dump oc "\tADD.s\t%s, %s, %s # args\n" (reg fr) (reg z) reg_fzero)
+    (fun (z, fr) -> dump oc "\tADD.s\t%s, %s, %s\n" (reg fr) (reg z) reg_fzero)
     (shuffle reg_fsw zfrs)
 
 let h oc { name = Id.L(x); args = _; fargs = _; body = e; ret = _ } =
